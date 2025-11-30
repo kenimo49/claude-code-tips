@@ -53,12 +53,18 @@ if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
 
     [[ $pct -gt 100 ]] && pct=100
 
-    filled=$((pct * bar_width / 100))
-    empty=$((bar_width - filled))
-
     bar=""
-    for ((i=0; i<filled; i++)); do bar+="█"; done
-    for ((i=0; i<empty; i++)); do bar+="░"; done
+    for ((i=0; i<bar_width; i++)); do
+        bar_start=$((i * 10))
+        progress=$((pct - bar_start))
+        if [[ $progress -ge 8 ]]; then
+            bar+="█"
+        elif [[ $progress -ge 3 ]]; then
+            bar+="▄"
+        else
+            bar+="░"
+        fi
+    done
 
     ctx="${bar} ${pct}% of 200k tokens used"
 else
