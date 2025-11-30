@@ -4,7 +4,7 @@
 
 A complete status line script for Claude Code that shows model, directory, git branch, uncommitted file count, sync status with origin, and context usage.
 
-**Example output:** `Opus 4.5 | 📁myproject | 🔀main (2 files uncommitted, synced) | ████▄░░░░░ 45% of 155k (/context)`
+**Example output:** `Opus 4.5 | 📁myproject | 🔀main (2 files uncommitted, synced) | ████▄░░░░░ 45% of 155k tokens used (/context)`
 
 ### Installation
 

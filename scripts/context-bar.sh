@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Claude Code status line script
-# Shows: Opus 4.5 | 📁 Daft | 🔀 main (2 files uncommitted) | ████▄░░░░░ 45% of 155k (/context)
+# Shows: Opus 4.5 | 📁 Daft | 🔀 main (2 files uncommitted) | ████▄░░░░░ 45% of 155k tokens used (/context)
 #
 # Context calculation:
 # - 200k total context window
@@ -102,9 +102,9 @@ if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
         fi
     done
 
-    ctx="${bar} ${pct}% of 155k (/context)"
+    ctx="${bar} ${pct}% of 155k tokens used (/context)"
 else
-    ctx="░░░░░░░░░░ 0% of 155k (/context)"
+    ctx="░░░░░░░░░░ 0% of 155k tokens used (/context)"
 fi
 
 # Build output: Model | Dir | Branch (uncommitted) | Context
