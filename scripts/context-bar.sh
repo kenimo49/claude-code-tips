@@ -41,7 +41,7 @@ if [[ -n "$cwd" && -d "$cwd" ]]; then
 
         # Build git status string
         if [[ "$file_count" -eq 0 ]]; then
-            git_status="(${sync_status})"
+            git_status="(0 files uncommitted, ${sync_status})"
         elif [[ "$file_count" -eq 1 ]]; then
             git_status="(1 file uncommitted, ${sync_status})"
         else
