@@ -1,4 +1,4 @@
-# 30 Claude Code Tips: From Basics to Advanced (Work in Progress - 5 tips so far)
+# 30 Claude Code Tips: From Basics to Advanced (Work in Progress - 6 tips so far)
 
 ## Tip 0: Customize your status line
 
@@ -54,3 +54,32 @@ alias c='claude'
 alias gb='github'
 alias co='code'
 ```
+
+## Tip 5: Proactively compact your context
+
+There's a `/compact` command in Claude Code that summarizes your conversation to free up context space. Automatic compaction also happens when the full available context is filled. The total available context window for Opus 4.5 is currently 200k, and 45k of that is reserved for automatic compaction. About 13% of the remaining 155k is automatically filled with the system prompt, tools, memory, and dynamic context. But I found that it's better to proactively do it and manually tune it.
+
+The way I do this is to ask Claude to write a handoff document before starting fresh. Something like:
+
+> Put the rest of the plan in the system-prompt-extraction folder. Explain what you have tried, what worked, what didn't work, so that the next agent with fresh context is able to just load that file and nothing else to get started on this task and finish it up.
+
+Claude will create a file summarizing the current state of work:
+
+```
+⏺ Write(experiments/system-prompt-extraction/NEXT-STEPS.md)
+  ⎿  Wrote 129 lines to experiments/system-prompt-extraction/NEXT-STEPS.md
+     # System Prompt Slimming - Handoff Document
+     ## Goal
+     Reduce Claude Code's system prompt by ~45% (currently at 11%, need ~34% more).
+     ## Current Progress
+     ### What's Been Done
+     - **Backup/restore system**: `backup-cli.sh` and `restore-cli.sh` with SHA256 verification
+     - **Patch system**: `patch-cli.js` that restores from backup then applies patches
+     ...
+```
+
+After Claude writes it, review it quickly. If something's missing, ask for edits:
+
+> Did you add a note about iteratively testing instead of trying to do everything all at once?
+
+Then start a fresh conversation. The new Claude instance can read that one file and pick up right where you left off, with fresh context.
