@@ -1,4 +1,4 @@
-# 30 Claude Code Tips: From Basics to Advanced (Work in Progress - 10 tips so far)
+# 30 Claude Code Tips: From Basics to Advanced (Work in Progress - 11 tips so far)
 
 ## Tip 0: Customize your status line
 
@@ -189,3 +189,11 @@ Skills are more token-efficient because Claude Code only loads them when needed.
 This is experimental because I haven't tested it extensively yet, but it's been working well so far. The idea is that Claude Code will automatically fall back to Gemini when it encounters a blocked site.
 
 You'll need to have Gemini CLI installed for this to work. Check out [Google's Gemini CLI repo](https://github.com/google-gemini/gemini-cli) for installation instructions.
+
+## Tip 10: Invest in your own workflow
+
+Personally, I've created my own voice transcription app from scratch with Swift. I created my own custom status line from scratch using Claude Code, this one with bash. And I created my own system for simplifying the system prompt in Claude Code's minified JavaScript file.
+
+But you don't have to go overboard like that. Just taking care of your own CLAUDE.md, making sure it's as concise as possible while being able to help you achieve your goals - stuff like that is helpful. And of course, learning these tips, learning these tools, and some of the most important features.
+
+All of these are investments in the tools you use to build whatever you want to build. I think it's important to spend at least a little bit of time on that.
