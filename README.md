@@ -147,32 +147,40 @@ This applies to any AI, not just Claude Code.
 
 Claude Code's WebFetch tool can't access certain sites, like Reddit. But you can work around this by creating a skill that tells Claude to use Gemini CLI as a fallback. Gemini has web access and can fetch content from sites that Claude can't reach directly.
 
-The best way to do this is with a skill file. Create `~/.claude/skills/reddit-fetch/SKILL.md`:
+This uses the same tmux pattern from Tip 7 - start a session, send commands, capture output. The skill file goes in `~/.claude/skills/reddit-fetch/SKILL.md`:
 
 ````markdown
 ---
 name: reddit-fetch
-description: Fetch content from Reddit using Gemini CLI when WebFetch is blocked. Use when accessing Reddit URLs, researching topics on Reddit, or when Reddit returns 403/blocked errors.
+description: Fetch content from Reddit using Gemini CLI when WebFetch is blocked. Use when accessing Reddit URLs, researching topics on Reddit, or when Reddit returns 403/blocked errors. (user)
 ---
 
 # Reddit Fetch via Gemini CLI
 
-When WebFetch fails to access Reddit (blocked, 403, etc.), use Gemini CLI instead. Run commands in foreground.
+When WebFetch fails to access Reddit (blocked, 403, etc.), use Gemini CLI via tmux.
 
-## Loading a specific Reddit page (verbatim content)
-
-Use 60s timeout:
+## Setup
 
 ```bash
-gemini -m gemini-2.5-flash-lite -o text --yolo "Fetch the EXACT content verbatim from: <URL>"
+tmux new-session -d -s gemini_reddit -x 200 -y 50
+tmux send-keys -t gemini_reddit 'gemini' Enter
+sleep 3  # wait for Gemini CLI to load
 ```
 
-## Researching a topic on Reddit (search, aggregate, reason)
-
-Use 90s timeout:
+## Send query and capture output
 
 ```bash
-gemini -m gemini-2.5-flash -o text --yolo "Search Reddit for <topic>. List the top relevant posts with: title, URL, and main points from each. Keep posts separate, don't summarize across them."
+tmux send-keys -t gemini_reddit 'Your Reddit query here' Enter
+sleep 30  # wait for response (adjust as needed, up to 90s for complex searches)
+tmux capture-pane -t gemini_reddit -p -S -500  # capture output
+```
+
+If you capture the pane and only see your own message with no response, you forgot to send Enter. Run `tmux send-keys -t gemini_reddit Enter` to submit.
+
+## Cleanup when done
+
+```bash
+tmux kill-session -t gemini_reddit
 ```
 ````
 
