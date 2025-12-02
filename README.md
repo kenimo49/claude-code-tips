@@ -251,7 +251,7 @@ When waiting on long-running jobs like GitHub CI, you can ask Claude Code to do 
 
 This way the agent can continuously check the status and let you know once it's done.
 
-(For GitHub CI specifically, `gh run watch` is a simpler option. But this is a general technique that works well even when you don't have a dedicated wait command handy.)
+(For GitHub CI specifically, `gh run watch` is another option. But this is a general technique that works well even when you don't have a dedicated wait command handy.)
 
 For example, if you have a workflow run you're waiting on:
 
