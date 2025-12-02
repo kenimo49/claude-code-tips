@@ -71,48 +71,56 @@ console.log('');
  * Found by searching for patterns like: varName="ToolName"
  */
 const VAR_MAP = {
-  'E9': 'Bash',
-  'R8': 'Task',
-  'eI': 'TodoWrite',
-  'h5': 'Read',
-  'R5': 'Edit',
-  'vX': 'Write',
-  'xX': 'WebFetch',
-  'DD': 'Glob',
-  'uY': 'Grep',
-  'uJ': 'AskUserQuestion',
-  'ZC': 'Explore',
-  'yb1': 'claude-code-guide',
-  'F': 'SlashCommand',
-  'Oq': 'SlashCommand',
+  // 2.0.56 variable names (updated from 2.0.55)
+  'C9': 'Bash',
+  'r8': 'Task',
+  'd7B': 'TodoWrite',
+  'u5': 'Read',
+  'T5': 'Edit',
+  'yX': 'Write',
+  '_X': 'WebFetch',
+  'HD': 'Glob',
+  'hY': 'Grep',
+  'mJ': 'AskUserQuestion',
+  'Lk': 'WebSearch',
+  'kP': 'SlashCommand',
 };
 
 /**
  * Replace all known variable patterns with readable names
  */
 function replaceVariables(text) {
-  // Simple variable references
-  text = text.replace(/\$\{E9\}/g, 'Bash');
-  text = text.replace(/\$\{R8\}/g, 'Task');
-  text = text.replace(/\$\{eI\.name\}/g, 'TodoWrite');
-  text = text.replace(/\$\{eI\}/g, 'TodoWrite');
-  text = text.replace(/\$\{h5\}/g, 'Read');
-  text = text.replace(/\$\{R5\}/g, 'Edit');
-  text = text.replace(/\$\{vX\}/g, 'Write');
-  text = text.replace(/\$\{xX\}/g, 'WebFetch');
-  text = text.replace(/\$\{DD\}/g, 'Glob');
-  text = text.replace(/\$\{uY\}/g, 'Grep');
-  text = text.replace(/\$\{uJ\}/g, 'AskUserQuestion');
-  text = text.replace(/\$\{ZC\.agentType\}/g, 'Explore');
-  text = text.replace(/\$\{yb1\}/g, 'claude-code-guide');
-  text = text.replace(/\$\{F\}/g, 'SlashCommand');
+  // Simple variable references (2.0.56 variable names)
+  text = text.replace(/\$\{C9\}/g, 'Bash');
+  text = text.replace(/\$\{r8\}/g, 'Task');
+  text = text.replace(/\$\{d7B\.name\}/g, 'TodoWrite');
+  text = text.replace(/\$\{d7B\}/g, 'TodoWrite');
+  text = text.replace(/\$\{u5\}/g, 'Read');
+  text = text.replace(/\$\{T5\}/g, 'Edit');
+  text = text.replace(/\$\{yX\}/g, 'Write');
+  text = text.replace(/\$\{_X\}/g, 'WebFetch');
+  text = text.replace(/\$\{HD\}/g, 'Glob');
+  text = text.replace(/\$\{hY\}/g, 'Grep');
+  text = text.replace(/\$\{mJ\}/g, 'AskUserQuestion');
   text = text.replace(/\$\{Lk\}/g, 'WebSearch');
+  text = text.replace(/\$\{kP\}/g, 'SlashCommand');
+  text = text.replace(/\$\{db1\}/g, 'claude-code-guide');
+
+  // Object.name patterns (2.0.56)
+  text = text.replace(/\$\{WO\.name\}/g, 'Glob');
+  text = text.replace(/\$\{m8\.name\}/g, 'Read');
+  text = text.replace(/\$\{aX\.name\}/g, 'Write');
+  text = text.replace(/\$\{tI\.name\}/g, 'TodoWrite');
+  text = text.replace(/\$\{An\.name\}/g, 'Task');
+
+  // Agent type patterns (2.0.56)
+  text = text.replace(/\$\{Pq\.agentType\}/g, 'Explore');
 
   // Tool name references without ${}
-  text = text.replace(/,R8,/g, ', Task,');
-  text = text.replace(/,R5,/g, ', Edit,');
-  text = text.replace(/,vX,/g, ', Write,');
-  text = text.replace(/\[R8,/g, '[Task,');
+  text = text.replace(/,r8,/g, ', Task,');
+  text = text.replace(/,T5,/g, ', Edit,');
+  text = text.replace(/,yX,/g, ', Write,');
+  text = text.replace(/\[r8,/g, '[Task,');
   text = text.replace(/,Nk\]/g, ', NotebookEdit]');
 
   return text;
@@ -456,8 +464,8 @@ sections.push(`
 const agentTypes = extractAgentTypes();
 
 const tools = [
-  { name: 'Task', search: 'Launch agents for complex, multi-step tasks', appendAgentTypes: true },
-  { name: 'Bash', search: 'Executes bash commands in a persistent shell session' },
+  { name: 'Task', search: 'Launch a new agent to handle complex, multi-step tasks', appendAgentTypes: true },
+  { name: 'Bash', search: 'Executes a given bash command in a persistent shell session' },
   { name: 'Glob', search: 'Fast file pattern matching tool' },
   { name: 'Grep', search: 'A powerful search tool built on ripgrep' },
   { name: 'ExitPlanMode', search: 'Use this tool when you are in plan mode and have finished' },
@@ -596,8 +604,9 @@ output = output.replace(/the \[DYNAMIC\] tool to launch/g, 'the Task tool to lau
 output = output.replace(/use the \[DYNAMIC\] tool/g, 'use the Write tool');
 output = output.replace(/Uses the \[DYNAMIC\] tool/g, 'Uses the Task tool');
 
-// Remove any remaining standalone [DYNAMIC]
-output = output.replace(/\[DYNAMIC\]/g, 'Task');
+// Remove any remaining standalone [DYNAMIC] - be conservative, don't replace with specific tools
+output = output.replace(/\[DYNAMIC\]\s*\n/g, '\n');
+output = output.replace(/\[DYNAMIC\]$/gm, '');
 
 // Write output
 const outputPath = process.argv[2] || path.join(__dirname, 'system-prompt-original-unpatched.md');
