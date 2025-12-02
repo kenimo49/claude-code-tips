@@ -112,3 +112,20 @@ output="${model} | 📁${dir}"
 output+=" | ${ctx}"
 
 echo "$output"
+
+# Get user's last message (text only, not tool results)
+# Truncate to match first line length (minus "💬 " prefix)
+if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
+    max_len=$((${#output} - 4))  # subtract for "💬 " prefix
+    last_user_msg=$(jq -rs --argjson max "$max_len" '
+        [.[] | select(.type == "user") |
+         select(.message.content | type == "string" or
+                (type == "array" and any(.[]; .type == "text")))] |
+        last | .message.content |
+        if type == "string" then .
+        else [.[] | select(.type == "text") | .text] | join(" ") end |
+        gsub("\n"; " ") | gsub("  +"; " ") |
+        if length > $max then .[:$max] + "..." else . end
+    ' < "$transcript_path" 2>/dev/null)
+    [[ -n "$last_user_msg" ]] && echo "💬 ${last_user_msg}"
+fi
