@@ -133,7 +133,7 @@ extract_uuid_value() {
     local line="$1"
     local key="$2"
     # Extract the value after "key":"
-    echo "$line" | grep -oE "\"${key}\":\"[a-f0-9-]{36}\"" 2>/dev/null | sed "s/\"${key}\":\"//;s/\"//" || true
+    echo "$line" | grep -oE "\"${key}\":\"[a-f0-9-]{36}\"" 2>/dev/null | head -1 | sed "s/\"${key}\":\"//;s/\"//" || true
 }
 
 # Replace a UUID value in the line
