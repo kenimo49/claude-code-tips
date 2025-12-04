@@ -327,3 +327,11 @@ ln -s /path/to/this/repo/commands/clone.md ~/.claude/commands/clone.md
 Then just type `/clone` in any conversation and Claude will handle finding the session ID and running the script.
 
 This is experimental. I'm still testing this.
+
+## Tip 21: Use realpath to get absolute paths
+
+When you need to tell Claude Code about files in a different folder, use `realpath` to get the full absolute path:
+
+```bash
+realpath some/relative/path
+```
