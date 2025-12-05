@@ -8,33 +8,125 @@ This project patches the Claude Code CLI to reduce system prompt token usage. Wh
 - `patches/*.find.txt` - text to find in bundle
 - `patches/*.replace.txt` - replacement text (shorter)
 
-## Quick Method: Let Claude Do It
+## Quick Method: Let Claude Do It in a Container
 
-The fastest way to upgrade is to let Claude Code handle it in a container:
+The fastest way to upgrade is to have Claude Code fix the patches autonomously inside a container. This is safe because any mistakes stay isolated in the container.
+
+### Why use a container?
+
+1. **Safety** - patching mistakes won't break your main Claude installation
+2. **Autonomy** - Claude can run with `--dangerously-skip-permissions` and iterate freely
+3. **Easy recovery** - if something breaks, the container can be reset
+4. **Copy when done** - only move verified patches to the host
+
+### Step 1: Update Claude in container
 
 ```bash
-# 1. Update Claude in container
 docker exec -u root peaceful_lovelace npm install -g @anthropic-ai/claude-code@latest
+docker exec peaceful_lovelace claude --version  # verify new version
+```
 
-# 2. Copy previous version's patches
+### Step 2: Set up the new version folder
+
+```bash
+# Copy previous version's patches to container
 docker cp system-prompt/2.0.XX peaceful_lovelace:/home/claude/projects/
+
+# Create new version folder from previous
 docker exec -u root peaceful_lovelace bash -c "
   cp -r /home/claude/projects/2.0.XX /home/claude/projects/2.0.YY
   chown -R claude:claude /home/claude/projects/"
 
-# 3. Create backup
+# Create backup of new cli.js
 docker exec peaceful_lovelace bash -c "
   cp /usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js \
      /home/claude/projects/2.0.YY/cli.js.backup"
 
-# 4. Update version/hash in patch-cli.js, then let Claude fix the patches
-docker exec peaceful_lovelace tmux new-session -d -s upgrade 'cd /home/claude/projects/2.0.YY && claude --dangerously-skip-permissions'
-docker exec peaceful_lovelace tmux send-keys -t upgrade \
-  'Read UPGRADING.md. Update patches for new version. The backup is cli.js.backup.
-   Run patches with --local flag to test. Keep fixing until all apply.' Enter
+# Get the hash for patch-cli.js
+docker exec peaceful_lovelace sha256sum /home/claude/projects/2.0.YY/cli.js.backup
 ```
 
-Claude will find variable mappings, update patch files, and iterate until everything works.
+### Step 3: Update patch-cli.js version and hash
+
+Either manually edit or have Claude do it:
+```bash
+# Update EXPECTED_VERSION and EXPECTED_HASH in patch-cli.js
+docker exec peaceful_lovelace sed -i \
+  -e "s/EXPECTED_VERSION = '2.0.XX'/EXPECTED_VERSION = '2.0.YY'/" \
+  -e "s/EXPECTED_HASH = '.*'/EXPECTED_HASH = 'NEW_HASH_HERE'/" \
+  /home/claude/projects/2.0.YY/patch-cli.js
+```
+
+### Step 4: Let Claude fix the patches
+
+Start a Claude session in tmux (so you can monitor progress):
+
+```bash
+docker exec peaceful_lovelace tmux new-session -d -s upgrade \
+  'cd /home/claude/projects/2.0.YY && claude --dangerously-skip-permissions'
+
+# Wait for it to start, then send the task
+sleep 4
+docker exec peaceful_lovelace tmux send-keys -t upgrade \
+  'Read UPGRADING.md for context. Update all patches for the new version.
+   The backup is cli.js.backup. Use --local flag to test patches.
+   Keep fixing until all patches apply successfully.' Enter
+```
+
+Monitor progress:
+```bash
+docker exec peaceful_lovelace tmux capture-pane -t upgrade -p -S -50
+```
+
+Claude will:
+1. Find new variable mappings by searching cli.js.backup
+2. Update all .find.txt and .replace.txt files with sed
+3. Test with `node patch-cli.js --local`
+4. Iterate until all patches apply
+
+### Step 5: Test the real installation
+
+Once patches work locally, apply to the actual Claude installation:
+
+```bash
+# Apply patches to real cli.js (needs root)
+docker exec -u root peaceful_lovelace node /home/claude/projects/2.0.YY/patch-cli.js
+
+# Test /context works
+docker exec peaceful_lovelace tmux new-session -d -s test 'claude --dangerously-skip-permissions'
+sleep 4
+docker exec peaceful_lovelace tmux send-keys -t test '/context' Enter
+sleep 3
+docker exec peaceful_lovelace tmux capture-pane -t test -p -S -30
+```
+
+### Step 6: Copy verified patches to host
+
+```bash
+# Create folder on host
+mkdir -p system-prompt/2.0.YY/patches
+
+# Copy from container (exclude the large cli.js.backup)
+docker cp peaceful_lovelace:/home/claude/projects/2.0.YY/patch-cli.js system-prompt/2.0.YY/
+docker cp peaceful_lovelace:/home/claude/projects/2.0.YY/patches/. system-prompt/2.0.YY/patches/
+```
+
+### Step 7: Apply to host and other containers
+
+```bash
+# Host
+CLI_PATH="$(which claude | xargs realpath | xargs dirname)/cli.js"
+cp "$CLI_PATH" "$CLI_PATH.backup"
+node system-prompt/2.0.YY/patch-cli.js
+
+# Other containers
+for container in eager_moser daphne; do
+  docker cp system-prompt/2.0.YY $container:/tmp/
+  docker exec -u root $container cp /usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js \
+    /usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js.backup
+  docker exec -u root $container node /tmp/2.0.YY/patch-cli.js
+done
+```
 
 ---
 
