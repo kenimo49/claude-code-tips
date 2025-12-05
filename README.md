@@ -207,34 +207,31 @@ In this example:
 4. **Fourth tab** - Working on an engineering project
 5. **Fifth tab (current)** - Writing this very tip
 
-## Tip 13: Slim down the system prompt (experimental)
+## Tip 13: Slim down the system prompt
 
-Claude Code's system prompt and tool definitions take up about 18k tokens (~9% of your 200k context) before you even start working. I created a patch system that reduces this to about 11k tokens - saving around 7,000 tokens (39% of the static overhead).
+Claude Code's system prompt and tool definitions take up about 18k tokens (~9% of your 200k context) before you even start working. I created a patch system that reduces this to about 10k tokens - saving around 7,300 tokens (41% of the static overhead).
 
 | Component | Before | After | Savings |
 |-----------|--------|-------|---------|
-| System prompt | 3.0k | 2.2k | 800 tokens |
-| System tools | 14.6k | 8.3k | 6,300 tokens |
-| Other | ~0.4k | ~0.4k | 0 |
-| **Static total** | **~18k** | **~11k** | **~7,100 tokens (39%)** |
+| System prompt | 2.9k | 2.0k | 900 tokens |
+| System tools | 14.7k | 8.3k | 6,400 tokens |
+| **Static total** | **~18k** | **~10k** | **~7,300 tokens (41%)** |
 | Allowed tools list | ~2.5-3.5k | 0 | ~3,000 tokens |
-| **Total** | **~21k** | **~11k** | **~10,000 tokens (48%)** |
+| **Total** | **~21k** | **~10k** | **~11,000 tokens (52%)** |
 
 The allowed tools list is dynamic context - it grows as you approve more bash commands. With 70+ approved commands, mine was eating up 2,500-3,500 tokens. The patch removes this list entirely.
 
 Here's what `/context` looks like before and after patching:
 
-| Unpatched (18k, 9%) | Patched (11k, 5%) |
+| Unpatched (18k, 9%) | Patched (10k, 5%) |
 |---------------------|-------------------|
-| ![Unpatched context](system-prompt/2.0.55/context-unpatched.png) | ![Patched context](system-prompt/2.0.55/context-patched.png) |
+| ![Unpatched context](system-prompt/2.0.59/context-unpatched.png) | ![Patched context](system-prompt/2.0.59/context-patched.png) |
 
 The patches work by trimming verbose examples and redundant text from the minified CLI bundle while keeping all the essential instructions. For example, the TodoWrite examples go from 6KB to 0.4KB, and the Bash tool description drops from 3.7KB to 0.6KB.
 
-This is still experimental - I'm testing it across different types of tasks to make sure nothing important is lost. But so far it's been working well, and the output quality seems to have improved somewhat (probably because there's less noise in the context).
+I've tested this extensively and it works well. It feels more raw - more powerful, but maybe a little less regulated, which makes sense because the system instruction is shorter. It feels more like a pro tool when you use it this way. I really enjoy starting with lower context because you have more room before it fills up, which gives you the option to continue conversations a bit longer. That's definitely the best part of this strategy.
 
-**After a few days of testing**: It's been working pretty well. My impression is that it feels more raw - more powerful, but maybe a little less regulated, which makes sense because the system instruction is shorter. It feels more like a pro tool when you use it this way. Another thing I like is that you start with lower context in the first place, so you have more room before it fills up completely.
-
-Check out the [system-prompt folder](system-prompt/2.0.57/) for the patch scripts and full details on what gets trimmed.
+Check out the [system-prompt folder](system-prompt/) for the patch scripts and full details on what gets trimmed.
 
 **Requirements**: These patches require npm installation (`npm install -g @anthropic-ai/claude-code`). The patching works by modifying the JavaScript bundle (`cli.js`) - other installation methods may produce compiled binaries that can't be patched this way.
 
@@ -321,7 +318,7 @@ That's how I feel about this too. Of course, there are supplementary things you 
 
 I like to think of it like a billion token rule instead of the 10,000 hour rule. If you want to get better at AI and truly get a good intuition about how it works, the best way is to consume a lot of tokens. And nowadays it's possible. I found that especially with Opus 4.5, it's powerful enough but affordable enough that you can run multiple sessions at the same time. You don't have to worry as much about token usage, which frees you up a lot.
 
-## Tip 21: Clone conversations to branch off (experimental)
+## Tip 21: Clone conversations to branch off
 
 Sometimes you want to try a different approach from a specific point in a conversation without losing your original thread. The [clone-conversation script](scripts/clone-conversation.sh) lets you duplicate a conversation with new UUIDs so you can branch off.
 
@@ -335,7 +332,7 @@ ln -s /path/to/this/repo/commands/clone.md ~/.claude/commands/clone.md
 
 Then just type `/clone` in any conversation and Claude will handle finding the session ID and running the script.
 
-This is experimental. I'm still testing this.
+I've tested this extensively and the cloning works really well.
 
 ## Tip 22: Use realpath to get absolute paths
 
