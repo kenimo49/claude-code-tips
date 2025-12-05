@@ -221,7 +221,7 @@ The allowed tools list is dynamic context - it grows as you approve more bash co
 
 Here's what `/context` looks like before and after patching:
 
-| Unpatched (18k, 9%) | Patched (10k, 5%) |
+| Unpatched (~18k, 9%) | Patched (~10k, 5%) |
 |---------------------|-------------------|
 | ![Unpatched context](system-prompt/2.0.59/context-unpatched.png) | ![Patched context](system-prompt/2.0.59/context-patched.png) |
 
