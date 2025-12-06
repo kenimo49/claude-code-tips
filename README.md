@@ -133,6 +133,8 @@ tmux capture-pane -t test-session -p
 
 Once you have a test like this, Claude Code can run `git bisect` and automatically test each commit until it finds the one that broke things.
 
+Another example is simply writing tests. After you let Claude Code write some code, if you want to test it, you can just let it write tests for itself too. And let it run on its own and fix things if it can. Of course, it doesn't always go in the right direction and you need to supervise it sometimes, but it's able to do a surprising amount of coding tasks on its own.
+
 This is also an example of why your software engineering skills still matter. If you're a software engineer, you probably know about tools like `git bisect`. That knowledge is still really valuable when working with AI - you just apply it in new ways.
 
 ## Tip 8: Cmd+A and Ctrl+A are your friends
