@@ -1,4 +1,4 @@
-# 30 Claude Code Tips: From Basics to Advanced (Work in Progress - 28 tips so far)
+# 30 Claude Code Tips: From Basics to Advanced (Work in Progress - 29 tips so far)
 
 Tips for getting the most out of Claude Code - includes a custom status line script, cutting the system prompt in half, using Gemini CLI as Claude Code's minion, and Claude Code running itself in a container.
 
@@ -389,6 +389,10 @@ I wanted to specifically create a separate tip for this because it's been really
 Once you identify what the particular problem was, you can just create a draft PR and go through some of the tips I mentioned earlier - check the output, make sure it looks good, let it verify its own outputs, and then turn it into a real PR to actually fix the issue. It's been working really well for me personally.
 
 You can sometimes combine some of these things together too. For example, if you want to edit one of your PR descriptions, instead of having it edit directly (which it might mess up), you can have it put the content into a local file first, let it edit it, and then let it copy and paste it back into the GitHub PR. That works really well. Or if you want to do that yourself, you can just ask it to open it in VS Code or give it to you via pbcopy so you can copy and paste it manually.
+
+## Tip 28: Keep CLAUDE.md simple and concise
+
+I think it's important to keep CLAUDE.md really simple and concise. You can just start with no CLAUDE.md at all. And if you find that you keep telling Claude Code the same thing over and over again, then you can just add it to CLAUDE.md. I know there is an option to do that through the hashtag symbol, but I prefer to just ask Claude Code to either add it to the project level CLAUDE.md or the global CLAUDE.md and it'll know what to edit exactly. So you can just let Claude Code edit CLAUDE.md by itself based on your instruction.
 
 ---
 
