@@ -40,6 +40,16 @@ This is one of the most important concepts to master. It's exactly the same as t
 
 If you find that Claude Code isn't able to one-shot a difficult problem or coding task, ask it to break it down into multiple smaller issues. See if it can solve an individual part of that problem. If it's still too hard, see if it can solve an even smaller sub-problem. Keep going until everything is solvable.
 
+Essentially, instead of going from A to B:
+
+![Direct approach](breakdown-direct.png)
+
+You can go from A to A1 to A2 to A3, then to B:
+
+![Step-by-step approach](breakdown-steps.png)
+
+A good example of this is when I was building my own voice transcription system. I needed to build a system that could let the user select and download a model, take keyboard shortcuts, start transcribing, put the transcribed text at the user's cursor, and wrap all of this in a nice UI. That's a lot. So I broke it down into smaller tasks. First, I created an executable that would just download a model, nothing else. Then I created another one that would just record voice, nothing else. Then another one that would just transcribe a pre-recorded audio. I completed them one by one like that before combining them at the end.
+
 Highly related to this: your problem-solving skills and software engineering skills are still highly relevant in the world of agentic coding and Claude Code. It's able to solve a lot of problems on its own, but when you apply your general problem-solving and software engineering skills to it, it becomes a lot more powerful.
 
 ## Tip 3: Using Git and GitHub CLI like a pro
