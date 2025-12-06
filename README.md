@@ -1,4 +1,4 @@
-# 30 Claude Code Tips: From Basics to Advanced (Work in Progress - 26 tips so far)
+# 30 Claude Code Tips: From Basics to Advanced (Work in Progress - 27 tips so far)
 
 Tips for getting the most out of Claude Code - includes a custom status line script, cutting the system prompt in half, using Gemini CLI as Claude Code's minion, and Claude Code running itself in a container.
 
@@ -375,6 +375,12 @@ Claude Code is amazing for any sort of research. It's essentially a Google repla
 The key is giving it the right pieces of information and instructions about how to access those pieces of information. It might be `gh` terminal command access, or the container approach (Tip 19), or Reddit through Gemini CLI (Tip 9), or private information through an MCP like Slack MCP, or the Cmd+A / Ctrl+A method (Tip 8) - whatever it is.
 
 In fact, I was able to save $10,000 using some research through Claude Code. I hope to be able to share this story at some point soon.
+
+## Tip 26: Mastering different ways of verifying its output
+
+One way to verify its output if it's code is to have it write tests and make sure the tests look good in general. That's one way, but you can of course check the code it generates as it goes, just on the Claude Code UI. Another thing is you can use a visual Git client like GitHub Desktop for example. I personally use it. It's not a perfect product, but it's good enough for checking changes quickly. And having it generate a PR as I probably mentioned earlier in this post is a great way as well. Have it create a draft PR, check the content before turning it into a real PR.
+
+Another one is letting it check itself, its own work. If it gives you some sort of output, let's say from some research, you can say "are you sure about this? Can you double check?" One of my favorite prompts is to say "double check everything, every single claim in what you produced and at the end make a table of what you were able to verify" - and that seems to work really well.
 
 ---
 
