@@ -45,6 +45,7 @@ docker exec peaceful_lovelace claude --version  # verify new version
 docker cp system-prompt/2.0.XX peaceful_lovelace:/home/claude/projects/
 
 # Create new version folder from previous
+# Note: chown is needed because files copied from host keep host UID
 docker exec -u root peaceful_lovelace bash -c "
   cp -r /home/claude/projects/2.0.XX /home/claude/projects/2.0.YY
   chown -R claude:claude /home/claude/projects/"
@@ -81,7 +82,7 @@ docker exec peaceful_lovelace tmux new-session -d -s upgrade \
 sleep 4
 docker exec peaceful_lovelace tmux send-keys -t upgrade \
   'Read UPGRADING.md for context. Update all patches for the new version.
-   The backup is cli.js.backup. Use --local flag to test patches.
+   The backup is cli.js.backup. Test with: node patch-cli.js cli.js
    Keep fixing until all patches apply successfully.' Enter
 ```
 
@@ -93,7 +94,7 @@ docker exec peaceful_lovelace tmux capture-pane -t upgrade -p -S -50
 Claude will:
 1. Find new variable mappings by searching cli.js.backup
 2. Update all .find.txt and .replace.txt files with sed
-3. Test with `node patch-cli.js --local`
+3. Test with `node patch-cli.js cli.js` (uses local backup)
 4. Iterate until all patches apply
 
 ### Step 5: Test the real installation
@@ -137,12 +138,12 @@ sed -i '' \
 
 ```bash
 # Host
-CLI_PATH="$(which claude | xargs realpath | xargs dirname)/cli.js"
-cp "$CLI_PATH" "$CLI_PATH.backup"
-node system-prompt/2.0.YY/patch-cli.js
+npm update -g @anthropic-ai/claude-code
+cd system-prompt/2.0.YY && ./backup-cli.sh && node patch-cli.js
 
-# Other containers
+# Other containers (update Claude first, then patch)
 for container in eager_moser daphne; do
+  docker exec -u root $container npm install -g @anthropic-ai/claude-code@latest
   docker cp system-prompt/2.0.YY $container:/tmp/
   docker exec -u root $container cp /usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js \
     /usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js.backup
