@@ -1,0 +1,1 @@
+Get output from background shell. Returns new output since last check. Optional regex filter.

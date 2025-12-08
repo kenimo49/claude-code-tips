@@ -1,0 +1,15 @@
+Launch agents for complex, multi-step tasks. Specify subagent_type parameter.
+
+Available agent types:
+${Q}
+
+When NOT to use: For specific file reads use ${Z6.name}/${yO.name}; for specific class search use ${yO.name}.
+
+Usage:
+- Launch multiple agents in parallel with multiple tool uses in one message
+- Agents are stateless; provide detailed task description and specify what to return
+- Agent results aren't visible to user; summarize them in your response
+- Use run_in_background parameter for async execution; use ${xE} to retrieve results
+- Agents with "access to current context" can see conversation history
+- Tell agent if it should write code or just research
+- Use proactively when agent description suggests it

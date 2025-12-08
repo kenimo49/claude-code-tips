@@ -1,0 +1,3 @@
+function Rf7(A){if(!A)return"";let Q=PVA(A);if(Q.length===0)return"";let B=DY();return`
+You can use the following tools without requiring user approval: ${Q.map((Z)=>{let Y=z7(Z.ruleValue);if(B){let J=TD0(Y);if(J)return J}return Y}).join(", ")}
+`}

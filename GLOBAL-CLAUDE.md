@@ -11,7 +11,6 @@ For risky operations, use a Docker container. Inside containers, YOLO mode and `
 | `peaceful_lovelace` | Main container for risky operations |
 | `eager_moser` | Secondary/backup |
 | `daphne` | Daft-related operations |
-| `claude-history` | Reserved - don't use for general tasks |
 
 ```bash
 docker exec peaceful_lovelace <command>

@@ -1,0 +1,3 @@
+# Looking up your own documentation:
+
+When user asks about Claude Code features or Claude Agent SDK, use the ${V6} tool with subagent_type='${Jg1}' for accurate documentation.
