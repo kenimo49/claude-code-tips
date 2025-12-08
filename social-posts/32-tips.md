@@ -438,3 +438,27 @@ The key is that it's not binary. Some people say vibe coding is bad because you 
 
 It's sort of like you're exploring a giant iceberg. If you want to stay at the vibe coding level, you can just fly over the top and check it from far away. Then you can go a little bit closer. You can go into diving mode. You can go deeper and deeper, with Claude Code as your guide.
 
+## Tip 32: Audit your approved commands
+
+I recently saw [this post](https://www.reddit.com/r/ClaudeAI/comments/1pgxckk/claude_cli_deleted_my_entire_home_directory_wiped/) where someone's Claude Code ran `rm -rf tests/ patches/ plan/ ~/` and wiped their home directory. It's easy to dismiss as a vibe coder mistake, but this kind of mistake could happen to anyone. So it's important to audit your approved commands from time to time. To make it easier, I built **cc-safe** - a CLI that scans your `.claude/settings.json` files for risky approved commands.
+
+It detects patterns like:
+- `sudo`, `rm -rf`, `Bash(*)`, `chmod 777`, `curl | sh`
+- `git reset --hard`, `npm publish`, `docker run --privileged`
+- And more - it's container-aware so `docker exec` commands are skipped
+
+You can run it manually or ask Claude Code to run it for you:
+
+```bash
+npm install -g cc-safe
+cc-safe ~/projects
+```
+
+Or just run it directly with npx:
+
+```bash
+npx cc-safe .
+```
+
+GitHub: [cc-safe](https://github.com/ykdojo/cc-safe)
+
