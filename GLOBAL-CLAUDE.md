@@ -2,9 +2,9 @@
 
 **NEVER use `--dangerously-skip-permissions` on the host machine.**
 
-Run `npx cc-safe <directory>` to scan Claude Code settings for security issues.
-
 For risky operations, use a Docker container. Inside containers, YOLO mode and `--dangerously-skip-permissions` are fine.
+
+Run `npx cc-safe <directory>` to scan Claude Code settings for security issues.
 
 ## Containers
 
