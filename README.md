@@ -445,7 +445,7 @@ It detects patterns like:
 - `git reset --hard`, `npm publish`, `docker run --privileged`
 - And more - it's container-aware so `docker exec` commands are skipped
 
-You can run it manually or ask Claude Code to run it for you:
+It recursively scans all subdirectories, so you can point it at your projects folder to check everything at once. You can run it manually or ask Claude Code to run it for you:
 
 ```bash
 npm install -g cc-safe
