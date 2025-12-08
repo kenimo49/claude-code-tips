@@ -60,6 +60,32 @@ I personally allow pull automatically but not push, because push is riskier - it
 
 For GitHub CLI (`gh`), there's a lot you can do. One thing I started doing more after using Claude Code is creating draft PRs. This lets Claude Code handle the PR creation process with low risk - you can review everything before marking it ready for review.
 
+And it turns out, `gh` is pretty powerful. You can even send arbitrary GraphQL queries through it. For example, you can even find the exact times at which GitHub PR descriptions were edited:
+
+```
+⏺ Bash(gh api graphql -f query='
+      query {
+        repository(owner: "...", name: "...") {
+          pullRequest(number: ...) {
+            userContentEdits(first: 100) {
+              nodes { editedAt editor { login } }
+            }
+          }
+        }
+      }')
+
+⏺ Here's the full edit history for your PR description:
+
+  | #  | Edited At (UTC)     | Editor |
+  |----|---------------------|--------|
+  | 1  | 2025-12-01 00:08:34 | ykdojo |
+  | 2  | 2025-12-01 15:57:21 | ykdojo |
+  | 3  | 2025-12-01 16:24:33 | ykdojo |
+  | 4  | 2025-12-01 16:27:00 | ykdojo |
+  | 5  | 2025-12-04 00:40:02 | ykdojo |
+  ...
+```
+
 ## Tip 4: AI context is like milk; it's best served fresh and condensed!
 
 When you start a new conversation with Claude Code, it performs the best because it doesn't have all the added complexity of having to process the previous context from earlier parts of the conversation. But as you talk to it longer and longer, the context gets longer and the performance tends to go down.
