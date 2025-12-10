@@ -99,7 +99,7 @@ Claude will:
 
 ### Step 5: Test the real installation
 
-Once patches work locally, apply to the actual Claude installation:
+Once patches work locally, apply to the actual Claude installation and **run the full verification checklist** (see bottom of this doc):
 
 ```bash
 # Apply patches to real cli.js (needs root)
@@ -112,6 +112,8 @@ docker exec peaceful_lovelace tmux send-keys -t test '/context' Enter
 sleep 3
 docker exec peaceful_lovelace tmux capture-pane -t test -p -S -30
 ```
+
+**IMPORTANT:** Don't skip verification! Run all tests from the Final Verification Checklist before copying patches to host.
 
 ### Step 6: Copy verified patches to host
 
@@ -142,7 +144,8 @@ npm update -g @anthropic-ai/claude-code
 cd system-prompt/2.0.YY && ./backup-cli.sh && node patch-cli.js
 
 # Other containers (update Claude first, then patch)
-for container in eager_moser daphne; do
+# Check ~/.claude/CLAUDE.md for current container list
+for container in eager_moser daphne delfina; do
   docker exec -u root $container npm install -g @anthropic-ai/claude-code@latest
   docker cp system-prompt/2.0.YY $container:/tmp/
   docker exec -u root $container cp /usr/local/lib/node_modules/@anthropic-ai/claude-code/cli.js \
@@ -150,6 +153,8 @@ for container in eager_moser daphne; do
   docker exec -u root $container node /tmp/2.0.YY/patch-cli.js
 done
 ```
+
+**Note:** The loop syntax above may not work in all shells. If it fails, run each container separately or use `&&` to chain commands.
 
 ---
 
