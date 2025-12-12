@@ -43,6 +43,7 @@ Here are my tips for getting the most out of Claude Code, including a custom sta
 - [Tip 35: Ctrl+B to move commands to the background](#tip-35-ctrlb-to-move-commands-to-the-background)
 - [Tip 36: The era of personalized software is here](#tip-36-the-era-of-personalized-software-is-here)
 - [Tip 37: Navigating and editing your input box](#tip-37-navigating-and-editing-your-input-box)
+- [Tip 38: Share your knowledge and contribute where you can](#tip-38-share-your-knowledge-and-contribute-where-you-can)
 
 <!-- /TOC -->
 
@@ -616,6 +617,21 @@ Or in `~/.claude/settings.json` (requires restart):
   }
 }
 ```
+
+## Tip 38: Share your knowledge and contribute where you can
+
+This tip is a bit different from the others. I found that by learning as much as you can, you're able to share your knowledge with people around you. Maybe through posts like these, maybe even books, courses, videos. I also recently had an internal session for my colleagues at Daft. It's been very rewarding.
+
+And whenever I share tips, I often get information back. For example, when I shared my trick for shortening the system prompt and tool descriptions (Tip 14), some people told me about the `--system-prompt` flag that you can use as an alternative. Another time, I shared about the difference between slash commands and skills (Tip 24), and I learned new things from comments on that Reddit post.
+
+So sharing your knowledge isn't just about establishing your brand or solidifying your learning. It's also about learning new things through that process. It's not always a one-way street.
+
+When it comes to contributing, I've been sending issues to the Claude Code repo. I thought, okay, if they listen, cool. If they don't, that's totally fine. I didn't have any expectations. But in version 2.0.67, I noticed they took multiple suggestions from reports I made:
+
+- Fixed scroll position resetting after deleting a permission rule in `/permissions`
+- Added search functionality to `/permissions` command
+
+It's kind of amazing how fast the team can react to feature requests and bug reports. But it makes sense because they're using Claude Code to build Claude Code itself.
 
 ---
 
