@@ -4,6 +4,9 @@
 - Testing: use tmux to control Claude Code instances (send-keys, capture-pane)
 - After adding or renaming tips, run `node scripts/generate-toc.js` to update the table of contents
 
+## Version checks
+- Use `npm view @anthropic-ai/claude-code version` to check for new Claude Code versions
+
 ## System prompt patching
 - When upgrading patches, **always test `/context` in the container** before copying to host. Don't skip the Final Verification Checklist at the bottom of UPGRADING.md.
 - For function-based patches (like `allowed-tools`), the replace.txt must use the NEW function name, not the old one.
