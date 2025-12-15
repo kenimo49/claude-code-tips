@@ -636,7 +636,7 @@ You can use plan mode for this by pressing Shift+Tab to switch to it. Or you can
 
 ## Tip 39: Share your knowledge and contribute where you can
 
-This tip is a bit different from the others. I found that by learning as much as you can, you're able to share your knowledge with people around you. Maybe through posts like these, maybe even books, courses, videos. I also recently had an internal session for my colleagues at Daft. It's been very rewarding.
+This tip is a bit different from the others. I found that by learning as much as you can, you're able to share your knowledge with people around you. Maybe through posts like these, maybe even books, courses, videos. I also recently had an [internal session for my colleagues at Daft](https://www.daft.ai/blog/how-we-use-ai-coding-agents). It's been very rewarding.
 
 And whenever I share tips, I often get information back. For example, when I shared my trick for shortening the system prompt and tool descriptions (Tip 14), some people told me about the `--system-prompt` flag that you can use as an alternative. Another time, I shared about the difference between slash commands and skills (Tip 24), and I learned new things from comments on that Reddit post.
 
