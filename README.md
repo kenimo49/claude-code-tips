@@ -56,8 +56,8 @@ Here are my tips for getting the most out of Claude Code, including a custom sta
 You can customize the status line at the bottom of Claude Code to show useful info. I set mine up to show the model, current directory, git branch (if any), uncommitted file count, sync status with origin, and a visual progress bar for token usage. It also shows a second line with my last message so I can see what the conversation was about:
 
 ```
-Opus 4.5 | 📁Daft | 🔀fix/colab-pydantic-pickle (0 files uncommitted, synced 20m ago) | █░░░░░░░░░ 12% of 200k tokens used
-💬 Okay, and this part I don't quite understand. What is type checking and why are we using it there? from typing impor...
+Opus 4.5 | 📁claude-code-tips | 🔀main (scripts/context-bar.sh uncommitted, synced 12m ago) | ██░░░░░░░░ 18% of 200k tokens used
+💬 This is good. I don't think we need to change the documentation as long as we don't say that the default color is orange el...
 ```
 
 This is especially helpful for keeping an eye on your context usage and remembering what you were working on. The script also supports 10 color themes (orange, blue, teal, green, lavender, rose, gold, slate, cyan, or gray).
