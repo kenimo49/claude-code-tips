@@ -31,6 +31,19 @@ Opus 4.5 | 📁Daft | 🔀fix/colab-pydantic-pickle (0 files uncommitted, synced
 
 That's it!
 
+### Color Themes
+
+The script supports optional color themes for the model name and progress bar. Edit the `COLOR` variable at the top of the script:
+
+```bash
+# Color theme: default, orange, blue, teal, green, lavender
+COLOR="blue"
+```
+
+Preview all options by running `bash scripts/color-preview.sh`:
+
+![Color preview options](color-preview.png)
+
 ### Requirements
 
 - `jq` (for JSON parsing)

@@ -1,13 +1,25 @@
 #!/bin/bash
 
-# Claude Code status line script
-# Shows: Opus 4.5 | 📁Daft | 🔀main (2 files uncommitted, synced 20m ago) | ████▄░░░░░ 45% of 200k tokens used
-#
-# Context calculation:
-# - 200k total context window
-# - 45k reserved for autocompact buffer (disable via /config if needed)
-# - 20k baseline for system prompt, tools, memory, and dynamic context
-# - 155k effectively available (after autocompact buffer), 135k free at conversation start
+# Color theme: gray, orange, blue, teal, green, lavender, rose, gold, slate, cyan
+# Preview colors with: bash scripts/color-preview.sh
+COLOR="orange"
+
+# Color codes
+C_RESET='\033[0m'
+C_GRAY='\033[38;5;245m'  # explicit gray for default text
+C_BAR_EMPTY='\033[38;5;238m'
+case "$COLOR" in
+    orange)   C_ACCENT='\033[38;5;173m' ;;
+    blue)     C_ACCENT='\033[38;5;74m' ;;
+    teal)     C_ACCENT='\033[38;5;66m' ;;
+    green)    C_ACCENT='\033[38;5;71m' ;;
+    lavender) C_ACCENT='\033[38;5;139m' ;;
+    rose)     C_ACCENT='\033[38;5;132m' ;;
+    gold)     C_ACCENT='\033[38;5;136m' ;;
+    slate)    C_ACCENT='\033[38;5;60m' ;;
+    cyan)     C_ACCENT='\033[38;5;37m' ;;
+    *)        C_ACCENT="$C_GRAY" ;;  # gray: all same color
+esac
 
 input=$(cat)
 
@@ -122,29 +134,33 @@ if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
         bar_start=$((i * 10))
         progress=$((pct - bar_start))
         if [[ $progress -ge 8 ]]; then
-            bar+="█"
+            bar+="${C_ACCENT}█${C_RESET}"
         elif [[ $progress -ge 3 ]]; then
-            bar+="▄"
+            bar+="${C_ACCENT}▄${C_RESET}"
         else
-            bar+="░"
+            bar+="${C_BAR_EMPTY}░${C_RESET}"
         fi
     done
 
-    ctx="${bar} ${pct}% of ${max_k}k tokens used"
+    ctx="${bar} ${C_GRAY}${pct}% of ${max_k}k tokens used"
 else
-    ctx="█░░░░░░░░░ ~10% of ${max_k}k tokens used"
+    ctx="${C_ACCENT}█${C_BAR_EMPTY}░░░░░░░░░ ${C_GRAY}~10% of ${max_k}k tokens used"
 fi
 
 # Build output: Model | Dir | Branch (uncommitted) | Context
-output="${model} | 📁${dir}"
+output="${C_ACCENT}${model}${C_GRAY} | 📁${dir}"
 [[ -n "$branch" ]] && output+=" | 🔀${branch} ${git_status}"
-output+=" | ${ctx}"
+output+=" | ${ctx}${C_RESET}"
 
-echo "$output"
+printf '%b\n' "$output"
 
 # Get user's last message (text only, not tool results, skip unhelpful messages)
 if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
-    max_len=$((${#output} - 4))  # subtract for "💬 " prefix
+    # Calculate visible length (without ANSI codes) - 10 chars for bar + content
+    plain_output="${model} | 📁${dir}"
+    [[ -n "$branch" ]] && plain_output+=" | 🔀${branch} ${git_status}"
+    plain_output+=" | xxxxxxxxxx ${pct}% of ${max_k}k tokens used"
+    max_len=${#plain_output}
     last_user_msg=$(jq -rs '
         # Messages to skip (not useful as context)
         def is_unhelpful:
