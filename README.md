@@ -60,7 +60,9 @@ Opus 4.5 | 📁Daft | 🔀fix/colab-pydantic-pickle (0 files uncommitted, synced
 💬 Okay, and this part I don't quite understand. What is type checking and why are we using it there? from typing impor...
 ```
 
-This is especially helpful for keeping an eye on your context usage and remembering what you were working on.
+This is especially helpful for keeping an eye on your context usage and remembering what you were working on. The script also supports 10 color themes (orange, blue, teal, green, lavender, rose, gold, slate, cyan, or gray).
+
+![Color preview options](scripts/color-preview.png)
 
 To set this up, you can use [this sample script](scripts/context-bar.sh) and check the [setup instructions](scripts/README.md).
 
