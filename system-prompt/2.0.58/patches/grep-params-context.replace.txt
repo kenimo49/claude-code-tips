@@ -1,1 +1,0 @@
-"-B":_.number().optional().describe("Lines before match (rg -B)"),"-A":_.number().optional().describe("Lines after match (rg -A)"),"-C":_.number().optional().describe("Context lines (rg -C)")

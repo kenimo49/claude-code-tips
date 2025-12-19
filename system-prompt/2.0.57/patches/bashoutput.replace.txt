@@ -1,1 +1,0 @@
-Retrieves new output from background shell (by shell_id). Supports regex filtering. Find IDs with /tasks.

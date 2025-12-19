@@ -1,3 +1,0 @@
-function yv3(A){if(!A)return"";let Q=CVA(A);if(Q.length===0)return"";let B=bZ();return`
-You can use the following tools without requiring user approval: ${Q.map((Z)=>{let I=B3(Z.ruleValue);if(B){let Y=zK0(I);if(Y)return Y}return I}).join(", ")}
-`}
