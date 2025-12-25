@@ -1,0 +1,1 @@
+pattern:m.string().describe("The regular expression pattern to search for in file contents")

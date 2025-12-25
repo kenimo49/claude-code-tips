@@ -1,0 +1,1 @@
+glob:m.string().optional().describe('Glob pattern to filter files (e.g. "*.js", "*.{ts,tsx}") - maps to rg --glob')

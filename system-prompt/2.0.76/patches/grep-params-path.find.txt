@@ -1,0 +1,1 @@
+path:m.string().optional().describe("File or directory to search in (rg PATH). Defaults to current working directory.")

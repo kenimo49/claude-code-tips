@@ -1,0 +1,1 @@
+path:m.string().optional().describe("Search path (default: cwd)")

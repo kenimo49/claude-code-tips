@@ -1,0 +1,1 @@
+"-n":m.boolean().optional().describe("Line numbers (default: true)")

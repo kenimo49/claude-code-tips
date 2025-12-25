@@ -141,6 +141,17 @@ const patches = [
   { name: 'Further slim git commit (~400 → 200 chars)', file: 'git-commit-v2' },
   { name: 'Further slim PR creation (~400 → 150 chars)', file: 'pr-creation-v2' },
   { name: 'Remove TodoWrite examples (~400 chars)', file: 'todowrite-examples-v2' },
+  // Round 11 - New tool descriptions and grep params
+  { name: 'Slim LSP tool description (~750 → 150 chars)', file: 'lsp-tool' },
+  { name: 'Slim Edit tool description (~900 → 200 chars)', file: 'edit-tool' },
+  { name: 'Slim Write tool description (~550 → 100 chars)', file: 'write-tool' },
+  { name: 'Slim Glob tool description (~400 → 100 chars)', file: 'glob-tool' },
+  { name: 'Slim Grep glob param (~80 → 20 chars)', file: 'grep-params-glob' },
+  { name: 'Slim Grep -i param (~35 → 18 chars)', file: 'grep-params-i' },
+  { name: 'Slim Grep -n param (~95 → 30 chars)', file: 'grep-params-n' },
+  { name: 'Slim Grep path param (~75 → 25 chars)', file: 'grep-params-path' },
+  { name: 'Slim Grep pattern param (~60 → 15 chars)', file: 'grep-params-pattern' },
+  { name: 'Slim Grep -A/-B/-C context params (~300 → 100 chars)', file: 'grep-params-context' },
 ];
 
 // Helper: compute SHA256 hash
