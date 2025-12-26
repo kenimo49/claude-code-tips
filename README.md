@@ -719,6 +719,8 @@ There are several effective ways to keep learning about Claude Code:
 
 ---
 
+📝 [How I got a full-time job with Claude Code](blog-drafts/how-i-got-a-job-with-claude-code.md)
+
 📺 **Related talk**: [Claude Code Masterclass](https://youtu.be/9UdZhTnMrTA) - lessons and project examples from 31 months of agentic coding
 
 📰 **Newsletter**: [Agentic Coding with Discipline and Skill](https://agenticcoding.substack.com/) - bring the practice of agentic coding to the next level
