@@ -8,7 +8,7 @@ I first used it for initial research. I gave the URL of the company's website to
 
 After the initial few calls, they asked me to do a task that I wasn't that familiar with. It was basically a data engineering task, and I was never a data engineer. It was also supposed to be AI-heavy, and while I had worked with AI before, I hadn't worked with the specific model that would be the best for this task, specifically CLIP. I was kind of stumped, and I only had a few days to prepare.
 
-But I thought, okay, let's give Claude Code this task and see what I can do with it. I worked with it using a voice transcription system, going back and forth. I had a lot of bugs in my code, but eventually I was able to get through everything. At the end of the day, they were impressed with my project. I was kind of unsure if I could make it work in basically a day, but I was able to do that thanks to the power of Opus 4.1 at that time.
+But I thought, okay, let's give Claude Code this task and see what I can do with it. I worked with it using a voice transcription system, going back and forth. I initially had a lot of bugs in my code, but eventually I was able to get through everything. At the end of the day, they were impressed with my project. I was kind of unsure if I could make it work in basically a day, but I was able to do that thanks to the power of Opus 4.1 at that time.
 
 Additionally, they asked me to present a blog post I read. So I figured, okay, why not write an entire blog post just for this? I did exactly that, and they were also impressed by that.
 
