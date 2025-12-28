@@ -52,6 +52,7 @@ Here are my tips for getting the most out of Claude Code, including a custom sta
 - [Tip 40: Automation of automation](#tip-40-automation-of-automation)
 - [Tip 41: Share your knowledge and contribute where you can](#tip-41-share-your-knowledge-and-contribute-where-you-can)
 - [Tip 42: Keep learning!](#tip-42-keep-learning)
+- [Install the dx plugin](#install-the-dx-plugin)
 
 <!-- /TOC -->
 
@@ -215,7 +216,7 @@ Then start a fresh conversation. For the fresh agent, you can just give the path
 
 In subsequent conversations, you can ask the agent to update the document for the next agent.
 
-I've also created a `/handoff` slash command that automates this - it checks for an existing HANDOFF.md, reads it if present, then creates or updates it with the goal, progress, what worked, what didn't, and next steps. You can find it in the [commands folder](commands/handoff.md).
+I've also created a `/handoff` slash command that automates this - it checks for an existing HANDOFF.md, reads it if present, then creates or updates it with the goal, progress, what worked, what didn't, and next steps. You can find it in the [commands folder](commands/handoff.md), or install it via the [dx plugin](#install-the-dx-plugin).
 
 ## Tip 8: Complete the write-test cycle for autonomous tasks
 
@@ -280,7 +281,7 @@ This uses the same tmux pattern from Tip 8 - start a session, send commands, cap
 
 Skills are more token-efficient because Claude Code only loads them when needed. If you want something simpler, you can put a condensed version in `~/.claude/CLAUDE.md` instead, but that gets loaded into every conversation whether you need it or not.
 
-I tested this by asking Claude Code to check how Claude Code skills are regarded on Reddit - a bit meta. It goes back and forth with Gemini for a while, so it's not fast, but the report quality was surprisingly good. Obviously, you'll need to have Gemini CLI installed for this to work.
+I tested this by asking Claude Code to check how Claude Code skills are regarded on Reddit - a bit meta. It goes back and forth with Gemini for a while, so it's not fast, but the report quality was surprisingly good. Obviously, you'll need to have Gemini CLI installed for this to work. You can also install this skill via the [dx plugin](#install-the-dx-plugin).
 
 ## Tip 11: Invest in your own workflow
 
@@ -457,13 +458,15 @@ Sometimes you want to try a different approach from a specific point in a conver
 
 The first message is tagged with `[CLONED]`, which shows up both in the `claude -r` list and inside the conversation.
 
-To set it up, symlink both files:
+To set it up manually, symlink both files:
 ```bash
 ln -s /path/to/this/repo/scripts/clone-conversation.sh ~/.claude/scripts/clone-conversation.sh
 ln -s /path/to/this/repo/commands/clone.md ~/.claude/commands/clone.md
 ```
 
-Then just type `/clone` in any conversation and Claude will handle finding the session ID and running the script.
+Or install via the [dx plugin](#install-the-dx-plugin) - no symlinks needed.
+
+Then just type `/clone` (or `/dx:clone` if using the plugin) in any conversation and Claude will handle finding the session ID and running the script.
 
 I've tested this extensively and the cloning works really well.
 
@@ -515,7 +518,7 @@ Another one is letting it check itself, its own work. If it gives you some sort 
 
 I wanted to specifically create a separate tip for this because it's been really amazing for me. Whenever there are GitHub Actions CI failures, I just give it to Claude Code and say "dig into this issue, try to find the root cause." Sometimes it gives you surface level answers, but if you just keep asking - was it caused by a particular commit, a particular PR, or is it a flaky issue? - it really helps you dig into these nasty issues that are hard to dig into by hand. You would need to wade through a bunch of logs and that would be super painful to do manually, but Claude Code is able to handle a lot of that.
 
-I've packaged this workflow as a `/gha` slash command - just run `/gha <url>` with any GitHub Actions URL and it will automatically investigate the failure, check for flakiness, identify breaking commits, and suggest fixes. You can find it in the [commands folder](commands/gha.md).
+I've packaged this workflow as a `/gha` slash command - just run `/gha <url>` with any GitHub Actions URL and it will automatically investigate the failure, check for flakiness, identify breaking commits, and suggest fixes. You can find it in the [commands folder](commands/gha.md), or install it via the [dx plugin](#install-the-dx-plugin).
 
 Once you identify what the particular problem was, you can just create a draft PR and go through some of the tips I mentioned earlier - check the output, make sure it looks good, let it verify its own outputs, and then turn it into a real PR to actually fix the issue. It's been working really well for me personally.
 
@@ -720,6 +723,28 @@ There are several effective ways to keep learning about Claude Code:
 
 - [Twitter/X: Advent of Claude posts](https://x.com/search?q=from%3Aadocomplete%20advent%20of%20claude&src=typed_query&f=live)
 - [LinkedIn: Advent of Claude posts](https://www.linkedin.com/search/results/content/?fromMember=%5B%22ACoAAAFdD3IBYHwKSh6FsyGqOh1SpbrZ9ZHTjnI%22%5D&keywords=advent%20of%20claude&origin=FACETED_SEARCH&sid=zDV&sortBy=%22date_posted%22)
+
+## Install the dx plugin
+
+This repo is also a Claude Code plugin called `dx` (developer experience). It bundles several tools from the tips above into a single install:
+
+| Command/Skill | Description |
+|---------------|-------------|
+| `/dx:clone` | Clone conversations to branch off (Tip 22) |
+| `/dx:handoff` | Create handoff documents for context continuity (Tip 7) |
+| `/dx:gha <url>` | Analyze GitHub Actions failures (Tip 28) |
+| `reddit-fetch` | Fetch Reddit content via Gemini CLI (Tip 10) - auto-invoked when needed |
+
+**Install with two commands:**
+
+```bash
+claude plugin marketplace add ykdojo/claude-code-tips
+claude plugin install dx@ykdojo
+```
+
+After installing, the commands are available as `/dx:clone`, `/dx:handoff`, and `/dx:gha`. The `reddit-fetch` skill is invoked automatically when you ask about Reddit URLs.
+
+**Recommended companion:** [Playwright MCP](https://github.com/microsoft/playwright-mcp) for browser automation - add with `claude mcp add playwright npx @playwright/mcp@latest`
 
 ---
 

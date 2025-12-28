@@ -21,20 +21,32 @@ function main() {
   const content = fs.readFileSync(readmePath, 'utf8');
   const lines = content.split('\n');
 
-  // Match "## Tip N: Title" pattern
+  // Match "## Tip N: Title" pattern and other "## Section" headers
   const tipRegex = /^## (Tip \d+: .+)$/;
+  const sectionRegex = /^## (.+)$/;
   const tips = [];
+  const sections = [];
+  const skipSections = ['Table of Contents']; // Sections to exclude from TOC
 
   for (const line of lines) {
-    const match = line.match(tipRegex);
-    if (match) {
-      const title = match[1];
-      // GitHub anchor: lowercase, spaces to hyphens, remove special chars
+    const tipMatch = line.match(tipRegex);
+    if (tipMatch) {
+      const title = tipMatch[1];
       const anchor = title
         .toLowerCase()
         .replace(/[^\w\s-]/g, '')
         .replace(/\s+/g, '-');
       tips.push({ title, anchor });
+    } else {
+      const sectionMatch = line.match(sectionRegex);
+      if (sectionMatch && !skipSections.includes(sectionMatch[1]) && !sectionMatch[1].startsWith('Tip ')) {
+        const title = sectionMatch[1];
+        const anchor = title
+          .toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/\s+/g, '-');
+        sections.push({ title, anchor });
+      }
     }
   }
 
@@ -43,10 +55,13 @@ function main() {
     process.exit(1);
   }
 
-  // Build TOC
+  // Build TOC - tips first, then other sections
   let toc = '## Table of Contents\n\n';
   for (const tip of tips) {
     toc += `- [${tip.title}](#${tip.anchor})\n`;
+  }
+  for (const section of sections) {
+    toc += `- [${section.title}](#${section.anchor})\n`;
   }
 
   // Check for markers
