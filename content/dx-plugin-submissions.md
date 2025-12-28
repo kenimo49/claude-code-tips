@@ -1,11 +1,5 @@
 # dx Plugin Submissions Tracker
 
-## Reddit Post
-
-| Platform | Status | Link |
-|----------|--------|------|
-| r/ClaudeAI | Draft | [marketing/dx-plugin-reddit-post.md](dx-plugin-reddit-post.md) |
-
 ## Plugin Marketplace Submissions
 
 | Repo | Stars | Type | Status | Link |
