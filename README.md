@@ -773,7 +773,7 @@ claude plugin install dx@ykdojo
 
 After installing, the commands are available as `/dx:clone`, `/dx:handoff`, and `/dx:gha`. The `reddit-fetch` skill is invoked automatically when you ask about Reddit URLs.
 
-**Recommended companion:** [Playwright MCP](https://github.com/microsoft/playwright-mcp) for browser automation - add with `claude mcp add playwright npx @playwright/mcp@latest`
+**Recommended companion:** [Playwright MCP](https://github.com/microsoft/playwright-mcp) for browser automation - add with `claude mcp add -s user playwright npx @playwright/mcp@latest`
 
 ---
 
