@@ -114,6 +114,31 @@ Manage MCP (Model Context Protocol) servers:
     • /Users/yk/.claude.json
 ```
 
+### /stats
+
+View your usage statistics with a GitHub-style activity graph:
+
+```
+      Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
+      ·············································▒▒▒▓▒░█
+  Mon ··············································▒█░▓░█
+      ·············································▒▒██▓░█
+  Wed ·············································░▒█▒▓░█
+      ············································░▓▒█▓▓░
+  Fri ············································░▓░█▓▓█
+      ············································▓▒░█▓▒█
+
+      Less ░ ▒ ▓ █ More
+
+  Favorite model: Opus 4.5        Total tokens: 12.1m
+
+  Sessions: 1.8k                  Longest session: 20h 40m 45s
+  Current streak: 44 days         Longest streak: 45 days
+  Active days: 49/51              Peak hour: 17:00-18:00
+
+  You've used ~145x more tokens than Brave New World
+```
+
 ### /clear
 
 Clear the conversation and start fresh.
