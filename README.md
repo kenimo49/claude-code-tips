@@ -32,7 +32,7 @@ Here are my tips for getting the most out of Claude Code, including a custom sta
 - [Tip 20: Use Notion to preserve links when pasting](#tip-20-use-notion-to-preserve-links-when-pasting)
 - [Tip 21: Containers for long-running risky tasks](#tip-21-containers-for-long-running-risky-tasks)
 - [Tip 22: The best way to get better at using Claude Code is by using it](#tip-22-the-best-way-to-get-better-at-using-claude-code-is-by-using-it)
-- [Tip 23: Clone conversations to branch off](#tip-23-clone-conversations-to-branch-off)
+- [Tip 23: Clone and half-clone conversations](#tip-23-clone-and-half-clone-conversations)
 - [Tip 24: Use realpath to get absolute paths](#tip-24-use-realpath-to-get-absolute-paths)
 - [Tip 25: Understanding CLAUDE.md vs Skills vs Slash Commands vs Plugins](#tip-25-understanding-claudemd-vs-skills-vs-slash-commands-vs-plugins)
 - [Tip 26: Interactive PR reviews](#tip-26-interactive-pr-reviews)
@@ -539,7 +539,7 @@ That's how I feel about this too. Of course, there are supplementary things you 
 
 I like to think of it like a billion token rule instead of the 10,000 hour rule. If you want to get better at AI and truly get a good intuition about how it works, the best way is to consume a lot of tokens. And nowadays it's possible. I found that especially with Opus 4.5, it's powerful enough but affordable enough that you can run multiple sessions at the same time. You don't have to worry as much about token usage, which frees you up a lot.
 
-## Tip 23: Clone conversations to branch off
+## Tip 23: Clone and half-clone conversations
 
 Sometimes you want to try a different approach from a specific point in a conversation without losing your original thread. The [clone-conversation script](scripts/clone-conversation.sh) lets you duplicate a conversation with new UUIDs so you can branch off.
 
@@ -556,6 +556,18 @@ Or install via the [dx plugin](#install-the-dx-plugin) - no symlinks needed.
 Then just type `/clone` (or `/dx:clone` if using the plugin) in any conversation and Claude will handle finding the session ID and running the script.
 
 I've tested this extensively and the cloning works really well.
+
+### Half-clone to reduce context
+
+When a conversation gets too long, the [half-clone-conversation script](scripts/half-clone-conversation.sh) keeps only the later half. This reduces token usage while preserving your recent work. The first message is tagged with `[HALF-CLONE]`.
+
+To set it up manually, symlink both files:
+```bash
+ln -s /path/to/this/repo/scripts/half-clone-conversation.sh ~/.claude/scripts/half-clone-conversation.sh
+ln -s /path/to/this/repo/commands/half-clone.md ~/.claude/commands/half-clone.md
+```
+
+Or install via the [dx plugin](#install-the-dx-plugin) - no symlinks needed.
 
 ## Tip 24: Use realpath to get absolute paths
 
@@ -822,6 +834,7 @@ This repo is also a Claude Code plugin called `dx` (developer experience). It bu
 | `/dx:gha <url>` | Analyze GitHub Actions failures (Tip 29) |
 | `/dx:handoff` | Create handoff documents for context continuity (Tip 8) |
 | `/dx:clone` | Clone conversations to branch off (Tip 23) |
+| `/dx:half-clone` | Half-clone to reduce context (Tip 23) |
 | `reddit-fetch` | Fetch Reddit content via Gemini CLI (Tip 11) - auto-invoked when needed |
 
 **Install with two commands:**
@@ -831,7 +844,7 @@ claude plugin marketplace add ykdojo/claude-code-tips
 claude plugin install dx@ykdojo
 ```
 
-After installing, the commands are available as `/dx:clone`, `/dx:handoff`, and `/dx:gha`. The `reddit-fetch` skill is invoked automatically when you ask about Reddit URLs.
+After installing, the commands are available as `/dx:clone`, `/dx:half-clone`, `/dx:handoff`, and `/dx:gha`. The `reddit-fetch` skill is invoked automatically when you ask about Reddit URLs.
 
 **Recommended companion:** [Playwright MCP](https://github.com/microsoft/playwright-mcp) for browser automation - add with `claude mcp add -s user playwright npx @playwright/mcp@latest`
 
