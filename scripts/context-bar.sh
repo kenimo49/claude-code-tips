@@ -145,6 +145,27 @@ if [[ -n "$transcript_path" && -f "$transcript_path" ]]; then
     done
 
     ctx="${bar} ${C_GRAY}${pct_prefix}${pct}% of ${max_k}k tokens"
+else
+    # Transcript not available yet - show baseline estimate
+    baseline=20000
+    bar_width=10
+    pct=$((baseline * 100 / max_context))
+    [[ $pct -gt 100 ]] && pct=100
+
+    bar=""
+    for ((i=0; i<bar_width; i++)); do
+        bar_start=$((i * 10))
+        progress=$((pct - bar_start))
+        if [[ $progress -ge 8 ]]; then
+            bar+="${C_ACCENT}█${C_RESET}"
+        elif [[ $progress -ge 3 ]]; then
+            bar+="${C_ACCENT}▄${C_RESET}"
+        else
+            bar+="${C_BAR_EMPTY}░${C_RESET}"
+        fi
+    done
+
+    ctx="${bar} ${C_GRAY}~${pct}% of ${max_k}k tokens"
 fi
 
 # Build output: Model | Dir | Branch (uncommitted) | Context
