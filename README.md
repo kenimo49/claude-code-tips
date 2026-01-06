@@ -1,84 +1,86 @@
-# 40+ Claude Code Tips: From Basics to Advanced
+# 40+ Claude Code Tips: 基礎から上級まで
 
-Here are my tips for getting the most out of Claude Code, including a custom status line script, cutting the system prompt in half, using Gemini CLI as Claude Code's minion, and Claude Code running itself in a container. Also includes the [dx plugin](#install-the-dx-plugin).
+[English version](README.en.md)
 
-📺 [Quick demo](https://www.youtube.com/watch?v=hiISl558JGE) - See some of these tips in action with a multi-Claude workflow and voice input:
+Claude Codeを最大限に活用するためのTips集です。カスタムステータスライン、システムプロンプトの半減、Gemini CLIをClaude Codeの部下として使う方法、コンテナ内でのClaude Code実行なども含まれています。[dxプラグイン](#dxプラグインのインストール)も提供しています。
 
-[![Demo video thumbnail](assets/demo-thumbnail.png)](https://www.youtube.com/watch?v=hiISl558JGE)
+📺 [クイックデモ](https://www.youtube.com/watch?v=hiISl558JGE) - マルチClaude ワークフローと音声入力の実演：
+
+[![デモ動画サムネイル](assets/demo-thumbnail.png)](https://www.youtube.com/watch?v=hiISl558JGE)
 
 <!-- TOC -->
-## Table of Contents
+## 目次
 
-- [Tip 0: Customize your status line](#tip-0-customize-your-status-line)
-- [Tip 1: Learn a few essential slash commands](#tip-1-learn-a-few-essential-slash-commands)
-- [Tip 2: Talk to Claude Code with your voice](#tip-2-talk-to-claude-code-with-your-voice)
-- [Tip 3: Break down large problems into smaller ones](#tip-3-break-down-large-problems-into-smaller-ones)
-- [Tip 4: Using Git and GitHub CLI like a pro](#tip-4-using-git-and-github-cli-like-a-pro)
-- [Tip 5: AI context is like milk; it's best served fresh and condensed!](#tip-5-ai-context-is-like-milk-its-best-served-fresh-and-condensed)
-- [Tip 6: Getting output out of your terminal](#tip-6-getting-output-out-of-your-terminal)
-- [Tip 7: Set up terminal aliases for quick access](#tip-7-set-up-terminal-aliases-for-quick-access)
-- [Tip 8: Proactively compact your context](#tip-8-proactively-compact-your-context)
-- [Tip 9: Complete the write-test cycle for autonomous tasks](#tip-9-complete-the-write-test-cycle-for-autonomous-tasks)
-- [Tip 10: Cmd+A and Ctrl+A are your friends](#tip-10-cmda-and-ctrla-are-your-friends)
-- [Tip 11: Use Gemini CLI as a fallback for blocked sites](#tip-11-use-gemini-cli-as-a-fallback-for-blocked-sites)
-- [Tip 12: Invest in your own workflow](#tip-12-invest-in-your-own-workflow)
-- [Tip 13: Search through your conversation history](#tip-13-search-through-your-conversation-history)
-- [Tip 14: Multitasking with terminal tabs](#tip-14-multitasking-with-terminal-tabs)
-- [Tip 15: Slim down the system prompt](#tip-15-slim-down-the-system-prompt)
-- [Tip 16: Git worktrees for parallel branch work](#tip-16-git-worktrees-for-parallel-branch-work)
-- [Tip 17: Manual exponential backoff for long-running jobs](#tip-17-manual-exponential-backoff-for-long-running-jobs)
-- [Tip 18: Claude Code as a writing assistant](#tip-18-claude-code-as-a-writing-assistant)
-- [Tip 19: Markdown is the s**t](#tip-19-markdown-is-the-st)
-- [Tip 20: Use Notion to preserve links when pasting](#tip-20-use-notion-to-preserve-links-when-pasting)
-- [Tip 21: Containers for long-running risky tasks](#tip-21-containers-for-long-running-risky-tasks)
-- [Tip 22: The best way to get better at using Claude Code is by using it](#tip-22-the-best-way-to-get-better-at-using-claude-code-is-by-using-it)
-- [Tip 23: Clone and half-clone conversations](#tip-23-clone-and-half-clone-conversations)
-- [Tip 24: Use realpath to get absolute paths](#tip-24-use-realpath-to-get-absolute-paths)
-- [Tip 25: Understanding CLAUDE.md vs Skills vs Slash Commands vs Plugins](#tip-25-understanding-claudemd-vs-skills-vs-slash-commands-vs-plugins)
-- [Tip 26: Interactive PR reviews](#tip-26-interactive-pr-reviews)
-- [Tip 27: Claude Code as a research tool](#tip-27-claude-code-as-a-research-tool)
-- [Tip 28: Mastering different ways of verifying its output](#tip-28-mastering-different-ways-of-verifying-its-output)
-- [Tip 29: Claude Code as a DevOps engineer](#tip-29-claude-code-as-a-devops-engineer)
-- [Tip 30: Keep CLAUDE.md simple and concise](#tip-30-keep-claudemd-simple-and-concise)
-- [Tip 31: Claude Code as the universal interface](#tip-31-claude-code-as-the-universal-interface)
-- [Tip 32: It's all about choosing the right level of abstraction](#tip-32-its-all-about-choosing-the-right-level-of-abstraction)
-- [Tip 33: Audit your approved commands](#tip-33-audit-your-approved-commands)
-- [Tip 34: Write lots of tests (and use TDD)](#tip-34-write-lots-of-tests-and-use-tdd)
-- [Tip 35: Be braver in the unknown; iterative problem solving](#tip-35-be-braver-in-the-unknown-iterative-problem-solving)
-- [Tip 36: Running bash commands and agents in the background](#tip-36-running-bash-commands-and-agents-in-the-background)
-- [Tip 37: The era of personalized software is here](#tip-37-the-era-of-personalized-software-is-here)
-- [Tip 38: Navigating and editing your input box](#tip-38-navigating-and-editing-your-input-box)
-- [Tip 39: Spend some time planning, but also prototype quickly](#tip-39-spend-some-time-planning-but-also-prototype-quickly)
-- [Tip 40: Simplify overcomplicated code](#tip-40-simplify-overcomplicated-code)
-- [Tip 41: Automation of automation](#tip-41-automation-of-automation)
-- [Tip 42: Share your knowledge and contribute where you can](#tip-42-share-your-knowledge-and-contribute-where-you-can)
-- [Tip 43: Keep learning!](#tip-43-keep-learning)
-- [Install the dx plugin](#install-the-dx-plugin)
+- [Tip 0: ステータスラインをカスタマイズする](#tip-0-ステータスラインをカスタマイズする)
+- [Tip 1: 基本的なスラッシュコマンドを覚える](#tip-1-基本的なスラッシュコマンドを覚える)
+- [Tip 2: 音声でClaude Codeと会話する](#tip-2-音声でclaude-codeと会話する)
+- [Tip 3: 大きな問題を小さく分解する](#tip-3-大きな問題を小さく分解する)
+- [Tip 4: GitとGitHub CLIをプロのように使う](#tip-4-gitとgithub-cliをプロのように使う)
+- [Tip 5: AIのコンテキストは牛乳のようなもの。新鮮で凝縮されているのが一番！](#tip-5-aiのコンテキストは牛乳のようなもの新鮮で凝縮されているのが一番)
+- [Tip 6: ターミナルから出力を取り出す](#tip-6-ターミナルから出力を取り出す)
+- [Tip 7: ターミナルエイリアスでクイックアクセス](#tip-7-ターミナルエイリアスでクイックアクセス)
+- [Tip 8: コンテキストを積極的に圧縮する](#tip-8-コンテキストを積極的に圧縮する)
+- [Tip 9: 自律タスクには書き込み-テストサイクルを完結させる](#tip-9-自律タスクには書き込み-テストサイクルを完結させる)
+- [Tip 10: Cmd+AとCtrl+Aはあなたの味方](#tip-10-cmdaとctrlaはあなたの味方)
+- [Tip 11: ブロックされたサイトにはGemini CLIをフォールバックとして使用](#tip-11-ブロックされたサイトにはgemini-cliをフォールバックとして使用)
+- [Tip 12: 自分のワークフローに投資する](#tip-12-自分のワークフローに投資する)
+- [Tip 13: 会話履歴を検索する](#tip-13-会話履歴を検索する)
+- [Tip 14: ターミナルタブでマルチタスク](#tip-14-ターミナルタブでマルチタスク)
+- [Tip 15: システムプロンプトをスリム化する](#tip-15-システムプロンプトをスリム化する)
+- [Tip 16: Git worktreeで並列ブランチ作業](#tip-16-git-worktreeで並列ブランチ作業)
+- [Tip 17: 長時間ジョブには手動エクスポネンシャルバックオフ](#tip-17-長時間ジョブには手動エクスポネンシャルバックオフ)
+- [Tip 18: Claude Codeをライティングアシスタントとして使う](#tip-18-claude-codeをライティングアシスタントとして使う)
+- [Tip 19: Markdownは最強](#tip-19-markdownは最強)
+- [Tip 20: Notionを使ってリンクを保持して貼り付け](#tip-20-notionを使ってリンクを保持して貼り付け)
+- [Tip 21: 長時間でリスクのあるタスクにはコンテナを使用](#tip-21-長時間でリスクのあるタスクにはコンテナを使用)
+- [Tip 22: Claude Codeを使いこなすには使い続けること](#tip-22-claude-codeを使いこなすには使い続けること)
+- [Tip 23: 会話を複製・半複製する](#tip-23-会話を複製半複製する)
+- [Tip 24: realpathで絶対パスを取得](#tip-24-realpathで絶対パスを取得)
+- [Tip 25: CLAUDE.md、スキル、スラッシュコマンド、プラグインの違いを理解する](#tip-25-claudemdスキルスラッシュコマンドプラグインの違いを理解する)
+- [Tip 26: インタラクティブなPRレビュー](#tip-26-インタラクティブなprレビュー)
+- [Tip 27: Claude Codeをリサーチツールとして使う](#tip-27-claude-codeをリサーチツールとして使う)
+- [Tip 28: 出力を検証する様々な方法をマスターする](#tip-28-出力を検証する様々な方法をマスターする)
+- [Tip 29: Claude CodeをDevOpsエンジニアとして使う](#tip-29-claude-codeをdevopsエンジニアとして使う)
+- [Tip 30: CLAUDE.mdはシンプルで簡潔に保つ](#tip-30-claudemdはシンプルで簡潔に保つ)
+- [Tip 31: Claude Codeは万能インターフェース](#tip-31-claude-codeは万能インターフェース)
+- [Tip 32: 適切な抽象レベルを選ぶことがすべて](#tip-32-適切な抽象レベルを選ぶことがすべて)
+- [Tip 33: 許可したコマンドを監査する](#tip-33-許可したコマンドを監査する)
+- [Tip 34: たくさんテストを書く（TDDを使う）](#tip-34-たくさんテストを書くtddを使う)
+- [Tip 35: 未知に勇敢に、反復的に問題解決](#tip-35-未知に勇敢に反復的に問題解決)
+- [Tip 36: Bashコマンドとエージェントをバックグラウンドで実行](#tip-36-bashコマンドとエージェントをバックグラウンドで実行)
+- [Tip 37: パーソナライズソフトウェアの時代が来た](#tip-37-パーソナライズソフトウェアの時代が来た)
+- [Tip 38: 入力ボックスのナビゲーションと編集](#tip-38-入力ボックスのナビゲーションと編集)
+- [Tip 39: 計画に時間をかけつつ、素早くプロトタイプも作る](#tip-39-計画に時間をかけつつ素早くプロトタイプも作る)
+- [Tip 40: 複雑すぎるコードをシンプルにする](#tip-40-複雑すぎるコードをシンプルにする)
+- [Tip 41: 自動化の自動化](#tip-41-自動化の自動化)
+- [Tip 42: 知識を共有し、できるところで貢献する](#tip-42-知識を共有しできるところで貢献する)
+- [Tip 43: 学び続ける！](#tip-43-学び続ける)
+- [dxプラグインのインストール](#dxプラグインのインストール)
 
 <!-- /TOC -->
 
-## Tip 0: Customize your status line
+## Tip 0: ステータスラインをカスタマイズする
 
-You can customize the status line at the bottom of Claude Code to show useful info. I set mine up to show the model, current directory, git branch (if any), uncommitted file count, sync status with origin, and a visual progress bar for token usage. It also shows a second line with my last message so I can see what the conversation was about:
+Claude Codeの下部にあるステータスラインをカスタマイズして便利な情報を表示できます。私の設定では、モデル名、現在のディレクトリ、Gitブランチ（あれば）、未コミットファイル数、originとの同期状態、トークン使用量のプログレスバーを表示しています。また、最後のメッセージを表示する2行目もあり、会話の内容を確認できます：
 
 ```
 Opus 4.5 | 📁claude-code-tips | 🔀main (scripts/context-bar.sh uncommitted, synced 12m ago) | ██░░░░░░░░ 18% of 200k tokens
 💬 This is good. I don't think we need to change the documentation as long as we don't say that the default color is orange el...
 ```
 
-This is especially helpful for keeping an eye on your context usage and remembering what you were working on. The script also supports 10 color themes (orange, blue, teal, green, lavender, rose, gold, slate, cyan, or gray).
+これはコンテキスト使用量を常に把握し、何をしていたか思い出すのに特に役立ちます。スクリプトは10色のテーマ（orange、blue、teal、green、lavender、rose、gold、slate、cyan、gray）をサポートしています。
 
-![Color preview options](scripts/color-preview.png)
+![カラープレビュー](scripts/color-preview.png)
 
-To set this up, you can use [this sample script](scripts/context-bar.sh) and check the [setup instructions](scripts/README.md).
+セットアップには、[このサンプルスクリプト](scripts/context-bar.sh)を使用し、[セットアップ手順](scripts/README.md)を確認してください。
 
-## Tip 1: Learn a few essential slash commands
+## Tip 1: 基本的なスラッシュコマンドを覚える
 
-There are a bunch of built-in slash commands (type `/` to see them all). Here are a few worth knowing:
+ビルトインのスラッシュコマンドがたくさんあります（`/`を入力すると一覧表示）。知っておくべきものをいくつか紹介：
 
 ### /usage
 
-Check your rate limits:
+レート制限を確認：
 
 ```
  Current session
@@ -92,7 +94,7 @@ Check your rate limits:
 
 ### /chrome
 
-Toggle Claude's native browser integration:
+Claudeのネイティブブラウザ統合を切り替え：
 
 ```
 > /chrome
@@ -101,7 +103,7 @@ Chrome integration enabled
 
 ### /mcp
 
-Manage MCP (Model Context Protocol) servers:
+MCP（Model Context Protocol）サーバーを管理：
 
 ```
  Manage MCP servers
@@ -116,7 +118,7 @@ Manage MCP (Model Context Protocol) servers:
 
 ### /stats
 
-View your usage statistics with a GitHub-style activity graph:
+GitHub風のアクティビティグラフで使用統計を表示：
 
 ```
       Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec
@@ -141,54 +143,54 @@ View your usage statistics with a GitHub-style activity graph:
 
 ### /clear
 
-Clear the conversation and start fresh.
+会話をクリアして新規開始。
 
-## Tip 2: Talk to Claude Code with your voice
+## Tip 2: 音声でClaude Codeと会話する
 
-I found that you can communicate much faster with your voice than typing with your hands. Using a voice transcription system on your local machine is really helpful for this.
+タイピングより音声の方がはるかに速くコミュニケーションできることがわかりました。ローカルマシンで音声認識システムを使うと非常に便利です。
 
-On my Mac, I've tried a few different options:
+Macでは、いくつかのオプションを試しました：
 - [superwhisper](https://superwhisper.com/)
 - [MacWhisper](https://goodsnooze.gumroad.com/l/macwhisper)
-- [Super Voice Assistant](https://github.com/ykdojo/super-voice-assistant) (open source, I built it with Claude Code)
+- [Super Voice Assistant](https://github.com/ykdojo/super-voice-assistant)（オープンソース、Claude Codeで構築）
 
-You can get more accuracy by using a hosted service, but I found that a local model is strong enough for this purpose. Even when there are mistakes or typos in the transcription, Claude is smart enough to understand what you're trying to say. Sometimes you need to say certain things extra clearly, but overall local models work well enough.
+ホストサービスを使えばより高い精度が得られますが、ローカルモデルでもこの目的には十分な強さです。認識ミスやタイポがあっても、Claudeは言いたいことを理解できるほど賢いです。特定の言葉を特にはっきり言う必要がある時もありますが、全体的にローカルモデルは十分に機能します。
 
-For example, in this screenshot you can see that Claude was able to interpret mistranscribed words like "ExcelElanishMark" and "advast" correctly as "exclamation mark" and "Advanced":
+例えば、このスクリーンショットでは、「ExcelElanishMark」や「advast」のような誤認識を、Claudeが「exclamation mark」と「Advanced」として正しく解釈できています：
 
-![Voice transcription mistakes interpreted correctly](assets/voice-transcription-mistakes.png)
+![音声認識ミスの正しい解釈](assets/voice-transcription-mistakes.png)
 
-I think the best way to think about this is like you're trying to communicate with your friend. Of course, you can communicate through texts. That might be easier for some people, or emails, right? That's totally fine. That's what most people seem to do with Claude Code. But if you want to communicate faster, why wouldn't you get on a quick phone call? You can just send voice messages. You don't need to literally have a phone call with Claude Code. Just send a bunch of voice messages. It's faster, at least for me, as someone who's practiced the art of speaking a lot over the past number of years. But I think for a majority of people, it's going to be faster too.
+これは友人とコミュニケーションを取ろうとしているように考えるのが一番良いと思います。もちろん、テキストでコミュニケーションできます。それが楽な人もいますし、メールでも全然OKです。Claude Codeでもほとんどの人がそうしているようです。でも、もっと速くコミュニケーションしたいなら、電話をかけるのはどうでしょう？ボイスメッセージを送るだけでもいいです。Claude Codeと文字通り電話をする必要はありません。ボイスメッセージをたくさん送るだけです。少なくとも私にとっては速いです。しかし、大多数の人にとっても速いと思います。
 
-A common objection is "what if you're in a room with other people?" I just whisper using earphones - I personally like Apple EarPods (not AirPods). They're affordable, high quality enough, and you just whisper into them quietly. I've done it in front of other people and it works well. In offices, people talk anyway - instead of talking to coworkers, you're talking quietly to your voice transcription system. I don't think there's any problem with that. This method works so well that it even works on a plane. It's loud enough that other people won't hear you, but if you speak close enough to the mic, your local model can still understand what you're saying. (In fact, I'm writing this very paragraph using that method on a flight.)
+よくある反論は「他の人がいる部屋ではどうする？」です。イヤホンを使って小声で話しています - 個人的にはApple EarPods（AirPodsではなく）が好きです。手頃で、十分な品質で、静かにささやくだけです。他の人の前でやったことがありますが、うまくいきます。オフィスでは人が話すものです - 同僚と話す代わりに、静かに音声認識システムに話しかけるだけです。問題ないと思います。この方法は飛行機の中でも使えるほどうまくいきます。他の人には聞こえないくらい静かですが、マイクに十分近づいて話せば、ローカルモデルはまだ理解できます。（実際、この段落自体をその方法でフライト中に書いています。）
 
-## Tip 3: Break down large problems into smaller ones
+## Tip 3: 大きな問題を小さく分解する
 
-This is one of the most important concepts to master. It's exactly the same as traditional software engineering - the best software engineers already know how to do this, and it applies to Claude Code too.
+これはマスターすべき最も重要な概念の一つです。従来のソフトウェアエンジニアリングと全く同じです - 最高のソフトウェアエンジニアはすでにこれを知っており、Claude Codeにも適用されます。
 
-If you find that Claude Code isn't able to one-shot a difficult problem or coding task, ask it to break it down into multiple smaller issues. See if it can solve an individual part of that problem. If it's still too hard, see if it can solve an even smaller sub-problem. Keep going until everything is solvable.
+Claude Codeが難しい問題やコーディングタスクをワンショットで解決できない場合、複数の小さな問題に分解するよう依頼してください。その問題の個々の部分を解決できるか見てください。それでも難しい場合、さらに小さなサブ問題を解決できるか見てください。すべてが解決可能になるまで続けてください。
 
-Essentially, instead of going from A to B:
+本質的に、AからBに直接行く代わりに：
 
-![Direct approach](assets/breakdown-direct.png)
+![直接アプローチ](assets/breakdown-direct.png)
 
-You can go from A to A1 to A2 to A3, then to B:
+AからA1、A2、A3を経てBに行くことができます：
 
-![Step-by-step approach](assets/breakdown-steps.png)
+![段階的アプローチ](assets/breakdown-steps.png)
 
-A good example of this is when I was building my own voice transcription system. I needed to build a system that could let the user select and download a model, take keyboard shortcuts, start transcribing, put the transcribed text at the user's cursor, and wrap all of this in a nice UI. That's a lot. So I broke it down into smaller tasks. First, I created an executable that would just download a model, nothing else. Then I created another one that would just record voice, nothing else. Then another one that would just transcribe pre-recorded audio. I completed them one by one like that before combining them at the end.
+良い例として、自分の音声認識システムを構築した時があります。ユーザーがモデルを選択してダウンロードでき、キーボードショートカットを取り、文字起こしを開始し、ユーザーのカーソル位置にテキストを配置し、すべてを素敵なUIでラップするシステムを構築する必要がありました。たくさんあります。そこで小さなタスクに分解しました。まず、モデルをダウンロードするだけの実行ファイルを作成し、他には何もしません。次に、音声を録音するだけの別のものを作成し、他には何もしません。そして録音済み音声を文字起こしするだけの別のものを作成しました。そうやって一つずつ完成させてから、最後に統合しました。
 
-Highly related to this: your problem-solving skills and software engineering skills are still highly relevant in the world of agentic coding and Claude Code. It's able to solve a lot of problems on its own, but when you apply your general problem-solving and software engineering skills to it, it becomes a lot more powerful.
+これと非常に関連して：あなたの問題解決スキルとソフトウェアエンジニアリングスキルは、エージェントコーディングとClaude Codeの世界でも依然として非常に重要です。多くの問題を自力で解決できますが、一般的な問題解決とソフトウェアエンジニアリングスキルを適用すると、はるかに強力になります。
 
-## Tip 4: Using Git and GitHub CLI like a pro
+## Tip 4: GitとGitHub CLIをプロのように使う
 
-Just ask Claude to handle your Git and GitHub CLI tasks. This includes committing (so you don't have to write commit messages manually), branching, pulling, and pushing.
+GitとGitHub CLIのタスクをClaude Codeに任せるだけです。コミット（手動でコミットメッセージを書く必要がない）、ブランチ作成、プル、プッシュなどが含まれます。
 
-I personally allow pull automatically but not push, because push is riskier - it doesn't contaminate the origin if something goes wrong with a pull.
+個人的にはpullは自動許可しますが、pushはしません。pushはよりリスキーだからです - pullで何か問題が起きてもoriginを汚染しません。
 
-For GitHub CLI (`gh`), there's a lot you can do. One thing I started doing more after using Claude Code is creating draft PRs. This lets Claude Code handle the PR creation process with low risk - you can review everything before marking it ready for review.
+GitHub CLI（`gh`）では、たくさんのことができます。Claude Codeを使い始めてからより多く行うようになったことの一つは、ドラフトPRの作成です。これにより、Claude CodeにPR作成プロセスを低リスクで処理させることができます - レビュー準備完了にする前にすべてを確認できます。
 
-And it turns out, `gh` is pretty powerful. You can even send arbitrary GraphQL queries through it. For example, you can even find the exact times at which GitHub PR descriptions were edited:
+そして、`gh`はかなり強力です。任意のGraphQLクエリを送信することもできます。例えば、GitHub PRの説明が編集された正確な時刻を見つけることもできます：
 
 ```
 ⏺ Bash(gh api graphql -f query='
@@ -214,36 +216,36 @@ And it turns out, `gh` is pretty powerful. You can even send arbitrary GraphQL q
   ...
 ```
 
-## Tip 5: AI context is like milk; it's best served fresh and condensed!
+## Tip 5: AIのコンテキストは牛乳のようなもの。新鮮で凝縮されているのが一番！
 
-When you start a new conversation with Claude Code, it performs the best because it doesn't have all the added complexity of having to process the previous context from earlier parts of the conversation. But as you talk to it longer and longer, the context gets longer and the performance tends to go down.
+Claude Codeと新しい会話を始める時、最高のパフォーマンスを発揮します。会話の以前の部分からの過去のコンテキストを処理する複雑さがないからです。しかし、長く話すほどコンテキストが長くなり、パフォーマンスが低下する傾向があります。
 
-So it's best to start a new conversation for every new topic, or if the performance starts to go down.
+したがって、新しいトピックごとに新しい会話を始めるか、パフォーマンスが低下し始めたら新しい会話を始めるのが最善です。
 
-## Tip 6: Getting output out of your terminal
+## Tip 6: ターミナルから出力を取り出す
 
-Sometimes you want to copy and paste Claude Code's output, but copying directly from the terminal isn't always clean. Here are a few ways to get content out more easily:
+Claude Codeの出力をコピー&ペーストしたい時がありますが、ターミナルから直接コピーすると常にきれいにはなりません。より簡単にコンテンツを取り出すいくつかの方法があります：
 
-- **Clipboard directly**: On Mac or Linux, ask Claude to use `pbcopy` to send output straight to your clipboard
-- **Write to a file**: Have Claude put the content in a file, then ask it to open it in VS Code (or your favorite editor) so you can copy from there. You can also specify a line number, so you can ask Claude to open the specific line it just edited. For markdown files, once it's open in VS Code, you can use Cmd+Shift+P (or Ctrl+Shift+P on Linux/Windows) and select "Markdown: Open Preview" to see the rendered version
-- **Opening URLs**: If there's a URL you want to examine yourself, ask Claude to open it in your browser. On Mac, you can ask it to use the `open` command, but in general asking to open in your favorite browser should work on any platform
-- **GitHub Desktop**: You can ask Claude to open the current repo in GitHub Desktop. This is particularly useful when it's working in a non-root directory - for example, if you asked it to create a git worktree in a different directory and you haven't opened Claude Code from there yet
+- **直接クリップボード**: MacまたはLinuxでは、`pbcopy`を使って出力を直接クリップボードに送信するようClaude Codeに依頼
+- **ファイルに書き込み**: コンテンツをファイルに入れてもらい、VS Code（またはお気に入りのエディタ）で開くよう依頼してそこからコピー。行番号を指定することもでき、Claudeが編集した特定の行を開くよう依頼できます。マークダウンファイルの場合、VS Codeで開いたら、Cmd+Shift+P（またはLinux/WindowsではCtrl+Shift+P）を使用して「Markdown: Open Preview」を選択すると、レンダリングされたバージョンを見ることができます
+- **URLを開く**: 自分で確認したいURLがある場合、ブラウザで開くようClaude Codeに依頼。Macでは`open`コマンドを使用するよう依頼できますが、一般的にお気に入りのブラウザで開くよう依頼すれば、どのプラットフォームでも動作するはずです
+- **GitHub Desktop**: 現在のリポジトリをGitHub Desktopで開くようClaude Codeに依頼できます。これは非ルートディレクトリで作業している時に特に便利です - 例えば、異なるディレクトリにgit worktreeを作成させて、そこからClaude Codeをまだ開いていない場合など
 
-You can combine some of these together too. For example, if you want to edit a GitHub PR description, instead of having Claude edit it directly (which it might mess up), you can have it copy the content into a local file first. Let it edit that, check the result yourself, and once it looks good, have it copy and paste it back into the GitHub PR. That works really well. Or if you want to do that yourself, you can just ask it to open it in VS Code or give it to you via pbcopy so you can copy and paste it manually.
+これらの一部を組み合わせることもできます。例えば、GitHub PRの説明を編集したい場合、Claude Codeに直接編集させる（失敗する可能性がある）代わりに、まずコンテンツをローカルファイルにコピーさせることができます。それを編集させ、結果を自分で確認し、良さそうなら、GitHub PRにコピー&ペーストさせます。これは非常にうまくいきます。または自分でやりたい場合は、VS Codeで開くか、pbcopyで渡してもらい、手動でコピー&ペーストできます。
 
-Of course, you can run these commands yourself, but if you find yourself doing it repetitively, it's helpful to let Claude run them for you.
+もちろん、これらのコマンドは自分で実行できますが、繰り返し行っている場合は、Claudeに実行させると便利です。
 
-## Tip 7: Set up terminal aliases for quick access
+## Tip 7: ターミナルエイリアスでクイックアクセス
 
-Since I use the terminal more because of Claude Code, I found it helpful to set up short aliases so I can launch things quickly. Here are the ones I use:
+Claude Codeのおかげでターミナルをより多く使うようになったので、短いエイリアスを設定して素早く起動できるようにすると便利です。使っているものはこちら：
 
-- `c` for Claude Code (this is the one I use the most)
-- `ch` for Claude Code with Chrome integration
-- `gb` for GitHub Desktop
-- `co` for VS Code
-- `q` for going to the project directory where I have most projects. From there I can manually cd into an individual folder to work on that project, or I can just launch Claude Code with `c` to let it basically have access to any project it needs to access.
+- `c` - Claude Code（最もよく使う）
+- `ch` - Chrome統合付きClaude Code
+- `gb` - GitHub Desktop
+- `co` - VS Code
+- `q` - ほとんどのプロジェクトがあるプロジェクトディレクトリへ移動。そこから個別のフォルダにcdして作業するか、`c`でClaude Codeを起動して、基本的にどのプロジェクトにもアクセスできるようにします。
 
-To set these up, add lines like this to your shell config file (`~/.zshrc` or `~/.bashrc`):
+これらを設定するには、シェル設定ファイル（`~/.zshrc`または`~/.bashrc`）に次のような行を追加：
 
 ```bash
 alias c='claude'
@@ -253,17 +255,17 @@ alias co='code'
 alias q='cd ~/Desktop/projects'
 ```
 
-Once you have these aliases, you can combine them with flags: `c -c` continues your last conversation, and `c -r` shows a list of recent conversations to resume. These work with `ch` too (`ch -c`, `ch -r`) for Chrome sessions.
+これらのエイリアスがあれば、フラグと組み合わせられます：`c -c`は最後の会話を続行し、`c -r`は再開する最近の会話のリストを表示します。これらは`ch`でも動作します（`ch -c`、`ch -r`）Chromeセッション用。
 
-## Tip 8: Proactively compact your context
+## Tip 8: コンテキストを積極的に圧縮する
 
-There's a `/compact` command in Claude Code that summarizes your conversation to free up context space. Automatic compaction also happens when the full available context is filled. The total available context window for Opus 4.5 is currently 200k, and 45k of that is reserved for automatic compaction. About 10% of the total 200k is automatically filled with the system prompt, tools, memory, and dynamic context. But I found that it's better to proactively do it and manually tune it. I turned off auto-compact with `/config` so I have more context available for the main conversation and more control over when and how compaction happens.
+Claude Codeには会話を要約してコンテキストスペースを解放する`/compact`コマンドがあります。利用可能なフルコンテキストが埋まると自動圧縮も発生します。Opus 4.5の利用可能なコンテキストウィンドウは現在200kで、そのうち45kが自動圧縮用に予約されています。総200kの約10%がシステムプロンプト、ツール、メモリ、動的コンテキストで自動的に埋まります。しかし、積極的に行い、手動で調整する方が良いことがわかりました。`/config`で自動圧縮をオフにして、メイン会話に使えるコンテキストを増やし、圧縮のタイミングと方法をより制御できるようにしています。
 
-The way I do this is to ask Claude to write a handoff document before starting fresh. Something like:
+私がやる方法は、新しく始める前にClaudeに引き継ぎドキュメントを書くよう依頼することです。次のように：
 
-> Put the rest of the plan in the system-prompt-extraction folder as HANDOFF.md. Explain what you have tried, what worked, what didn't work, so that the next agent with fresh context is able to just load that file and nothing else to get started on this task and finish it up.
+> 残りの計画をsystem-prompt-extractionフォルダにHANDOFF.mdとして入れて。試したこと、うまくいったこと、うまくいかなかったことを説明して、新鮮なコンテキストを持つ次のエージェントがそのファイルだけをロードしてこのタスクを開始して完了できるようにして。
 
-Claude will create a file summarizing the current state of work:
+Claudeは作業の現在の状態を要約したファイルを作成します：
 
 ```
 ⏺ Write(experiments/system-prompt-extraction/HANDOFF.md)
@@ -278,34 +280,34 @@ Claude will create a file summarizing the current state of work:
      ...
 ```
 
-After Claude writes it, review it quickly. If something's missing, ask for edits:
+Claudeが書いた後、素早くレビューします。何か足りなければ、編集を依頼：
 
-> Did you add a note about iteratively testing instead of trying to do everything all at once?
+> すべてを一度にやろうとする代わりに、反復的にテストすることについてのメモを追加した？
 
-Then start a fresh conversation. For the fresh agent, you can just give the path of the file and nothing else like this, and it should work just fine:
+それから新しい会話を開始します。新しいエージェントには、次のようにファイルのパスだけを渡せば、うまくいくはずです：
 
 ```
 > experiments/system-prompt-extraction/HANDOFF.md
 ```
 
-In subsequent conversations, you can ask the agent to update the document for the next agent.
+後続の会話では、次のエージェントのためにドキュメントを更新するようエージェントに依頼できます。
 
-I've also created a `/handoff` slash command that automates this - it checks for an existing HANDOFF.md, reads it if present, then creates or updates it with the goal, progress, what worked, what didn't, and next steps. You can find it in the [commands folder](commands/handoff.md), or install it via the [dx plugin](#install-the-dx-plugin).
+これを自動化する`/handoff`スラッシュコマンドも作成しました - 既存のHANDOFF.mdをチェックし、存在すれば読み込み、目標、進捗、うまくいったこと、うまくいかなかったこと、次のステップを記載して作成または更新します。[commandsフォルダ](commands/handoff.md)にあるか、[dxプラグイン](#dxプラグインのインストール)でインストールできます。
 
-## Tip 9: Complete the write-test cycle for autonomous tasks
+## Tip 9: 自律タスクには書き込み-テストサイクルを完結させる
 
-If you want Claude Code to run something autonomously, like `git bisect`, you need to give it a way to verify results. The key is completing the write-test cycle: write code, run it, check the output, and repeat.
+Claude Codeを自律的に実行したい場合、`git bisect`のように、結果を検証する方法を与える必要があります。重要なのは書き込み-テストサイクルを完結させること：コードを書き、実行し、出力をチェックし、繰り返す。
 
-For example, let's say you're working on Claude Code itself and you notice `/compact` stopped working and started throwing a 400 error. A classic tool to find the exact commit that caused this is `git bisect`. The nice thing is you can let Claude Code run bisect on itself, but it needs a way to test each commit.
+例えば、Claude Code自体で作業していて、`/compact`が動作しなくなり400エラーを出し始めたことに気づいたとします。これを引き起こした正確なコミットを見つける古典的なツールは`git bisect`です。いいことに、Claude Codeにそれ自体でbisectを実行させることができますが、各コミットをテストする方法が必要です。
 
-For tasks that involve interactive terminals like Claude Code, you can use tmux. The pattern is:
+Claude Codeのようなインタラクティブなターミナルを含むタスクには、tmuxを使用できます。パターンは：
 
-1. Start a tmux session
-2. Send commands to it
-3. Capture the output
-4. Verify it's what you expect
+1. tmuxセッションを開始
+2. コマンドを送信
+3. 出力をキャプチャ
+4. 期待通りか検証
 
-Here's a simple example of testing if `/context` works:
+`/context`が動作するかテストする簡単な例：
 
 ```bash
 tmux kill-session -t test-session 2>/dev/null
@@ -317,23 +319,23 @@ sleep 1
 tmux capture-pane -t test-session -p
 ```
 
-Once you have a test like this, Claude Code can run `git bisect` and automatically test each commit until it finds the one that broke things.
+このようなテストがあれば、Claude Codeは`git bisect`を実行し、壊れたものを見つけるまで各コミットを自動的にテストできます。
 
-This is also an example of why your software engineering skills still matter. If you're a software engineer, you probably know about tools like `git bisect`. That knowledge is still really valuable when working with AI - you just apply it in new ways.
+これはソフトウェアエンジニアリングスキルがまだ重要である理由の例でもあります。ソフトウェアエンジニアなら、おそらく`git bisect`のようなツールを知っているでしょう。その知識はAIと一緒に働く時にもまだ非常に価値があります - 新しい方法で適用するだけです。
 
-Another example is simply writing tests. After you let Claude Code write some code, if you want to test it, you can just let it write tests for itself too. And let it run on its own and fix things if it can. Of course, it doesn't always go in the right direction and you need to supervise it sometimes, but it's able to do a surprising amount of coding tasks on its own.
+もう一つの例は単純にテストを書くことです。Claude Codeにコードを書かせた後、テストしたい場合は、それ自身のテストも書かせることができます。そして自分で実行させ、可能なら修正させます。もちろん、常に正しい方向に進むわけではなく、時々監督が必要ですが、驚くほど多くのコーディングタスクを自分でこなせます。
 
-### Creative testing strategies
+### 創造的なテスト戦略
 
-Sometimes you need to be creative with how you complete the write-test cycle. For example, if you're building a web app, you could use Playwright MCP, Chrome DevTools MCP, or Claude's native browser integration (through `/chrome`). I haven't tried Chrome DevTools yet, but I've tried Playwright and Claude's native integration. Overall, Playwright generally works better. It does use a lot of context, but the 200k context window is normally enough for a single task or a few smaller tasks.
+書き込み-テストサイクルの完結方法で創造的になる必要がある場合もあります。例えば、Webアプリを構築している場合、Playwright MCP、Chrome DevTools MCP、またはClaude のネイティブブラウザ統合（`/chrome`を通じて）を使用できます。Chrome DevToolsはまだ試していませんが、PlaywrightとClaudeのネイティブ統合は試しました。全体的に、Playwrightの方がうまく機能します。コンテキストを多く使用しますが、200kのコンテキストウィンドウは通常、単一のタスクまたはいくつかの小さなタスクには十分です。
 
-The main difference between these two seems to be that Playwright focuses on the accessibility tree (structured data about page elements) rather than taking screenshots. It does have the ability to take screenshots, but it doesn't normally use them to take actions. On the other hand, Claude's native browser integration focuses more on taking screenshots and clicking on elements by specific coordinates. It can click on random things sometimes, and the whole process can be slow.
+これら2つの主な違いは、Playwrightがスクリーンショットを撮ることよりもアクセシビリティツリー（ページ要素についての構造化データ）に焦点を当てていることのようです。スクリーンショットを撮る機能はありますが、通常はアクションを取るために使用しません。一方、Claudeのネイティブブラウザ統合は、スクリーンショットを撮って特定の座標で要素をクリックすることにより焦点を当てています。ランダムなものをクリックすることがあり、全体のプロセスが遅くなることがあります。
 
-This might improve over time, but by default I would go with Playwright for most tasks that aren't visually intensive. I'd only use Claude's native browser integration if I need to use a logged-in state without having to provide credentials (since it runs in your own browser profile), or if it specifically needs to click on things visually using their coordinates.
+これは時間とともに改善されるかもしれませんが、デフォルトでは視覚的に集中的でないほとんどのタスクにはPlaywrightを選びます。ログイン状態を使用する必要がある場合（自分のブラウザプロファイルで実行されるため、資格情報を提供する必要がない）、または座標を使用して視覚的にクリックする必要がある場合にのみ、Claudeのネイティブブラウザ統合を使用します。
 
-This is why I disable Claude's native browser integration by default and use it through the `ch` shortcut I defined previously. That way Playwright handles most browser tasks, and I only enable Claude's native integration when I specifically need it.
+これが、Claudeのネイティブブラウザ統合をデフォルトで無効にし、以前定義した`ch`ショートカットを通じて使用する理由です。そうすることで、Playwrightがほとんどのブラウザタスクを処理し、特に必要な場合にのみClaudeのネイティブ統合を有効にします。
 
-Additionally, you can ask it to use accessibility tree refs instead of coordinates. Here's what I put in my CLAUDE.md for this:
+さらに、座標の代わりにアクセシビリティツリーのrefsを使用するよう依頼できます。これをCLAUDE.mdに入れています：
 
 ```markdown
 # Claude for Chrome
@@ -344,326 +346,326 @@ Additionally, you can ask it to use accessibility tree refs instead of coordinat
 - NEVER take screenshots unless explicitly requested by the user
 ```
 
-In my personal experience, I've also had a situation where I was working on a Python library at [Daft](https://github.com/Eventual-Inc/Daft) and needed to test a version I built locally on Google Colab. The trouble is it's hard to build a Python library with a Rust backend on Google Colab - it doesn't seem to work that well. So I needed to actually build a wheel locally and then upload it manually so that I could run it on Google Colab. I also tried monkey patching, which worked well in the short term before I had to wait for the whole wheel to build locally.
+個人的な経験では、[Daft](https://github.com/Eventual-Inc/Daft)でPythonライブラリに取り組んでいて、ローカルでビルドしたバージョンをGoogle Colabでテストする必要があった状況もありました。問題は、Google ColabでRustバックエンドを持つPythonライブラリをビルドするのが難しいことです - うまく機能しないようです。そこで、実際にローカルでwheelをビルドし、手動でアップロードしてGoogle Colabで実行できるようにする必要がありました。ローカルでwheel全体をビルドするのを待つ前に、短期的にうまく機能したモンキーパッチングも試しました。
 
-Another situation I encountered is I needed to test something on Windows but I'm not running a Windows machine. My CI tests on the same repo were failing because we had some issues with Rust on Windows, and I had no way of testing locally. So I needed to create a draft PR with all the changes, and another draft PR with the same changes plus enabling Windows CI runs on non-main branches. I instructed Claude Code to do all of that, and then I tested the CI directly in that new branch.
+もう一つ遭遇した状況は、Windowsでテストする必要があったがWindowsマシンを実行していないことです。同じリポジトリのCIテストが失敗していて、WindowsでRustに問題があり、ローカルでテストする方法がありませんでした。そこで、すべての変更を含むドラフトPRと、同じ変更に加えて非mainブランチでWindows CIの実行を有効にする別のドラフトPRを作成する必要がありました。Claude Codeにそのすべてを行うよう指示し、その新しいブランチで直接CIをテストしました。
 
-## Tip 10: Cmd+A and Ctrl+A are your friends
+## Tip 10: Cmd+AとCtrl+Aはあなたの味方
 
-I've been saying this for a few years now: Cmd+A and Ctrl+A are friends in the world of AI. This applies to Claude Code too.
+ここ数年言い続けています：Cmd+AとCtrl+AはAIの世界では友達です。これはClaude Codeにも当てはまります。
 
-Sometimes you want to give Claude Code a URL, but it can't access it directly. Maybe it's a private page (not sensitive data, just not publicly accessible), or something like a Reddit post that Claude Code has trouble fetching. In those cases, you can just select all the content you see (Cmd+A on Mac, Ctrl+A on other platforms), copy it, and paste it directly into Claude Code. It's a pretty powerful method.
+Claude CodeにURLを渡したいが、直接アクセスできない場合があります。プライベートページ（機密データではなく、単に公開されていない）かもしれませんし、Claude Codeが取得に苦労するReddit投稿のようなものかもしれません。そのような場合、見ているコンテンツをすべて選択（Macでは Cmd+A、他のプラットフォームではCtrl+A）し、コピーして、直接Claude Codeに貼り付けることができます。これはかなり強力な方法です。
 
-This works great for terminal output too. When I have output from Claude Code itself or any other CLI application, I can use the same trick: select all, copy, and paste it back to CC. Pretty helpful.
+これはターミナル出力にも最適です。Claude Code自体や他のCLIアプリケーションからの出力がある場合、同じトリックを使用できます：すべて選択、コピー、CCに貼り付け。かなり便利です。
 
-Some pages don't lend themselves well to select all by default - but there are tricks to get them into a better state first. For example, with Gmail threads, click Print All to get the print preview (but cancel the actual print). That page shows all emails in the thread expanded, so you can Cmd+A the entire conversation cleanly.
+一部のページはデフォルトでは全選択に適していませんが、まずより良い状態にするトリックがあります。例えば、Gmailスレッドでは、「すべて印刷」をクリックして印刷プレビューを取得します（実際の印刷はキャンセル）。そのページではスレッド内のすべてのメールが展開されて表示されるので、会話全体をきれいにCmd+Aできます。
 
-This applies to any AI, not just Claude Code.
+これはClaude Codeだけでなく、どのAIにも適用されます。
 
-## Tip 11: Use Gemini CLI as a fallback for blocked sites
+## Tip 11: ブロックされたサイトにはGemini CLIをフォールバックとして使用
 
-Claude Code's WebFetch tool can't access certain sites, like Reddit. But you can work around this by creating a skill that tells Claude to use Gemini CLI as a fallback. Gemini has web access and can fetch content from sites that Claude can't reach directly.
+Claude CodeのWebFetchツールはRedditなど特定のサイトにアクセスできません。しかし、Gemini CLIをフォールバックとして使用するようClaude Codeに指示するスキルを作成することでこれを回避できます。Geminiはウェブアクセスがあり、Claudeが直接到達できないサイトからコンテンツを取得できます。
 
-This uses the same tmux pattern from Tip 9 - start a session, send commands, capture output. The skill file goes in `~/.claude/skills/reddit-fetch/SKILL.md`. See [skills/reddit-fetch/SKILL.md](skills/reddit-fetch/SKILL.md) for the full content.
+これはTip 9と同じtmuxパターンを使用します - セッションを開始し、コマンドを送信し、出力をキャプチャ。スキルファイルは`~/.claude/skills/reddit-fetch/SKILL.md`に配置します。フルコンテンツは[skills/reddit-fetch/SKILL.md](skills/reddit-fetch/SKILL.md)を参照してください。
 
-Skills are more token-efficient because Claude Code only loads them when needed. If you want something simpler, you can put a condensed version in `~/.claude/CLAUDE.md` instead, but that gets loaded into every conversation whether you need it or not.
+スキルは必要な時だけClaude Codeがロードするため、トークン効率が良いです。よりシンプルなものが欲しい場合は、`~/.claude/CLAUDE.md`に短縮版を入れることもできますが、必要かどうかに関係なくすべての会話にロードされます。
 
-I tested this by asking Claude Code to check how Claude Code skills are regarded on Reddit - a bit meta. It goes back and forth with Gemini for a while, so it's not fast, but the report quality was surprisingly good. Obviously, you'll need to have Gemini CLI installed for this to work. You can also install this skill via the [dx plugin](#install-the-dx-plugin).
+Claude Code skillsがRedditでどう評価されているかClaude Codeに確認させてテストしました - ちょっとメタですね。Gemini CLIと行ったり来たりするので速くはないですが、レポートの品質は驚くほど良かったです。当然、これを機能させるにはGemini CLIがインストールされている必要があります。このスキルは[dxプラグイン](#dxプラグインのインストール)でもインストールできます。
 
-## Tip 12: Invest in your own workflow
+## Tip 12: 自分のワークフローに投資する
 
-Personally, I've created my own voice transcription app from scratch with Swift. I created my own custom status line from scratch using Claude Code, this one with bash. And I created my own system for simplifying the system prompt in Claude Code's minified JavaScript file.
+個人的には、Swiftでゼロから自分の音声認識アプリを作成しました。bashでゼロからカスタムステータスラインを作成しました。Claude Codeのminified JavaScriptファイル内のシステムプロンプトを簡素化するための独自のシステムを作成しました。
 
-But you don't have to go overboard like that. Just taking care of your own CLAUDE.md, making sure it's as concise as possible while being able to help you achieve your goals - stuff like that is helpful. And of course, learning these tips, learning these tools, and some of the most important features.
+でも、そこまでやる必要はありません。自分のCLAUDE.mdを整備し、目標を達成するのに役立つようにできるだけ簡潔にする - そういうことが役立ちます。そしてもちろん、これらのTipsを学び、これらのツールを学び、最も重要な機能のいくつかを学ぶこと。
 
-All of these are investments in the tools you use to build whatever you want to build. I think it's important to spend at least a little bit of time on that.
+これらすべては、構築したいものを構築するために使用するツールへの投資です。少なくとも少しの時間をそれに費やすことが重要だと思います。
 
-## Tip 13: Search through your conversation history
+## Tip 13: 会話履歴を検索する
 
-You can ask Claude Code about your past conversations, and it'll help you find and search through them. All your conversation history is stored locally in `~/.claude/`. Project-specific conversations are in `~/.claude/projects/`, with folder names based on the project path (slashes become dashes).
+Claude Codeに過去の会話について質問でき、検索してくれます。すべての会話履歴は`~/.claude/`にローカル保存されています。プロジェクト固有の会話は`~/.claude/projects/`にあり、フォルダ名はプロジェクトパスに基づいています（スラッシュはダッシュになる）。
 
-For example, conversations for a project at `/Users/yk/Desktop/projects/claude-code-tips` would be stored in:
+例えば、`/Users/yk/Desktop/projects/claude-code-tips`のプロジェクトの会話は次の場所に保存されます：
 
 ```
 ~/.claude/projects/-Users-yk-Desktop-projects-claude-code-tips/
 ```
 
-Each conversation is a `.jsonl` file. You can search through them with basic bash commands:
+各会話は`.jsonl`ファイルです。基本的なbashコマンドで検索できます：
 
 ```bash
-# Find all conversations mentioning "Reddit"
+# "Reddit"に言及しているすべての会話を検索
 grep -l -i "reddit" ~/.claude/projects/-Users-yk-Desktop-projects-*/*.jsonl
 
-# Find today's conversations about a topic
+# 今日のトピックについての会話を検索
 find ~/.claude/projects/-Users-yk-Desktop-projects-*/*.jsonl -mtime 0 -exec grep -l -i "keyword" {} \;
 
-# Extract just the user messages from a conversation (requires jq)
+# 会話からユーザーメッセージのみを抽出（jqが必要）
 cat ~/.claude/projects/.../conversation-id.jsonl | jq -r 'select(.type=="user") | .message.content'
 ```
 
-Or just ask Claude Code directly: "What did we talk about regarding X today?" and it'll search through the history for you.
+または直接Claude Codeに質問するだけでもいいです：「今日Xについて何を話した？」と聞けば、履歴を検索してくれます。
 
-## Tip 14: Multitasking with terminal tabs
+## Tip 14: ターミナルタブでマルチタスク
 
-When running multiple Claude Code instances, staying organized is more important than any specific technical setup like Git worktrees. I recommend focusing on at most three or four tasks at a time.
+複数のClaude Codeインスタンスを実行する時、Git worktreeのような特定の技術的セットアップよりも、整理整頓されていることの方が重要です。同時に最大3〜4つのタスクに集中することをお勧めします。
 
-My personal method is what I would call a "cascade" - whenever I start a new task, I just open a new tab on the right. Then I sweep left to right, left to right, going from oldest tasks to newest. The general direction stays consistent, except when I need to check on certain tasks, get notifications, etc.
+私の個人的な方法は「カスケード」と呼んでいるものです - 新しいタスクを始めるたびに、右に新しいタブを開くだけです。そして左から右へ、左から右へとスイープし、最も古いタスクから最新のものへ移動します。一般的な方向は一貫していますが、特定のタスクを確認したり、通知を受け取ったりする時は例外です。
 
-Here's what my setup typically looks like:
+私のセットアップは通常このようになります：
 
-![Terminal tabs showing multitasking workflow](assets/multitasking-terminal-tabs.png)
+![マルチタスクワークフローを示すターミナルタブ](assets/multitasking-terminal-tabs.png)
 
-In this example:
-1. **Leftmost tab** - A persistent tab running my voice transcription system (always stays here)
-2. **Second tab** - Setting up a Docker container
-3. **Third tab** - Checking disk usage on my local machine
-4. **Fourth tab** - Working on an engineering project
-5. **Fifth tab (current)** - Writing this very tip
+この例では：
+1. **最左タブ** - 音声認識システムを実行する永続タブ（常にここにある）
+2. **2番目のタブ** - Dockerコンテナのセットアップ
+3. **3番目のタブ** - ローカルマシンのディスク使用量チェック
+4. **4番目のタブ** - エンジニアリングプロジェクトでの作業
+5. **5番目のタブ（現在）** - まさにこのTipを書いている
 
-## Tip 15: Slim down the system prompt
+## Tip 15: システムプロンプトをスリム化する
 
-Claude Code's system prompt and tool definitions take up about 20k tokens (~10% of your 200k context) before you even start working. I created a patch system that reduces this to about 9k tokens - saving around 11,000 tokens (~55% of the overhead).
+Claude Codeのシステムプロンプトとツール定義は、作業を始める前に約20kトークン（200kコンテキストの約10%）を占めます。これを約9kトークンに削減するパッチシステムを作成しました - 約11,000トークン（オーバーヘッドの約55%）を節約。
 
-| Component | Before | After | Savings |
+| コンポーネント | 前 | 後 | 節約 |
 |-----------|--------|-------|---------|
-| System prompt | 3.1k | 1.8k | 1,300 tokens |
-| System tools | 15.6k | 7.1k | 8,500 tokens |
-| **Static total** | **~19k** | **~9k** | **~10,000 tokens (~52.5%)** |
-| Allowed tools list | ~1k | 0 | ~1k tokens |
-| **Total** | **~20k** | **~9k** | **~11k tokens (~55%)** |
+| システムプロンプト | 3.1k | 1.8k | 1,300トークン |
+| システムツール | 15.6k | 7.1k | 8,500トークン |
+| **静的合計** | **~19k** | **~9k** | **~10,000トークン (~52.5%)** |
+| 許可ツールリスト | ~1k | 0 | ~1kトークン |
+| **合計** | **~20k** | **~9k** | **~11kトークン (~55%)** |
 
-The allowed tools list is dynamic context - it grows as you approve more bash commands. The patch removes this list entirely.
+許可ツールリストは動的コンテキストです - より多くのbashコマンドを承認するにつれて増加します。パッチはこのリストを完全に削除します。
 
-Here's what `/context` looks like before and after patching:
+パッチ前後の`/context`の様子：
 
-**Unpatched (~20k, 10%)**
+**パッチなし (~20k, 10%)**
 
-![Unpatched context](assets/context-unpatched.png)
+![パッチなしコンテキスト](assets/context-unpatched.png)
 
-**Patched (~9k, 4%)**
+**パッチ済み (~9k, 4%)**
 
-![Patched context](assets/context-patched.png)
+![パッチ済みコンテキスト](assets/context-patched.png)
 
-The patches work by trimming verbose examples and redundant text from the minified CLI bundle while keeping all the essential instructions.
+パッチは、すべての重要な指示を保持しながら、minified CLIバンドルから冗長な例と重複テキストを削除することで機能します。
 
-I've tested this extensively and it works well. It feels more raw - more powerful, but maybe a little less regulated, which makes sense because the system instruction is shorter. It feels more like a pro tool when you use it this way. I really enjoy starting with lower context because you have more room before it fills up, which gives you the option to continue conversations a bit longer. That's definitely the best part of this strategy.
+これを広範囲にテストし、うまく機能します。より生々しい感じがします - よりパワフルですが、少し規制が少ないかもしれません。これはシステム指示が短いので理にかなっています。この方法で使用すると、よりプロツールのように感じます。低いコンテキストから始めるのが本当に好きです。埋まるまでにより多くの余裕があるので、会話を少し長く続けるオプションがあります。これは間違いなくこの戦略の最良の部分です。
 
-Check out the [system-prompt folder](system-prompt/) for the patch scripts and full details on what gets trimmed.
+パッチスクリプトと何が削除されるかの完全な詳細については、[system-promptフォルダ](system-prompt/)を確認してください。
 
-**Why patching?** Claude Code has flags that let you provide a simplified system prompt from a file (`--system-prompt` or `--system-prompt-file`), so that's another way to go about it. But for the tool descriptions and the dynamic approved tools list, there's no official option to customize them. Patching the CLI bundle is the only way. Since my patch system handles everything in one unified approach, I'm keeping it this way for now. I might re-implement the system prompt portion using the flag in the future.
+**なぜパッチ？** Claude Codeには、ファイルから簡素化されたシステムプロンプトを提供できるフラグ（`--system-prompt`または`--system-prompt-file`）があるので、それも別の方法です。しかし、ツールの説明と動的な承認済みツールリストについては、カスタマイズする公式オプションはありません。CLIバンドルにパッチを当てるのが唯一の方法です。私のパッチシステムはすべてを1つの統一されたアプローチで処理するので、今のところこの方法を維持しています。将来、フラグを使用してシステムプロンプト部分を再実装するかもしれません。
 
-**Requirements**: These patches require npm installation (`npm install -g @anthropic-ai/claude-code`). The patching works by modifying the JavaScript bundle (`cli.js`) - other installation methods may produce compiled binaries that can't be patched this way.
+**要件**: これらのパッチにはnpmインストール（`npm install -g @anthropic-ai/claude-code`）が必要です。パッチはJavaScriptバンドル（`cli.js`）を変更することで機能します - 他のインストール方法はこの方法でパッチを当てられないコンパイル済みバイナリを生成する可能性があります。
 
-**Important**: If you want to keep your patched system prompt, disable auto-updates by adding `export DISABLE_AUTOUPDATER=1` to `~/.zshenv` (not `~/.zshrc`). The reason for `.zshenv` is that it's sourced for ALL zsh invocations, including non-interactive shells and tmux sessions. `.zshrc` only gets sourced for interactive shells, so tmux-based workflows (like the ones in Tips 9, 11, and 21) would auto-update without `.zshenv`. You can manually update later with `npm update -g @anthropic-ai/claude-code` when you're ready to re-apply patches to a new version.
+**重要**: パッチされたシステムプロンプトを維持したい場合は、`~/.zshenv`（`~/.zshrc`ではなく）に`export DISABLE_AUTOUPDATER=1`を追加して自動更新を無効にしてください。`.zshenv`の理由は、非インタラクティブシェルやtmuxセッションを含む、すべてのzsh呼び出しでソースされるからです。`.zshrc`はインタラクティブシェルでのみソースされるので、tmuxベースのワークフロー（Tips 9、11、21のような）は`.zshenv`なしで自動更新されます。準備ができたら`npm update -g @anthropic-ai/claude-code`で手動更新し、新しいバージョンにパッチを再適用できます。
 
-## Tip 16: Git worktrees for parallel branch work
+## Tip 16: Git worktreeで並列ブランチ作業
 
-If you're working on multiple files or multiple branches and you don't want them to get conflicted, Git worktrees are a great way to work on them at the same time. You can just ask Claude Code to create a git worktree and start working on it there - you don't have to worry about the specific syntax.
+複数のファイルや複数のブランチで作業していて、それらが競合しないようにしたい場合、Git worktreeは同時に作業するための素晴らしい方法です。Claude Codeにgit worktreeを作成してそこで作業を開始するよう依頼するだけです - 特定の構文について心配する必要はありません。
 
-The basic idea is that you can work on a different branch in a different directory. It's essentially a branch + a directory.
+基本的なアイデアは、異なるディレクトリで異なるブランチで作業できるということです。本質的にはブランチ + ディレクトリです。
 
-You can add this layer of Git worktrees on top of the cascade method I discussed in the multitasking tip.
+マルチタスクのTipで説明したカスケードメソッドの上にこのGit worktreeのレイヤーを追加できます。
 
-## Tip 17: Manual exponential backoff for long-running jobs
+## Tip 17: 長時間ジョブには手動エクスポネンシャルバックオフ
 
-When waiting on long-running jobs like Docker builds or GitHub CI, you can ask Claude Code to do manual exponential backoff. Exponential backoff is a common technique in software engineering, but you can apply it here too. Ask Claude Code to check the status with increasing sleep intervals - one minute, then two minutes, then four minutes, and so on. It's not programmatically doing it in the traditional sense - the AI is doing it manually - but it works pretty well.
+DockerビルドやGitHub CIなどの長時間実行ジョブを待っている時、Claude Codeに手動エクスポネンシャルバックオフを行わせることができます。エクスポネンシャルバックオフはソフトウェアエンジニアリングの一般的なテクニックですが、ここでも適用できます。Claude Codeに増加するスリープ間隔でステータスをチェックするよう依頼します - 1分、次に2分、次に4分、というように。従来の意味でプログラム的にやっているわけではありません - AIが手動でやっているのです - でもかなりうまく機能します。
 
-This way the agent can continuously check the status and let you know once it's done.
+この方法でエージェントは継続的にステータスをチェックし、完了したら知らせることができます。
 
-(For GitHub CI specifically, `gh run watch` exists but outputs many lines continuously, which wastes tokens. Manual exponential backoff with `gh run view <run-id> | grep <job-name>` is actually more token-efficient. This is also a general technique that works well even when you don't have a dedicated wait command handy.)
+（GitHub CI専用には`gh run watch`がありますが、継続的に多くの行を出力し、トークンを浪費します。`gh run view <run-id> | grep <job-name>`で手動エクスポネンシャルバックオフする方が実際にはトークン効率が良いです。これは専用のwaitコマンドがなくてもうまく機能する一般的なテクニックでもあります。）
 
-For example, if you have a Docker build running in the background:
+例えば、バックグラウンドで実行中のDockerビルドがある場合：
 
-![Manual exponential backoff checking Docker build progress](assets/manual-exponential-backoff.png)
+![Dockerビルドの進捗をチェックする手動エクスポネンシャルバックオフ](assets/manual-exponential-backoff.png)
 
-And it keeps going until the job completes.
+そしてジョブが完了するまで続きます。
 
-## Tip 18: Claude Code as a writing assistant
+## Tip 18: Claude Codeをライティングアシスタントとして使う
 
-Claude Code is an excellent writing assistant and partner. The way I use it for writing is I first give it all the context about what I'm trying to write, and then I give it detailed instructions by speaking to it using my voice. That gives me the first draft. If it's not good enough, I try a few times.
+Claude Codeは優れたライティングアシスタントであり、パートナーです。ライティングでの使い方は、まず書こうとしていることについてすべてのコンテキストを与え、次に音声を使って詳細な指示を与えます。これで最初のドラフトができます。十分でなければ、何度か試します。
 
-Then I go through it line by line, pretty much. I say okay, let's take a look at it together. I like this line for these reasons. I feel like this line needs to move over there. This line needs to change in this particular way. I might ask about reference materials as well.
+それから、ほぼ行ごとに確認します。一緒に見てみましょう、と言います。この行はこれらの理由で好きです。この行はあそこに移動する必要があると思います。この行はこの特定の方法で変更する必要があります。参考資料についても質問することがあります。
 
-So it's this sort of back-and-forth process, maybe with the terminal on the left and your code editor on the right:
+だから、このような行ったり来たりのプロセスです。左にターミナル、右にコードエディタという感じで：
 
-![Side-by-side writing workflow with Claude Code](assets/writing-assistant-side-by-side.png)
+![Claude Codeと並べてライティングワークフロー](assets/writing-assistant-side-by-side.png)
 
-That tends to work really well.
+これは非常にうまくいく傾向があります。
 
-## Tip 19: Markdown is the s**t
+## Tip 19: Markdownは最強
 
-Typically when people write a new document, they might use something like Google Docs or maybe Notion. But now I honestly think the most efficient way to go about it is markdown.
+通常、人々が新しいドキュメントを書く時、Google DocsやおそらくNotionのようなものを使うかもしれません。でも今は正直、最も効率的な方法はマークダウンだと思います。
 
-Markdown was already pretty good even before AI, but with Claude Code in particular, because it's so efficient as I mentioned with regards to writing, it makes the value of markdown higher in my opinion. Whenever you want to write a blog post or even a LinkedIn post, you can just talk to Claude Code, have it be saved as markdown, and then go from there.
+マークダウンはAI以前からすでにかなり良かったですが、特にClaude Codeでは、ライティングに関して述べたように非常に効率的なので、マークダウンの価値が高くなると思います。ブログ投稿やLinkedIn投稿さえ書きたい時はいつでも、Claude Codeに話しかけ、マークダウンとして保存してから、そこから進めることができます。
 
-A quick tip for this one: if you want to copy and paste markdown content into a platform that doesn't accept it easily, you can paste it into a fresh Notion file first, then copy from Notion into the other platform. Notion converts it to a format that other platforms can accept. If regular pasting doesn't work, try Command + Shift + V to paste without formatting.
+これについての簡単なヒント：マークダウンコンテンツを簡単に受け入れないプラットフォームにコピー&ペーストしたい場合、まず新しいNotionファイルに貼り付けてから、Notionから他のプラットフォームにコピーできます。Notionは他のプラットフォームが受け入れられる形式に変換します。通常の貼り付けがうまくいかない場合は、Command + Shift + Vで書式なし貼り付けを試してください。
 
-## Tip 20: Use Notion to preserve links when pasting
+## Tip 20: Notionを使ってリンクを保持して貼り付け
 
-It turns out the reverse also works. If you have text with links from other places, let's say from Slack, you can copy it. If you paste it directly into Claude Code, it doesn't show the links. But if you put it in a Notion document first, then copy from there, you get it in markdown, which of course Claude Code can read.
+逆もうまくいくことがわかりました。他の場所からのリンク付きテキストがある場合、例えばSlackから、コピーできます。Claude Codeに直接貼り付けると、リンクは表示されません。しかし、まずNotionドキュメントに入れてから、そこからコピーすると、マークダウンで取得できます。もちろん、Claude Codeはそれを読むことができます。
 
-## Tip 21: Containers for long-running risky tasks
+## Tip 21: 長時間でリスクのあるタスクにはコンテナを使用
 
-> Running Claude Code with `--dangerously-skip-permissions` is the equivalent of having unprotected sex. So use a condo... I mean a container.
+> `--dangerously-skip-permissions`でClaude Codeを実行するのは、無防備な行為のようなものです。だからコンド...いや、コンテナを使いましょう。
 
-Regular sessions are more for methodical work where you control the permissions you give and review output more carefully. Containerized environments are great for `--dangerously-skip-permissions` sessions where you don't have to give permission for each little thing. You can just let it run on its own for a while.
+通常のセッションは、与える権限を制御し、出力をより慎重にレビューする方法論的な作業向けです。コンテナ化された環境は、小さなことごとに許可を与える必要がない`--dangerously-skip-permissions`セッションに最適です。しばらく自分で実行させることができます。
 
-This is useful for research or experimentation, things that take a long time and maybe could be risky. A good example is the Reddit research workflow from Tip 11, where the reddit-fetch skill goes back and forth with Gemini CLI through tmux. Running that unsupervised is risky on your main system, but in a container, if something goes wrong, it's contained.
+これは、時間がかかり、リスクがあるかもしれないリサーチや実験に役立ちます。良い例は、Tip 11のRedditリサーチワークフローで、reddit-fetchスキルがtmuxを通じてGemini CLIと行ったり来たりします。メインシステムでこれを監視なしで実行するのはリスキーですが、コンテナ内では、何か問題が起きても封じ込められています。
 
-Another example is how I created the [system prompt patching scripts](system-prompt/) in this repo. When a new version of Claude Code comes out, I need to update the patches for the minified CLI bundle. Instead of running Claude Code with `--dangerously-skip-permissions` on my host machine (where it has access to everything), I run it in a container. Claude Code can explore the minified JavaScript, find the variable mappings, and create new patch files without me approving every little thing that way.
+もう一つの例は、このリポジトリの[システムプロンプトパッチスクリプト](system-prompt/)を作成した方法です。Claude Codeの新しいバージョンが出た時、minified CLIバンドル用のパッチを更新する必要があります。ホストマシン（すべてにアクセスできる）で`--dangerously-skip-permissions`でClaude Codeを実行する代わりに、コンテナ内で実行します。Claude Codeはminified JavaScriptを探索し、変数マッピングを見つけ、すべての小さなことを承認することなく新しいパッチファイルを作成できます。
 
-In fact, it was able to complete the migration pretty much on its own. It tried applying the patches, found that some didn't work with the new version, iterated to fix them, and even improved the [instruction document](system-prompt/UPGRADING.md) for future instances based on what it learned.
+実際、ほぼ自分でマイグレーションを完了できました。パッチを適用しようとし、新しいバージョンでは一部が動作しないことを発見し、それらを修正するために反復し、学んだことに基づいて将来のインスタンス用の[指示ドキュメント](system-prompt/UPGRADING.md)も改善しました。
 
-I set up a Docker container with Claude Code, Gemini CLI, tmux, and all the customizations from this repo. Check out the [container folder](container/) for the Dockerfile and setup instructions.
+Claude Code、Gemini CLI、tmux、このリポジトリからのすべてのカスタマイズを含むDockerコンテナをセットアップしました。Dockerfileとセットアップ手順については[containerフォルダ](container/)を確認してください。
 
-### Advanced: Orchestrating a worker Claude Code in a container
+### 上級：コンテナ内のワーカーClaude Codeをオーケストレーション
 
-You can take this further by having your local Claude Code control another Claude Code instance running inside a container. The trick is using tmux as the control layer:
+ローカルのClaude Codeにコンテナ内で実行されている別のClaude Codeインスタンスを制御させることで、さらに進めることができます。トリックはtmuxをコントロールレイヤーとして使用すること：
 
-1. Your local Claude Code starts a tmux session
-2. In that tmux session, it runs or connects to the container
-3. Inside the container, Claude Code runs with `--dangerously-skip-permissions`
-4. Your outer Claude Code uses `tmux send-keys` to send prompts and `capture-pane` to read output
+1. ローカルのClaude Codeがtmuxセッションを開始
+2. そのtmuxセッションで、コンテナに接続
+3. コンテナ内で、Claude Codeが`--dangerously-skip-permissions`で実行
+4. 外部のClaude Codeが`tmux send-keys`でプロンプトを送信し、`capture-pane`で出力を読み取る
 
-This gives you a fully autonomous "worker" Claude Code that can run experimental or long-running tasks without you approving every action. When it's done, your local Claude Code can pull the results back. If something goes wrong, it's all sandboxed in the container.
+これにより、すべてのアクションを承認することなく、実験的または長時間実行タスクを実行できる完全に自律的な「ワーカー」Claude Codeが得られます。完了したら、ローカルのClaude Codeは結果を引き戻すことができます。何か問題が起きても、すべてコンテナ内にサンドボックス化されています。
 
-### Advanced: Multi-model orchestration
+### 上級：マルチモデルオーケストレーション
 
-Beyond just Claude Code, you can run different AI CLIs in containers - Codex, Gemini CLI, or others. I tried OpenAI Codex for code review, and it works well. The point isn't that you can't run these CLIs directly on your host machine - you obviously can. The value is that Claude Code's UI/UX is smooth enough that you can just talk to it and let it handle the orchestration: spinning up different models, sending data between containers and your host. Instead of manually switching between terminals and copy-pasting, Claude Code becomes the central interface that coordinates everything.
+Claude Codeだけでなく、コンテナ内で異なるAI CLIを実行できます - Codex、Gemini CLI、その他。コードレビュー用にOpenAI Codexを試しましたが、うまく機能します。ポイントは、これらのCLIをホストマシンで直接実行できないということではありません - 明らかにできます。価値は、Claude CodeのUI/UXが十分にスムーズなので、話しかけてオーケストレーションを任せられることです：異なるモデルを起動し、コンテナとホスト間でデータを送信。ターミナル間を手動で切り替えてコピー&ペーストする代わりに、Claude Codeがすべてを調整する中央インターフェースになります。
 
-## Tip 22: The best way to get better at using Claude Code is by using it
+## Tip 22: Claude Codeを使いこなすには使い続けること
 
-Recently I saw a world-class rock climber being interviewed by another rock climber. She was asked, "How do you get better at rock climbing?" She simply said, "By rock climbing."
+最近、世界クラスのロッククライマーが別のロッククライマーにインタビューされているのを見ました。「どうすればロッククライミングが上手くなる？」と聞かれて、彼女は単に「ロッククライミングをすることで」と答えました。
 
-That's how I feel about this too. Of course, there are supplementary things you can do, like watching videos, reading books, learning about tips. But using Claude Code is the best way to learn how to use it. Using AI in general is the best way to learn how to use AI.
+これについても同じように感じます。もちろん、動画を見たり、本を読んだり、Tipsを学んだりするような補助的なことはできます。しかし、Claude Codeを使うことがそれを使う方法を学ぶ最良の方法です。一般的にAIを使うことがAIを使う方法を学ぶ最良の方法です。
 
-I like to think of it like a billion token rule instead of the 10,000 hour rule. If you want to get better at AI and truly get a good intuition about how it works, the best way is to consume a lot of tokens. And nowadays it's possible. I found that especially with Opus 4.5, it's powerful enough but affordable enough that you can run multiple sessions at the same time. You don't have to worry as much about token usage, which frees you up a lot.
+10,000時間ルールの代わりに10億トークンルールのように考えるのが好きです。AIを上手くなり、本当にそれがどう機能するかについて良い直感を得たいなら、最良の方法は大量のトークンを消費することです。そして今日それは可能です。特にOpus 4.5では、十分にパワフルですが、同時に複数のセッションを実行できるほど手頃な価格です。トークン使用量についてそれほど心配する必要がなく、かなり解放されます。
 
-## Tip 23: Clone and half-clone conversations
+## Tip 23: 会話を複製・半複製する
 
-Sometimes you want to try a different approach from a specific point in a conversation without losing your original thread. The [clone-conversation script](scripts/clone-conversation.sh) lets you duplicate a conversation with new UUIDs so you can branch off.
+会話の特定のポイントから元のスレッドを失わずに異なるアプローチを試したい場合があります。[clone-conversationスクリプト](scripts/clone-conversation.sh)で新しいUUIDで会話を複製してブランチオフできます。
 
-The first message is tagged with `[CLONED]`, which shows up both in the `claude -r` list and inside the conversation.
+最初のメッセージに`[CLONED]`のタグが付き、`claude -r`リストと会話内の両方に表示されます。
 
-To set it up manually, symlink both files:
+手動でセットアップするには、両方のファイルをシンボリックリンク：
 ```bash
 ln -s /path/to/this/repo/scripts/clone-conversation.sh ~/.claude/scripts/clone-conversation.sh
 ln -s /path/to/this/repo/commands/clone.md ~/.claude/commands/clone.md
 ```
 
-Or install via the [dx plugin](#install-the-dx-plugin) - no symlinks needed.
+または[dxプラグイン](#dxプラグインのインストール)でインストール - シンボリックリンク不要。
 
-Then just type `/clone` (or `/dx:clone` if using the plugin) in any conversation and Claude will handle finding the session ID and running the script.
+会話内で`/clone`（プラグイン使用時は`/dx:clone`）と入力するだけで、Claudeがセッション IDを見つけてスクリプトを実行します。
 
-I've tested this extensively and the cloning works really well.
+これを広範囲にテストし、クローニングは非常にうまく機能します。
 
-### Half-clone to reduce context
+### コンテキストを減らすための半複製
 
-When a conversation gets too long, the [half-clone-conversation script](scripts/half-clone-conversation.sh) keeps only the later half. This reduces token usage while preserving your recent work. The first message is tagged with `[HALF-CLONE]`.
+会話が長くなりすぎた時、[half-clone-conversationスクリプト](scripts/half-clone-conversation.sh)は後半のみを保持します。これは最近の作業を維持しながらトークン使用量を減らします。最初のメッセージに`[HALF-CLONE]`のタグが付きます。
 
-To set it up manually, symlink both files:
+手動でセットアップするには、両方のファイルをシンボリックリンク：
 ```bash
 ln -s /path/to/this/repo/scripts/half-clone-conversation.sh ~/.claude/scripts/half-clone-conversation.sh
 ln -s /path/to/this/repo/commands/half-clone.md ~/.claude/commands/half-clone.md
 ```
 
-Or install via the [dx plugin](#install-the-dx-plugin) - no symlinks needed.
+または[dxプラグイン](#dxプラグインのインストール)でインストール - シンボリックリンク不要。
 
-## Tip 24: Use realpath to get absolute paths
+## Tip 24: realpathで絶対パスを取得
 
-When you need to tell Claude Code about files in a different folder, use `realpath` to get the full absolute path:
+別のフォルダのファイルについてClaude Codeに伝える必要がある場合、`realpath`を使用して完全な絶対パスを取得：
 
 ```bash
 realpath some/relative/path
 ```
 
-## Tip 25: Understanding CLAUDE.md vs Skills vs Slash Commands vs Plugins
+## Tip 25: CLAUDE.md、スキル、スラッシュコマンド、プラグインの違いを理解する
 
-These are somewhat similar features and I initially found them pretty confusing. I've been unpacking them and trying my best to wrap my head around them, so I wanted to share what I learned.
+これらはやや似た機能で、最初はかなり混乱しました。それらを紐解き、理解しようと最善を尽くしてきたので、学んだことを共有したいと思います。
 
-**CLAUDE.md** is the simplest one. It's a bunch of files that get treated as the default prompt, loaded into the beginning of every conversation no matter what. The nice thing about it is the simplicity. You can explain what the project is about in a particular project (`./CLAUDE.md`) or globally (`~/.claude/CLAUDE.md`).
+**CLAUDE.md**は最もシンプルなものです。何があってもすべての会話の最初にロードされる、デフォルトプロンプトとして扱われるファイルの束です。いいところはシンプルさです。特定のプロジェクト（`./CLAUDE.md`）またはグローバル（`~/.claude/CLAUDE.md`）でプロジェクトについて説明できます。
 
-**Skills** are like better-structured CLAUDE.md files. They can be invoked by Claude automatically when relevant, or manually by the user with a slash (e.g., `/my-skill`). For example, you could have a skill that opens a Google Translate link with proper formatting when you ask how to pronounce a word in a certain language. If those instructions are in a skill, they only load when needed. If they were in CLAUDE.md, they'd already be there taking up space. So skills are more token-efficient in theory.
+**スキル**はより良く構造化されたCLAUDE.mdファイルのようなものです。関連する時にClaudeによって自動的に呼び出されるか、スラッシュ（例：`/my-skill`）でユーザーが手動で呼び出すことができます。例えば、特定の言語で単語を発音する方法を尋ねると、適切なフォーマットでGoogle翻訳リンクを開くスキルがあります。それらの指示がスキルにあれば、必要な時だけロードされます。CLAUDE.mdにあれば、すでにそこにあってスペースを取っています。だからスキルは理論的にはトークン効率が良いです。
 
-**Slash Commands** are similar to skills in that they're ways of packaging instructions separately. They can be invoked manually by the user, or by Claude itself. If you need something more precise, to invoke at the right time at your own pace, slash commands are the tool to use.
+**スラッシュコマンド**は、指示を別々にパッケージ化する方法という点でスキルに似ています。ユーザーが手動で呼び出すか、Claude自体が呼び出すことができます。より正確なものが必要な場合、自分のペースで適切なタイミングで呼び出す場合、スラッシュコマンドが使用するツールです。
 
-Skills and slash commands are pretty similar in the way they function. The difference is the intention of the design - skills are primarily designed for Claude to use, and slash commands are primarily designed for the user to use. However, I think there's a chance they'll be merged at some point, and I [requested that from Anthropic](https://github.com/anthropics/claude-code/issues/13115).
+スキルとスラッシュコマンドは機能の仕方がかなり似ています。違いは設計の意図です - スキルは主にClaudeが使用するために設計されており、スラッシュコマンドは主にユーザーが使用するために設計されています。しかし、将来統合される可能性があると思い、[Anthropicにそれをリクエストしました](https://github.com/anthropics/claude-code/issues/13115)。
 
-**Plugins** are a way to package skills, slash commands, agents, hooks, and MCP servers together. But a plugin doesn't have to use all of them. Anthropic's official `frontend-design` plugin is essentially just a skill and nothing else. It could be distributed as a standalone skill, but the plugin format makes it easier to install.
+**プラグイン**は、スキル、スラッシュコマンド、エージェント、フック、MCPサーバーを一緒にパッケージ化する方法です。しかし、プラグインはそれらすべてを使用する必要はありません。Anthropicの公式`frontend-design`プラグインは本質的にスキルだけで他には何もありません。スタンドアロンスキルとして配布できますが、プラグイン形式の方がインストールが簡単です。
 
-For example, I built a plugin called `dx` that bundles slash commands and a skill from this repo together. You can see how it works in the [Install the dx plugin](#install-the-dx-plugin) section.
+例えば、このリポジトリからのスラッシュコマンドとスキルをバンドルする`dx`というプラグインを構築しました。[dxプラグインのインストール](#dxプラグインのインストール)セクションで動作を確認できます。
 
-## Tip 26: Interactive PR reviews
+## Tip 26: インタラクティブなPRレビュー
 
-Claude Code is great for PR reviews. The procedure is pretty simple: you ask it to retrieve PR information using the `gh` command, and then you can go through the review however you want.
+Claude CodeはPRレビューに最適です。手順はかなりシンプル：`gh`コマンドを使ってPR情報を取得するよう依頼し、好きなようにレビューを進めることができます。
 
-You can do a general review, or go file by file, step by step. You control the pace. You control how much detail you want to look into and the level of complexity you want to work at. Maybe you just want to understand the general structure, or maybe you want to have it run tests too.
+一般的なレビューをしたり、ファイルごと、ステップごとに進めることができます。ペースを制御します。どのくらい詳細に見たいか、どのレベルの複雑さで作業したいかを制御します。一般的な構造を理解したいだけかもしれませんし、テストも実行させたいかもしれません。
 
-The key difference is that Claude Code acts as an interactive PR reviewer, not just a one-shot machine. Some AI tools are good at one-shot reviews (including the latest GPT models), but with Claude Code you can have a conversation.
+重要な違いは、Claude CodeがインタラクティブなPRレビュアーとして機能することで、単なるワンショットマシンではないことです。一部のAIツールはワンショットレビューが得意です（最新のGPTモデルを含む）が、Claude Codeでは会話ができます。
 
-## Tip 27: Claude Code as a research tool
+## Tip 27: Claude Codeをリサーチツールとして使う
 
-Claude Code is amazing for any sort of research. It's essentially a Google replacement or deep research replacement, but more advanced in a few different ways. Whether you're researching why certain GitHub Actions failed (which I've been doing a lot recently), doing sentiment or market analysis on Reddit, exploring your codebase, or exploring public information to find something - it's able to do that.
+Claude Codeはあらゆる種類のリサーチに素晴らしいです。本質的にはGoogle置き換えまたはディープリサーチ置き換えですが、いくつかの点でより高度です。特定のGitHub Actionsが失敗した理由を調査する（最近多くやっています）、RedditでセンチメントまたはマーケットAnalysisを行う、コードベースを探索する、何かを見つけるために公開情報を探索する - そういうことができます。
 
-The key is giving it the right pieces of information and instructions about how to access those pieces of information. It might be `gh` terminal command access, or the container approach (Tip 21), or Reddit through Gemini CLI (Tip 11), or private information through an MCP like Slack MCP, or the Cmd+A / Ctrl+A method (Tip 10) - whatever it is. Additionally, if Claude Code has trouble loading certain URLs, you can try using Playwright MCP or Claude's native browser integration (see Tip 9).
+重要なのは、適切な情報とそれらの情報にアクセスする方法についての指示を与えることです。`gh`ターミナルコマンドアクセスかもしれませんし、コンテナアプローチ（Tip 21）かもしれませんし、Gemini CLI経由のReddit（Tip 11）かもしれませんし、Slack MCPのようなMCP経由のプライベート情報かもしれませんし、Cmd+A / Ctrl+Aメソッド（Tip 10）かもしれません - 何であれ。さらに、Claude Codeが特定のURLをロードするのに苦労する場合、Playwright MCPまたはClaudeのネイティブブラウザ統合を使用してみることができます（Tip 9参照）。
 
-In fact, I was even able to [save $10,000 by using Claude Code for research](content/how-i-saved-10k-with-claude-code.md).
+実際、[Claude Codeをリサーチに使って$10,000節約することさえできました](content/how-i-saved-10k-with-claude-code.md)。
 
-## Tip 28: Mastering different ways of verifying its output
+## Tip 28: 出力を検証する様々な方法をマスターする
 
-One way to verify its output if it's code is to have it write tests and make sure the tests look good in general. That's one way, but you can of course check the code it generates as it goes, just on the Claude Code UI. Another thing is you can use a visual Git client like GitHub Desktop for example. I personally use it. It's not a perfect product, but it's good enough for checking changes quickly. And having it generate a PR as I probably mentioned earlier in this post is a great way as well. Have it create a draft PR, check the content before turning it into a real PR.
+出力がコードの場合、それを検証する一つの方法は、テストを書かせて、テストが全体的に良さそうかどうか確認することです。それは一つの方法ですが、もちろん進行中に生成されるコードをClaude Code UIでチェックすることもできます。もう一つは、例えばGitHub Desktopのような視覚的なGitクライアントを使用することです。個人的に使っています。完璧な製品ではありませんが、変更を素早くチェックするには十分です。そして、この投稿で先に述べたように、PRを生成させることも素晴らしい方法です。ドラフトPRを作成させ、本物のPRに変える前に内容をチェックします。
 
-Another one is letting it check itself, its own work. If it gives you some sort of output, let's say from some research, you can say "are you sure about this? Can you double check?" One of my favorite prompts is to say "double check everything, every single claim in what you produced and at the end make a table of what you were able to verify" - and that seems to work really well.
+もう一つは、自分の仕事を自分でチェックさせることです。何かのリサーチから何らかの出力を提供したら、「これ確か？ダブルチェックして」と言うことができます。お気に入りのプロンプトの一つは、「すべてをダブルチェックして、生成したものの中のすべての主張を、最後に検証できたものの表を作って」と言うことです - そしてこれは非常にうまく機能するようです。
 
-## Tip 29: Claude Code as a DevOps engineer
+## Tip 29: Claude CodeをDevOpsエンジニアとして使う
 
-I wanted to specifically create a separate tip for this because it's been really amazing for me. Whenever there are GitHub Actions CI failures, I just give it to Claude Code and say "dig into this issue, try to find the root cause." Sometimes it gives you surface level answers, but if you just keep asking - was it caused by a particular commit, a particular PR, or is it a flaky issue? - it really helps you dig into these nasty issues that are hard to dig into by hand. You would need to wade through a bunch of logs and that would be super painful to do manually, but Claude Code is able to handle a lot of that.
+これは私にとって本当に素晴らしかったので、これについて別のTipを作成したかったです。GitHub Actions CIの失敗があるたびに、Claude Codeに渡して「この問題を掘り下げて、根本原因を見つけて」と言うだけです。表面的な回答が返ってくることもありますが、聞き続けるだけです - 特定のコミット、特定のPR、またはフレーキーな問題が原因だった？ - 手で掘り下げるのが難しいこれらの厄介な問題を本当に掘り下げるのに役立ちます。大量のログを見て回る必要があり、手動ではとても苦痛ですが、Claude Codeは多くを処理できます。
 
-I've packaged this workflow as a `/gha` slash command - just run `/gha <url>` with any GitHub Actions URL and it will automatically investigate the failure, check for flakiness, identify breaking commits, and suggest fixes. You can find it in the [commands folder](commands/gha.md), or install it via the [dx plugin](#install-the-dx-plugin).
+このワークフローを`/gha`スラッシュコマンドとしてパッケージ化しました - 任意のGitHub Actions URLで`/gha <url>`を実行するだけで、自動的に失敗を調査し、フレーキーかどうかチェックし、壊れたコミットを特定し、修正を提案します。[commandsフォルダ](commands/gha.md)にあるか、[dxプラグイン](#dxプラグインのインストール)でインストールできます。
 
-Once you identify what the particular problem was, you can just create a draft PR and go through some of the tips I mentioned earlier - check the output, make sure it looks good, let it verify its own outputs, and then turn it into a real PR to actually fix the issue. It's been working really well for me personally.
+特定の問題が何だったかを特定したら、ドラフトPRを作成し、先に述べたいくつかのTipsを確認できます - 出力をチェックし、良さそうかどうか確認し、自分の出力を検証させ、そして実際に問題を修正するための本物のPRにします。個人的にはとてもうまく機能しています。
 
-## Tip 30: Keep CLAUDE.md simple and concise
+## Tip 30: CLAUDE.mdはシンプルで簡潔に保つ
 
-I think it's important to keep CLAUDE.md really simple and concise. You can just start with no CLAUDE.md at all. And if you find that you keep telling Claude Code the same thing over and over again, then you can just add it to CLAUDE.md. I know there is an option to do that through the `#` symbol, but I prefer to just ask Claude Code to either add it to the project level CLAUDE.md or the global CLAUDE.md and it'll know what to edit exactly. So you can just let Claude Code edit CLAUDE.md by itself based on your instruction.
+CLAUDE.mdを本当にシンプルで簡潔に保つことが重要だと思います。CLAUDE.mdなしで始めることもできます。そして、同じことを何度も繰り返しClaude Codeに伝えていることに気づいたら、CLAUDE.mdに追加するだけです。`#`シンボルを通じてそれを行うオプションがあることは知っていますが、Claude CodeにプロジェクトレベルのCLAUDE.mdまたはグローバルCLAUDE.mdに追加するよう依頼する方が好きで、正確に何を編集すればいいか分かってくれます。だからあなたの指示に基づいてClaude Code自体にCLAUDE.mdを編集させることができます。
 
-## Tip 31: Claude Code as the universal interface
+## Tip 31: Claude Codeは万能インターフェース
 
-I used to think with Claude Code, CLI is like the new IDE, and it's still true in a way. I think it's a great first place to open your project whenever you want to make quick edits and stuff like that. But depending on the severity of your project, you want to be more careful about the outputs than just staying at the vibe coding level.
+Claude Codeでは、CLIは新しいIDEのようなものだと考えていましたが、ある意味ではまだ真実です。素早い編集などをしたい時にプロジェクトを最初に開くのに最適な場所だと思います。しかし、プロジェクトの深刻さによっては、バイブコーディングレベルに留まるだけでなく、出力についてより慎重になりたいかもしれません。
 
-But what's also true, the more general case of that, is that Claude Code is really the universal interface to your computer, the digital world, any sort of digital problem that you have. You can let it figure it out in many cases. For example, if you need to do a quick edit of your video, you can just ask it to do that - it'll probably figure out how to do that through ffmpeg or something similar. If you want to transcribe a bunch of audio files or video files that you have locally, you can just ask it to do that - it might suggest to use Whisper through Python. If you want to analyze some data that you have in a CSV file, it might suggest to use Python or JavaScript to visualize that. And of course with internet access - Reddit, GitHub, MCPs - the possibilities are endless.
+しかし、これのより一般的なケースとしても真実なのは、Claude Codeは本当にコンピュータ、デジタル世界、あらゆる種類のデジタル問題への万能インターフェースだということです。多くの場合、解決させることができます。例えば、動画の素早い編集が必要な場合、それを行うよう依頼するだけです - おそらくffmpegか何か似たもので解決方法を見つけるでしょう。ローカルに持っている音声ファイルや動画ファイルの束を文字起こししたい場合、それを行うよう依頼するだけです - Python経由でWhisperを使用することを提案するかもしれません。CSVファイルにあるデータを分析したい場合、PythonまたはJavaScriptを使用してそれを可視化することを提案するかもしれません。そしてもちろん、インターネットアクセス - Reddit、GitHub、MCP - 可能性は無限です。
 
-It's also great for any operations you want to perform on your local computer. For example, if you're running out of storage, you can just ask it to give you some advice on how to clean that up. It'll look through your local folders and files, try to find what's taking up a lot of space, and then give you advice on how to clean them up - maybe delete particularly large files. In my case, I had some Final Cut Pro files that were really large that I should have cleaned up. Claude Code told me about it. Maybe it'll tell you to clean up unused Docker images and containers using `docker system prune`. Or maybe it'll tell you to clean up some cache that you never realized was still there. No matter what you want to do on your computer, Claude Code is the first place I go to now.
+ローカルコンピュータで実行したい操作にも最適です。例えば、ストレージが足りなくなっている場合、クリーンアップ方法についてアドバイスを求めるだけです。ローカルフォルダとファイルを調べ、多くのスペースを占めているものを見つけようとし、クリーンアップ方法についてアドバイスしてくれます - 特に大きなファイルを削除するかもしれません。私の場合、クリーンアップすべき非常に大きなFinal Cut Proファイルがありました。Claude Codeがそれを教えてくれました。`docker system prune`を使って未使用のDockerイメージとコンテナをクリーンアップするよう言うかもしれません。または、まだそこにあることに気づかなかったキャッシュをクリーンアップするよう言うかもしれません。コンピュータで何をしたいにしても、今やClaude Codeが最初に行く場所です。
 
-I think it's kind of interesting because the computer started with a text interface. And we're, in a way, coming back to this text interface that you can spin up three or four tabs at a time, as I mentioned earlier. To me, that's really exciting. It feels like you have a second brain, in a way. But because of the way it's structured, because it's just a terminal tab, you can open up a third brain, a fourth brain, a fifth brain, a sixth brain. And as the models become more powerful, the proportion of the thinking that you can delegate to these things - not the important things, but things that you don't want to do or that you find boring or too tedious - you can just let them take care of it. As I mentioned, a good example of that is looking into GitHub Actions. Who wants to do that? But it turns out these agents are really good at those boring tasks.
+コンピュータがテキストインターフェースから始まったので、ある意味興味深いです。そして、ある意味このテキストインターフェースに戻ってきています。先に述べたように、3つか4つのタブを同時に開くことができます。それは本当にエキサイティングです。ある意味、セカンドブレインを持っているような感じです。でも、構造の仕方のおかげで、ただのターミナルタブなので、サードブレイン、フォースブレイン、フィフスブレイン、シックスブレインを開くことができます。そして、モデルがより強力になるにつれて、これらのものに委任できる思考の割合 - 重要なことではなく、やりたくないこと、退屈だと思うこと、面倒すぎること - ただそれらに任せることができます。先に述べたように、良い例はGitHub Actionsの調査です。誰がそれをやりたい？でも、これらのエージェントはそれらの退屈なタスクが本当に得意なことがわかりました。
 
-## Tip 32: It's all about choosing the right level of abstraction
+## Tip 32: 適切な抽象レベルを選ぶことがすべて
 
-As I mentioned earlier, sometimes it's okay to stay at the vibe coding level. You don't necessarily have to worry about every single line of code if you're working on one-time projects or non-critical parts of the codebase. But other times, you want to dig in a little deeper - look at the file structure and functions, individual lines of code, even checking dependencies.
+先に述べたように、バイブコーディングレベルに留まってもいい時もあります。ワンタイムプロジェクトやコードベースの重要でない部分で作業している場合、すべてのコード行について必ずしも心配する必要はありません。しかし、他の時は、もう少し深く掘り下げたいかもしれません - ファイル構造と関数、個々のコード行、依存関係のチェックさえも見る。
 
-![Vibe coding spectrum](assets/vibe-coding-spectrum.png)
+![バイブコーディングスペクトラム](assets/vibe-coding-spectrum.png)
 
-The key is that it's not binary. Some people say vibe coding is bad because you don't know what you're doing, but sometimes it's totally fine. But other times, it is helpful to dig deeper, use your software engineering skills, understand code at a granular level, or copy and paste parts of the codebase or specific error logs to ask Claude Code specific questions about them.
+重要なのは、これはバイナリではないということです。バイブコーディングは何をしているかわからないから悪いと言う人もいますが、時には全然問題ありません。しかし他の時は、より深く掘り下げ、ソフトウェアエンジニアリングスキルを使用し、詳細なレベルでコードを理解し、コードベースの一部や特定のエラーログをコピー&ペーストしてClaude Codeに具体的な質問をすることが役立ちます。
 
-It's sort of like you're exploring a giant iceberg. If you want to stay at the vibe coding level, you can just fly over the top and check it from far away. Then you can go a little bit closer. You can go into diving mode. You can go deeper and deeper, with Claude Code as your guide.
+巨大な氷山を探索しているようなものです。バイブコーディングレベルに留まりたい場合は、上空を飛んで遠くから確認するだけです。そして少し近づくことができます。潜水モードに入ることができます。より深く深く潜ることができ、Claude Codeがガイドです。
 
-## Tip 33: Audit your approved commands
+## Tip 33: 許可したコマンドを監査する
 
-I recently saw [this post](https://www.reddit.com/r/ClaudeAI/comments/1pgxckk/claude_cli_deleted_my_entire_home_directory_wiped/) where someone's Claude Code ran `rm -rf tests/ patches/ plan/ ~/` and wiped their home directory. It's easy to dismiss as a vibe coder mistake, but this kind of mistake could happen to anyone. So it's important to audit your approved commands from time to time. To make it easier, I built **cc-safe** - a CLI that scans your `.claude/settings.json` files for risky approved commands.
+最近、[この投稿](https://www.reddit.com/r/ClaudeAI/comments/1pgxckk/claude_cli_deleted_my_entire_home_directory_wiped/)を見ました。誰かのClaude Codeが`rm -rf tests/ patches/ plan/ ~/`を実行してホームディレクトリを消去しました。バイブコーダーのミスとして片付けるのは簡単ですが、この種のミスは誰にでも起こりうるものです。だから、承認したコマンドを時々監査することが重要です。これを簡単にするために、**cc-safe**を構築しました - リスキーな承認済みコマンドのために`.claude/settings.json`ファイルをスキャンするCLIです。
 
-It detects patterns like:
-- `sudo`, `rm -rf`, `Bash`, `chmod 777`, `curl | sh`
-- `git reset --hard`, `npm publish`, `docker run --privileged`
-- And more - it's container-aware so `docker exec` commands are skipped
+検出するパターン：
+- `sudo`、`rm -rf`、`Bash`、`chmod 777`、`curl | sh`
+- `git reset --hard`、`npm publish`、`docker run --privileged`
+- その他 - コンテナ対応なので`docker exec`コマンドはスキップされます
 
-It recursively scans all subdirectories, so you can point it at your projects folder to check everything at once. You can run it manually or ask Claude Code to run it for you:
+すべてのサブディレクトリを再帰的にスキャンするので、プロジェクトフォルダを指定してすべてを一度にチェックできます。手動で実行するか、Claude Codeに実行させることができます：
 
 ```bash
 npm install -g cc-safe
 cc-safe ~/projects
 ```
 
-Or just run it directly with npx:
+または単純にnpxで実行：
 
 ```bash
 npx cc-safe .
@@ -671,80 +673,80 @@ npx cc-safe .
 
 GitHub: [cc-safe](https://github.com/ykdojo/cc-safe)
 
-## Tip 34: Write lots of tests (and use TDD)
+## Tip 34: たくさんテストを書く（TDDを使う）
 
-As you write more code with Claude Code, it becomes easier to make mistakes. PR reviews and visual Git clients help catch issues (as I mentioned earlier), but writing tests is crucial as your codebase grows larger.
+Claude Codeでより多くのコードを書くにつれて、ミスが起こりやすくなります。PRレビューと視覚的なGitクライアントは問題を発見するのに役立ちますが（先に述べたように）、コードベースが大きくなるにつれてテストを書くことが重要になります。
 
-You can have Claude Code write tests for its own code. Some people say AI can't test its own work, but it turns out it can - similar to how the human brain works. When you write tests, you're thinking about the same problem in a different way. The same applies to AI.
+Claude Codeに自分のコードのテストを書かせることができます。AIは自分の仕事をテストできないと言う人もいますが、実際にはできます - 人間の脳の働き方と似ています。テストを書く時、同じ問題について異なる方法で考えています。AIも同じです。
 
-I've found that TDD (Test-Driven Development) works really well with Claude Code:
+TDD（テスト駆動開発）がClaude Codeとうまく機能することがわかりました：
 
-1. Write tests first
-2. Make sure they fail
-3. Commit the tests
-4. Write the code to make them pass
+1. テストを先に書く
+2. 失敗することを確認
+3. テストをコミット
+4. 通過させるコードを書く
 
-This is actually how I built [cc-safe](https://github.com/ykdojo/cc-safe). By writing failing tests first and committing them before implementation, you create a clear contract for what the code should do. Claude Code then has a concrete target to hit, and you can verify the implementation is correct by running the tests.
+これが実際に[cc-safe](https://github.com/ykdojo/cc-safe)の構築方法です。失敗するテストを先に書き、実装前にコミットすることで、コードが何をすべきかの明確な契約を作成します。Claude Codeはそれから達成すべき具体的なターゲットを持ち、テストを実行することで実装が正しいことを検証できます。
 
-If you want to be extra sure, review the tests yourself to make sure they don't do anything stupid like just returning true.
+さらに確実にしたい場合は、テスト自体をレビューして、単にtrueを返すような愚かなことをしていないか確認します。
 
-## Tip 35: Be braver in the unknown; iterative problem solving
+## Tip 35: 未知に勇敢に、反復的に問題解決
 
-Since I started using Claude Code more intensely, I've noticed that I became more and more brave in the unknown.
+Claude Codeをより集中的に使い始めてから、未知の領域でもますます勇敢になれるようになったことに気づきました。
 
-For example, when I started working at [Daft](https://github.com/Eventual-Inc/Daft), I noticed a problem with our frontend code. I'm not an expert in React, but I decided to dig into it anyway. I just started asking questions about the codebase and about the problem. Eventually I was able to solve it because I knew how to iteratively solve problems with Claude Code.
+例えば、[Daft](https://github.com/Eventual-Inc/Daft)で働き始めた時、フロントエンドコードに問題があることに気づきました。Reactの専門家ではありませんが、とにかく掘り下げることにしました。コードベースと問題について質問を始めました。最終的に、Claude Codeで反復的に問題を解決する方法を知っていたので解決できました。
 
-A similar thing happened recently. I was building a guide for users of Daft and ran into some very specific issues: cloudpickle not working with Google Colab with Pydantic, and a separate issue with Python and a bit of Rust where things weren't printing correctly in JupyterLab even though they worked fine in the terminal. I had never worked with Rust before.
+最近似たようなことが起きました。Daftのユーザー向けガイドを構築していて、非常に具体的な問題に遭遇しました：cloudpickleがGoogle ColabとPydanticで動作しない問題と、PythonとRustでJupyterLabで正しく印刷されない別の問題（ターミナルではうまく機能したのに）。Rustで働いたことはありませんでした。
 
-I could have just created an issue and let other engineers handle it. But I thought, let me dig into the codebase. Claude Code came up with an initial solution, but it wasn't that good. So I slowed down. A colleague suggested we just disable that part, but I didn't want any regression. Can we find a better solution?
+イシューを作成して他のエンジニアに処理させることもできました。でも、コードベースを掘り下げてみようと思いました。Claude Codeは最初の解決策を出しましたが、それほど良くありませんでした。だからペースを落としました。同僚がその部分を無効にするだけでいいと提案しましたが、リグレッションは望みませんでした。より良い解決策を見つけられる？
 
-What followed was a collaborative and iterative process. Claude Code suggested potential root causes and solutions. I experimented with those. Some turned out to be dead ends, so we went in a different direction. Throughout this, I controlled my pace. Sometimes I went faster, like when letting it explore different solution spaces or parts of the codebase. Sometimes I went slower, asking "what does this line mean exactly?" Controlling the level of abstraction, controlling the speed.
+続いたのは協力的で反復的なプロセスでした。Claude Codeは潜在的な根本原因と解決策を提案しました。私はそれらを試しました。いくつかは行き止まりとわかり、別の方向に進みました。この間、ペースを制御しました。時には速く進み、異なる解決策空間やコードベースの部分を探索させました。時には遅く進み、「この行は正確に何を意味する？」と質問しました。抽象レベルを制御し、速度を制御。
 
-Eventually I found a pretty elegant solution. The lesson: even in the world of the unknown, you can do a lot more with Claude Code than you might think.
+最終的にかなりエレガントな解決策を見つけました。教訓：未知の世界でも、Claude Codeを使えば思った以上のことができます。
 
-## Tip 36: Running bash commands and agents in the background
+## Tip 36: Bashコマンドとエージェントをバックグラウンドで実行
 
-When you have a long-running bash command in Claude Code, you can press Ctrl+B to move it to run in the background. Claude Code knows how to manage background processes - it can check on them later using the BashOutput tool.
+Claude Codeで長時間実行されるbashコマンドがある時、Ctrl+Bを押してバックグラウンドに移動できます。Claude Codeはバックグラウンドプロセスを管理する方法を知っています - BashOutputツールを使って後でチェックできます。
 
-This is useful when you realize a command is taking longer than expected and you want Claude to do something else in the meantime. You can either have it use the exponential backoff method I mentioned in Tip 17 to check on progress, or just let it work on something else entirely while the process runs.
+これは、コマンドが予想より長くかかっていることに気づき、その間にClaude Codeに他のことをさせたい時に便利です。Tip 17で述べたエクスポネンシャルバックオフ方法を使って進捗をチェックさせるか、プロセスの実行中に完全に他のことに取り組ませることができます。
 
-Claude Code also has the ability to run subagents in the background. If you need to do long-running research or have an agent check on something periodically, you don't have to keep it running in the foreground. Just ask Claude Code to run an agent or task in the background, and it'll handle it while you continue with other work.
+Claude Codeにはサブエージェントをバックグラウンドで実行する機能もあります。長時間のリサーチを行う必要がある場合や、エージェントに定期的に何かをチェックさせる必要がある場合、フォアグラウンドで実行し続ける必要はありません。Claude Codeにバックグラウンドでエージェントまたはタスクを実行するよう依頼するだけで、他の作業を続けながら処理してくれます。
 
-## Tip 37: The era of personalized software is here
+## Tip 37: パーソナライズソフトウェアの時代が来た
 
-We're entering an era of personalized, custom software. Since AI came out - ChatGPT in general, but especially Claude Code - I've noticed that I'm able to create a lot more software, sometimes just for myself, sometimes for small projects.
+パーソナライズされたカスタムソフトウェアの時代に入っています。AIが出てから - 一般的にChatGPTですが、特にClaude Code - 自分自身のため、または小さなプロジェクトのために、より多くのソフトウェアを作成できるようになったことに気づきました。
 
-As I mentioned earlier in this document, I've created a custom transcription tool that I use every day to talk to Claude Code. I've created ways to customize Claude Code itself. I've also done a bunch of data visualization and data analysis tasks using Python much faster than I could otherwise.
+このドキュメントで先に述べたように、Claude Codeと会話するために毎日使用するカスタム文字起こしツールを作成しました。Claude Code自体をカスタマイズする方法を作成しました。Pythonを使ったデータ可視化とデータ分析タスクも、他の方法よりはるかに速く行いました。
 
-Here's another example: [korotovsky/slack-mcp-server](https://github.com/korotovsky/slack-mcp-server), a popular Slack MCP with almost 1,000 stars, is designed to run as a Docker container. I had trouble using it smoothly inside my own Docker container (Docker-in-Docker complications). Instead of fighting with that setup, I just asked Claude Code to write a CLI using Slack's Node SDK directly. It worked really well.
+もう一つの例：[korotovsky/slack-mcp-server](https://github.com/korotovsky/slack-mcp-server)は、約1,000スターを持つ人気のSlack MCPで、Dockerコンテナとして実行するよう設計されています。自分のDockerコンテナ内でスムーズに使用するのに問題がありました（Docker-in-Dockerの複雑さ）。そのセットアップと戦う代わりに、SlackのNode SDKを直接使用してCLIを書くようClaude Codeに依頼しました。とてもうまくいきました。
 
-This is an exciting time. Whatever you want to get done, you can ask Claude Code to do it. If it's small enough, you can build it in an hour or two.
+これはエキサイティングな時代です。やりたいことがあれば、Claude Codeに依頼できます。十分に小さければ、1〜2時間で構築できます。
 
-## Tip 38: Navigating and editing your input box
+## Tip 38: 入力ボックスのナビゲーションと編集
 
-Claude Code's input box is designed to emulate common terminal/readline shortcuts, which makes it feel natural if you're used to working in the terminal. Here are some useful ones:
+Claude Codeの入力ボックスは、一般的なターミナル/readlineショートカットをエミュレートするよう設計されているので、ターミナルでの作業に慣れていれば自然に感じます。便利なものをいくつか：
 
-**Navigation:**
-- `Ctrl+A` - Jump to the beginning of the line
-- `Ctrl+E` - Jump to the end of the line
-- `Option+Left/Right` (Mac) or `Alt+Left/Right` - Jump backward/forward by word
+**ナビゲーション：**
+- `Ctrl+A` - 行頭にジャンプ
+- `Ctrl+E` - 行末にジャンプ
+- `Option+Left/Right`（Mac）または`Alt+Left/Right` - 単語単位で前後にジャンプ
 
-**Editing:**
-- `Ctrl+W` - Delete the previous word
-- `Ctrl+U` - Delete from cursor to beginning of line
-- `Ctrl+K` - Delete from cursor to end of line
-- `Ctrl+C` / `Ctrl+L` - Clear the current input
-- `Ctrl+G` - Open your prompt in an external editor (useful for pasting long text, since pasting directly into the terminal can be slow)
+**編集：**
+- `Ctrl+W` - 前の単語を削除
+- `Ctrl+U` - カーソルから行頭まで削除
+- `Ctrl+K` - カーソルから行末まで削除
+- `Ctrl+C` / `Ctrl+L` - 現在の入力をクリア
+- `Ctrl+G` - 外部エディタでプロンプトを開く（ターミナルに直接貼り付けると遅くなることがあるので、長いテキストの貼り付けに便利）
 
-If you're familiar with bash, zsh, or other shells, you'll feel right at home.
+bash、zsh、または他のシェルに慣れていれば、すぐに使えます。
 
-For `Ctrl+G`, the editor is determined by your `EDITOR` environment variable. You can set it in your shell config (`~/.zshrc` or `~/.bashrc`):
+`Ctrl+G`では、エディタは`EDITOR`環境変数で決まります。シェル設定（`~/.zshrc`または`~/.bashrc`）で設定できます：
 
 ```bash
-export EDITOR=vim      # or nano, code, nvim, etc.
+export EDITOR=vim      # またはnano, code, nvimなど
 ```
 
-Or in `~/.claude/settings.json` (requires restart):
+または`~/.claude/settings.json`で（再起動が必要）：
 
 ```json
 {
@@ -754,104 +756,104 @@ Or in `~/.claude/settings.json` (requires restart):
 }
 ```
 
-**Entering newlines (multi-line input):**
+**改行の入力（複数行入力）：**
 
-The quickest method works everywhere without any setup: type `\` followed by Enter to create a newline. For keyboard shortcuts, run `/terminal-setup` in Claude Code. On Mac Terminal.app, I use Option+Enter.
+最も簡単な方法はどこでもセットアップなしで機能します：`\`の後にEnterを入力して改行を作成。キーボードショートカットについては、Claude Codeで`/terminal-setup`を実行してください。Mac Terminal.appでは、Option+Enterを使用しています。
 
-**Pasting images:**
-- `Ctrl+V` (Mac/Linux) or `Alt+V` (Windows) - Paste an image from your clipboard
+**画像の貼り付け：**
+- `Ctrl+V`（Mac/Linux）または`Alt+V`（Windows）- クリップボードから画像を貼り付け
 
-Note: On Mac, it's `Ctrl+V`, not `Cmd+V`.
+注：Macでは`Ctrl+V`で、`Cmd+V`ではありません。
 
-## Tip 39: Spend some time planning, but also prototype quickly
+## Tip 39: 計画に時間をかけつつ、素早くプロトタイプも作る
 
-You want to spend enough time planning so that Claude Code knows what to build and how to build it. This means making high-level decisions early: what technology to use, how the project should be structured, where each functionality should live, which files things should go in. It's important to make good decisions as early as you can.
+Claude Codeが何を構築するか、どう構築するか理解できるよう、十分な計画時間をかけたいです。これは早い段階で高レベルの決定をすることを意味します：どの技術を使用するか、プロジェクトの構造をどうするか、各機能をどこに配置するか、どのファイルにものを入れるか。できるだけ早く良い決定をすることが重要です。
 
-Sometimes prototyping helps with that. Just by making a simple prototype quickly, you might be able to say "okay, this technology works for this particular purpose" or "this other technology works better."
+時にはプロトタイピングがそれに役立ちます。シンプルなプロトタイプを素早く作成するだけで、「この技術はこの特定の目的に使える」または「この他の技術の方がうまくいく」と言えるかもしれません。
 
-For example, I was recently experimenting with creating a diff viewer. I first tried a simple bash prototype with tmux and lazygit, then tried making my own git viewer with Ink and Node. I had a lot of trouble with different things and ended up not publishing any of these results. But what I got reminded of through this project is the importance of planning and prototyping. I found that just by planning a little bit better at the beginning before you let it write code, you're able to guide it better. You still need to guide it throughout the process of coding, but letting it plan a little first is really helpful.
+例えば、最近diffビューアの作成を実験していました。まずtmuxとlazygitでシンプルなbashプロトタイプを試し、次にInkとNodeで独自のgitビューアを作ろうとしました。様々なことで多くの問題があり、これらの結果のいずれも公開しませんでした。しかし、このプロジェクトを通じて思い出したのは、計画とプロトタイピングの重要性です。コードを書かせる前に最初に少し良く計画するだけで、より良くガイドできることがわかりました。コーディングのプロセス全体を通じてガイドする必要がありますが、最初に少し計画させることは本当に役立ちます。
 
-You can use plan mode for this by pressing Shift+Tab to switch to it. Or you can just ask Claude Code to make a plan before writing any code.
+これにはShift+Tabを押してプランモードに切り替えることができます。または、コードを書く前に計画を立てるようClaude Codeに依頼するだけでもいいです。
 
-## Tip 40: Simplify overcomplicated code
+## Tip 40: 複雑すぎるコードをシンプルにする
 
-I've found that Claude Code sometimes overcomplicates things and writes too much code. It makes changes you didn't ask for. It just seems to have a bias for writing more code. The code might work correctly if you've followed the other tips in this guide, but it's going to be hard to maintain and hard to check. It can be kind of a nightmare if you don't review it enough.
+Claude Codeは時々物事を複雑にしすぎ、コードを書きすぎることがわかりました。頼んでいない変更を加えます。より多くのコードを書くバイアスがあるようです。他のTipsに従っていれば、コードは正しく動作するかもしれませんが、メンテナンスが難しく、チェックが難しくなります。十分にレビューしないと、ちょっとした悪夢になることがあります。
 
-So sometimes you want to check the code and ask it to simplify things. You could fix things yourself, but you could also just ask it to simplify. You can ask questions like "why did you make this particular change?" or "why did you add this line?"
+だから時々コードをチェックして、シンプルにするよう依頼したいです。自分で修正することもできますが、シンプルにするよう依頼することもできます。「なぜこの特定の変更を加えた？」「なぜこの行を追加した？」のような質問ができます。
 
-Some people say if you write code only through AI, you'll never understand it. But that's only true if you don't ask enough questions. If you make sure you understand every single thing, you can actually understand code faster than otherwise because you can ask AI about it. Especially when you're working on a large project.
+AIだけでコードを書くと理解できないと言う人もいます。しかし、十分な質問をすれば、実際に理解できます。大規模なプロジェクトで作業している時は特に、AIに質問することで人間だけよりも速くコードを理解できることもあります。
 
-Note that this applies to prose as well. Claude Code often tries to summarize previous paragraphs in the last paragraph, or previous sentences in the last sentence. It can get pretty repetitive. Sometimes it's helpful, but most of the time you'll need to ask it to remove or simplify it.
+これは文章にも当てはまることに注意してください。Claude Codeは前の段落を最後の段落で要約しようとしたり、前の文を最後の文で要約しようとすることがよくあります。かなり繰り返しになることがあります。時には役立ちますが、ほとんどの場合、削除するか簡素化するよう依頼する必要があります。
 
-## Tip 41: Automation of automation
+## Tip 41: 自動化の自動化
 
-At the end of the day, it's all about automation of automation. What I mean by that is I've found it's the best way to not just become more productive, but also make the process more fun. At least to me, this whole process of automation of automation is really fun.
+結局のところ、すべては自動化の自動化についてです。これはただより生産的になるだけでなく、プロセスをより楽しくするための最良の方法だと思います。少なくとも私にとって、この自動化の自動化のプロセス全体は本当に楽しいです。
 
-I personally started with ChatGPT and wanted to automate the process of copy-pasting and running commands that ChatGPT gave me in the terminal. I automated that whole process by building a ChatGPT plugin called [Kaguya](https://github.com/ykdojo/kaguya). I've consistently worked towards more and more automation since then.
+個人的には、ChatGPTから始めて、ChatGPTが与えたコマンドをターミナルでコピー&ペーストして実行するプロセスを自動化したかったです。[Kaguya](https://github.com/ykdojo/kaguya)というChatGPTプラグインを構築してそのプロセス全体を自動化しました。それ以来、一貫してますます多くの自動化に向けて取り組んできました。
 
-Nowadays, luckily, we don't even have to build a tool like that because tools like Claude Code exist and they work really well. And as I've used it more and more, I found myself thinking, well, what if I could automate the process of typing? So I used Claude Code itself to build my voice transcription app, as I mentioned earlier.
+今日では、幸いにも、そのようなツールを自分で構築する必要がありません。Claude Codeのようなツールが存在し、非常にうまく機能するからです。そして、より多く使うようになるにつれて、タイピングのプロセスも自動化できないかと考え始めました。だから先に述べたように、Claude Code自体を使って音声認識アプリを構築しました。
 
-Then I started to think, I find myself repeating myself sometimes. So I would put those things in CLAUDE.md. Then I would think, okay, sometimes I go through running the same command over and over again. How can I automate that? Maybe I can ask Claude Code to do it. Or maybe I can put them in skills. Or maybe I can even have it create a script so I don't have to repeat the same process over and over again.
+そして考え始めました、時々自分を繰り返していると。だからそれらをCLAUDE.mdに入れました。同じコマンドを何度も実行していると思うこともあります。それをどう自動化できる？Claude Codeに依頼できるかもしれません。またはスキルに入れられるかもしれません。または同じプロセスを何度も繰り返す必要がないようにスクリプトを作成させることもできます。
 
-I think ultimately that's where we're heading. Whenever you find yourself repeating the same task or the same command over and over again, a couple of times is okay, but if you repeat it over and over again, then think about a way to automate that whole process.
+最終的にはそこに向かっていると思います。同じタスクや同じコマンドを何度も繰り返していることに気づいたら、数回は問題ありませんが、何度も繰り返すなら、そのプロセス全体を自動化する方法を考えてください。
 
-## Tip 42: Share your knowledge and contribute where you can
+## Tip 42: 知識を共有し、できるところで貢献する
 
-This tip is a bit different from the others. I found that by learning as much as you can, you're able to share your knowledge with people around you. Maybe through posts like these, maybe even books, courses, videos. I also recently had an [internal session for my colleagues at Daft](https://www.daft.ai/blog/how-we-use-ai-coding-agents). It's been very rewarding.
+このTipは他とは少し異なります。できるだけ多く学ぶことで、周りの人と知識を共有できることがわかりました。このような投稿を通じて、本、コース、動画など。最近[Daftの同僚向けの社内セッション](https://www.daft.ai/blog/how-we-use-ai-coding-agents)も行いました。とてもやりがいがありました。
 
-And whenever I share tips, I often get information back. For example, when I shared my trick for shortening the system prompt and tool descriptions (Tip 15), some people told me about the `--system-prompt` flag that you can use as an alternative. Another time, I shared about the difference between slash commands and skills (Tip 25), and I learned new things from comments on that Reddit post.
+そして、Tipsを共有するたびに、情報が返ってくることがよくあります。例えば、システムプロンプトとツールの説明を短縮するトリック（Tip 15）を共有した時、代替として使用できる`--system-prompt`フラグについて教えてくれた人がいました。別の時、スラッシュコマンドとスキルの違い（Tip 25）について共有した時、そのReddit投稿のコメントから新しいことを学びました。
 
-So sharing your knowledge isn't just about establishing your brand or solidifying your learning. It's also about learning new things through that process. It's not always a one-way street.
+だから知識を共有することは、ブランドを確立したり学習を固めたりするだけではありません。そのプロセスを通じて新しいことを学ぶことでもあります。常に一方通行ではありません。
 
-When it comes to contributing, I've been sending issues to the Claude Code repo. I thought, okay, if they listen, cool. If they don't, that's totally fine. I didn't have any expectations. But in version 2.0.67, I noticed they took multiple suggestions from reports I made:
+貢献について言えば、Claude Codeリポジトリにイシューを送ってきました。聞いてくれればいいな、聞いてくれなくても全然大丈夫、と思っていました。期待はありませんでした。しかし、バージョン2.0.67で、私が報告した複数の提案が採用されていることに気づきました：
 
-- Fixed scroll position resetting after deleting a permission rule in `/permissions`
-- Added search functionality to `/permissions` command
+- `/permissions`で権限ルールを削除した後のスクロール位置リセットを修正
+- `/permissions`コマンドに検索機能を追加
 
-It's kind of amazing how fast the team can react to feature requests and bug reports. But it makes sense because they're using Claude Code to build Claude Code itself.
+チームがフィーチャーリクエストやバグレポートにどれだけ速く反応できるかは驚くべきことです。しかし、Claude Codeを使ってClaude Code自体を構築しているので、理にかなっています。
 
-## Tip 43: Keep learning!
+## Tip 43: 学び続ける！
 
-There are several effective ways to keep learning about Claude Code:
+Claude Codeについて学び続けるための効果的な方法がいくつかあります：
 
-**Ask Claude Code itself** - If you have a question about Claude Code, just ask it. Claude Code has a specialized sub-agent for answering questions about its own features, slash commands, settings, hooks, MCP servers, and more.
+**Claude Code自体に質問する** - Claude Codeについて質問があれば、聞くだけです。Claude Codeには、自分自身の機能、スラッシュコマンド、設定、フック、MCPサーバーなどについての質問に答えるための専用サブエージェントがあります。
 
-**Check the release notes** - Type `/release-notes` to see what's new in your current version. This is the best way to learn about the latest features.
+**リリースノートをチェック** - `/release-notes`と入力して現在のバージョンの新機能を確認。最新の機能について学ぶ最良の方法です。
 
-**Learn from the community** - The [r/ClaudeAI](https://www.reddit.com/r/ClaudeAI/) subreddit is a great place to learn from other users and see what workflows people are using.
+**コミュニティから学ぶ** - [r/ClaudeAI](https://www.reddit.com/r/ClaudeAI/) subredditは他のユーザーから学び、人々が使っているワークフローを見るのに最適な場所です。
 
-**Follow Ado for daily tips** - Ado ([@adocomplete](https://x.com/adocomplete)) is a DevRel at Anthropic who's been posting daily Claude Code tips throughout December in his "Advent of Claude" series. Each day covers a different feature or workflow - things like named sessions, `/stats`, headless mode, vim mode, and more.
+**Adoのデイリーティップスをフォロー** - Ado ([@adocomplete](https://x.com/adocomplete))はAnthropicのDevRelで、12月中「Advent of Claude」シリーズでClaude Codeのデイリーティップスを投稿しています。毎日異なる機能やワークフローを取り上げています - 名前付きセッション、`/stats`、ヘッドレスモード、vimモードなど。
 
-- [Twitter/X: Advent of Claude posts](https://x.com/search?q=from%3Aadocomplete%20advent%20of%20claude&src=typed_query&f=live)
-- [LinkedIn: Advent of Claude posts](https://www.linkedin.com/search/results/content/?fromMember=%5B%22ACoAAAFdD3IBYHwKSh6FsyGqOh1SpbrZ9ZHTjnI%22%5D&keywords=advent%20of%20claude&origin=FACETED_SEARCH&sid=zDV&sortBy=%22date_posted%22)
+- [Twitter/X: Advent of Claude投稿](https://x.com/search?q=from%3Aadocomplete%20advent%20of%20claude&src=typed_query&f=live)
+- [LinkedIn: Advent of Claude投稿](https://www.linkedin.com/search/results/content/?fromMember=%5B%22ACoAAAFdD3IBYHwKSh6FsyGqOh1SpbrZ9ZHTjnI%22%5D&keywords=advent%20of%20claude&origin=FACETED_SEARCH&sid=zDV&sortBy=%22date_posted%22)
 
-## Install the dx plugin
+## dxプラグインのインストール
 
-This repo is also a Claude Code plugin called `dx` (developer experience). It bundles several tools from the tips above into a single install:
+このリポジトリは`dx`（developer experience）というClaude Codeプラグインでもあります。上記のTipsからいくつかのツールを1つのインストールにバンドルしています：
 
-| Command/Skill | Description |
+| コマンド/スキル | 説明 |
 |---------------|-------------|
-| `/dx:gha <url>` | Analyze GitHub Actions failures (Tip 29) |
-| `/dx:handoff` | Create handoff documents for context continuity (Tip 8) |
-| `/dx:clone` | Clone conversations to branch off (Tip 23) |
-| `/dx:half-clone` | Half-clone to reduce context (Tip 23) |
-| `reddit-fetch` | Fetch Reddit content via Gemini CLI (Tip 11) - auto-invoked when needed |
+| `/dx:gha <url>` | GitHub Actions失敗を分析（Tip 29） |
+| `/dx:handoff` | コンテキスト継続のための引き継ぎドキュメント作成（Tip 8） |
+| `/dx:clone` | ブランチオフのための会話複製（Tip 23） |
+| `/dx:half-clone` | コンテキスト削減のための半複製（Tip 23） |
+| `reddit-fetch` | Gemini CLI経由でRedditコンテンツ取得（Tip 11）- 必要時に自動呼び出し |
 
-**Install with two commands:**
+**2つのコマンドでインストール：**
 
 ```bash
 claude plugin marketplace add ykdojo/claude-code-tips
 claude plugin install dx@ykdojo
 ```
 
-After installing, the commands are available as `/dx:clone`, `/dx:half-clone`, `/dx:handoff`, and `/dx:gha`. The `reddit-fetch` skill is invoked automatically when you ask about Reddit URLs.
+インストール後、コマンドは`/dx:clone`、`/dx:half-clone`、`/dx:handoff`、`/dx:gha`として使用可能です。`reddit-fetch`スキルはReddit URLについて尋ねると自動的に呼び出されます。
 
-**Recommended companion:** [Playwright MCP](https://github.com/microsoft/playwright-mcp) for browser automation - add with `claude mcp add -s user playwright npx @playwright/mcp@latest`
+**推奨コンパニオン:** [Playwright MCP](https://github.com/microsoft/playwright-mcp) - ブラウザ自動化用 - `claude mcp add -s user playwright npx @playwright/mcp@latest`で追加
 
 ---
 
-📺 **Related talk**: [Claude Code Masterclass](https://youtu.be/9UdZhTnMrTA) - lessons and project examples from 31 months of agentic coding
+📺 **関連トーク**: [Claude Code Masterclass](https://youtu.be/9UdZhTnMrTA) - 31ヶ月のエージェントコーディングからの教訓とプロジェクト例
 
-📝 **Story**: [How I got a full-time job with Claude Code](content/how-i-got-a-job-with-claude-code.md)
+📝 **ストーリー**: [Claude Codeでフルタイムの仕事を得た方法](content/how-i-got-a-job-with-claude-code.md)
 
-📰 **Newsletter**: [Agentic Coding with Discipline and Skill](https://agenticcoding.substack.com/) - bring the practice of agentic coding to the next level
+📰 **ニュースレター**: [Agentic Coding with Discipline and Skill](https://agenticcoding.substack.com/) - エージェントコーディングの実践を次のレベルへ
