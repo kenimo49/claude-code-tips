@@ -1,29 +1,31 @@
-# Claude Code Container
+# Claude Code コンテナ
 
-A Docker container for running risky, long-running agentic tasks in isolation. Includes Claude Code, Gemini CLI (as a fallback for blocked sites), and all the customizations from this repo.
+リスクのある長時間実行エージェントタスクを隔離環境で実行するためのDockerコンテナ。Claude Code、Gemini CLI（ブロックされたサイトへのフォールバック用）、このリポジトリのすべてのカスタマイズを含みます。
 
-## Why Use This
+> **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。
 
-- **Isolation**: If something goes wrong, it's contained
-- **Long-running tasks**: Leave it running without tying up your terminal
-- **YOLO mode**: Auto-approve everything in a sandboxed environment
-- **Reproducible setup**: Same config every time
+## なぜこれを使うのか
 
-## Quick Start
+- **隔離**: 何か問題が起きても封じ込められる
+- **長時間タスク**: ターミナルを占有せずに実行させ続けられる
+- **YOLOモード**: サンドボックス環境ですべてを自動承認
+- **再現可能なセットアップ**: 毎回同じ設定
+
+## クイックスタート
 
 ```bash
-# Build the image (from the container directory, or anywhere with the Dockerfile)
+# イメージをビルド (containerディレクトリから、またはDockerfileがある任意の場所で)
 docker build -t claude-code-container -f Dockerfile .
 
-# Run
+# 実行
 docker run -it claude-code-container
 ```
 
-The Dockerfile pulls the latest `claude-code-tips` repo from GitHub during build, so no local files are needed.
+Dockerfileはビルド時にGitHubから最新の `claude-code-tips` リポジトリをプルするため、ローカルファイルは不要です。
 
-## First-Time Authentication
+## 初回認証
 
-After starting the container, you need to authenticate both CLIs manually:
+コンテナを起動した後、両方のCLIを手動で認証する必要があります:
 
 ### 1. Claude Code
 
@@ -31,7 +33,7 @@ After starting the container, you need to authenticate both CLIs manually:
 claude
 ```
 
-Follow the prompts to log in with your Anthropic account. This opens a browser URL - copy it to your host browser if needed.
+プロンプトに従ってAnthropicアカウントでログインします。ブラウザURLが開きます - 必要に応じてホストブラウザにコピーしてください。
 
 ### 2. Gemini CLI
 
@@ -39,19 +41,19 @@ Follow the prompts to log in with your Anthropic account. This opens a browser U
 gemini
 ```
 
-Follow the prompts to log in with your Google account.
+プロンプトに従ってGoogleアカウントでログインします。
 
-## What's Included
+## 含まれるもの
 
-- **Claude Code 2.0.56** with system prompt patches applied (~39% token savings)
-- **Gemini CLI** pre-configured with `gemini-3-pro-preview` model
-- **tmux** for the reddit-fetch skill
-- **Status bar** showing model, git status, and token usage
-- **Skills** (reddit-fetch) built into the container
+- **Claude Code 2.0.56** システムプロンプトパッチ適用済み（約39%のトークン節約）
+- **Gemini CLI** `gemini-3-pro-preview` モデルで設定済み
+- **tmux** reddit-fetchスキル用
+- **ステータスバー** モデル、Git状態、トークン使用量を表示
+- **スキル** (reddit-fetch) コンテナに組み込み済み
 
-## Persisting Auth
+## 認証の永続化
 
-To avoid re-authenticating Gemini every time, you can mount the credential directory:
+Geminiの再認証を毎回避けるには、認証情報ディレクトリをマウント:
 
 ```bash
 docker run -it \
@@ -59,11 +61,11 @@ docker run -it \
   claude-code-container
 ```
 
-Note: Claude Code credentials are stored in macOS Keychain, so you'll need to re-auth Claude each time (or use `ANTHROPIC_API_KEY` env var if you have one).
+注意: Claude Codeの認証情報はmacOSキーチェーンに保存されるため、毎回Claudeの再認証が必要です（または `ANTHROPIC_API_KEY` 環境変数を使用）。
 
-## Working with Projects
+## プロジェクトでの作業
 
-Mount your project directory:
+プロジェクトディレクトリをマウント:
 
 ```bash
 docker run -it \
@@ -71,13 +73,13 @@ docker run -it \
   claude-code-container
 ```
 
-Then `cd /home/claude/workspace` and start Claude Code there.
+そして `cd /home/claude/workspace` でClaude Codeを開始します。
 
-## Updating
+## 更新
 
-To get the latest changes:
+最新の変更を取得するには:
 
-1. Rebuild the image: `docker build --no-cache -t claude-code-container -f Dockerfile .`
-2. Run a new container
+1. イメージを再ビルド: `docker build --no-cache -t claude-code-container -f Dockerfile .`
+2. 新しいコンテナを実行
 
-The `--no-cache` flag ensures it pulls the latest from GitHub.
+`--no-cache` フラグでGitHubから最新版を確実にプルします。

@@ -2,6 +2,8 @@
 
 [English version](README.en.md)
 
+> **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。オリジナルのライセンスと権利については元リポジトリを参照してください。
+
 Claude Codeを最大限に活用するためのTips集です。カスタムステータスライン、システムプロンプトの半減、Gemini CLIをClaude Codeの部下として使う方法、コンテナ内でのClaude Code実行なども含まれています。[dxプラグイン](#dxプラグインのインストール)も提供しています。
 
 📺 [クイックデモ](https://www.youtube.com/watch?v=hiISl558JGE) - マルチClaude ワークフローと音声入力の実演：

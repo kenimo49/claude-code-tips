@@ -1,125 +1,127 @@
-# Tips Index
+# Tips インデックス
 
 Claude Code Tipsの全44項目（Tip 0〜43）の一覧です。各Tipの詳細説明は個別ファイルを参照してください。
 
-## Quick Reference
+> **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。
 
-| # | Title | Category |
-|---|-------|----------|
-| 0 | [Customize your status line](./tip-00.md) | Setup |
-| 1 | [Learn a few essential slash commands](./tip-01.md) | Basics |
-| 2 | [Talk to Claude Code with your voice](./tip-02.md) | Input |
-| 3 | [Break down large problems into smaller ones](./tip-03.md) | Workflow |
-| 4 | [Using Git and GitHub CLI like a pro](./tip-04.md) | Git |
-| 5 | [AI context is like milk; it's best served fresh and condensed!](./tip-05.md) | Context |
-| 6 | [Getting output out of your terminal](./tip-06.md) | Output |
-| 7 | [Set up terminal aliases for quick access](./tip-07.md) | Setup |
-| 8 | [Proactively compact your context](./tip-08.md) | Context |
-| 9 | [Complete the write-test cycle for autonomous tasks](./tip-09.md) | Testing |
-| 10 | [Cmd+A and Ctrl+A are your friends](./tip-10.md) | Input |
-| 11 | [Use Gemini CLI as a fallback for blocked sites](./tip-11.md) | Web |
-| 12 | [Invest in your own workflow](./tip-12.md) | Workflow |
-| 13 | [Search through your conversation history](./tip-13.md) | History |
-| 14 | [Multitasking with terminal tabs](./tip-14.md) | Workflow |
-| 15 | [Slim down the system prompt](./tip-15.md) | Optimization |
-| 16 | [Git worktrees for parallel branch work](./tip-16.md) | Git |
-| 17 | [Manual exponential backoff for long-running jobs](./tip-17.md) | Automation |
-| 18 | [Claude Code as a writing assistant](./tip-18.md) | Writing |
-| 19 | [Markdown is the s**t](./tip-19.md) | Writing |
-| 20 | [Use Notion to preserve links when pasting](./tip-20.md) | Input |
-| 21 | [Containers for long-running risky tasks](./tip-21.md) | Container |
-| 22 | [The best way to get better at using Claude Code is by using it](./tip-22.md) | Learning |
-| 23 | [Clone and half-clone conversations](./tip-23.md) | Context |
-| 24 | [Use realpath to get absolute paths](./tip-24.md) | Basics |
-| 25 | [Understanding CLAUDE.md vs Skills vs Slash Commands vs Plugins](./tip-25.md) | Concepts |
-| 26 | [Interactive PR reviews](./tip-26.md) | Git |
-| 27 | [Claude Code as a research tool](./tip-27.md) | Research |
-| 28 | [Mastering different ways of verifying its output](./tip-28.md) | Verification |
-| 29 | [Claude Code as a DevOps engineer](./tip-29.md) | DevOps |
-| 30 | [Keep CLAUDE.md simple and concise](./tip-30.md) | Setup |
-| 31 | [Claude Code as the universal interface](./tip-31.md) | Concepts |
-| 32 | [It's all about choosing the right level of abstraction](./tip-32.md) | Workflow |
-| 33 | [Audit your approved commands](./tip-33.md) | Security |
-| 34 | [Write lots of tests (and use TDD)](./tip-34.md) | Testing |
-| 35 | [Be braver in the unknown; iterative problem solving](./tip-35.md) | Workflow |
-| 36 | [Running bash commands and agents in the background](./tip-36.md) | Automation |
-| 37 | [The era of personalized software is here](./tip-37.md) | Concepts |
-| 38 | [Navigating and editing your input box](./tip-38.md) | Input |
-| 39 | [Spend some time planning, but also prototype quickly](./tip-39.md) | Workflow |
-| 40 | [Simplify overcomplicated code](./tip-40.md) | Code Quality |
-| 41 | [Automation of automation](./tip-41.md) | Automation |
-| 42 | [Share your knowledge and contribute where you can](./tip-42.md) | Community |
-| 43 | [Keep learning!](./tip-43.md) | Learning |
+## クイックリファレンス
 
-## Categories
+| # | タイトル | カテゴリ |
+|---|---------|----------|
+| 0 | [ステータスラインをカスタマイズする](./tip-00.md) | Setup |
+| 1 | [基本的なスラッシュコマンドを覚える](./tip-01.md) | Basics |
+| 2 | [音声でClaude Codeと会話する](./tip-02.md) | Input |
+| 3 | [大きな問題を小さく分解する](./tip-03.md) | Workflow |
+| 4 | [GitとGitHub CLIをプロのように使う](./tip-04.md) | Git |
+| 5 | [AIのコンテキストは牛乳のようなもの](./tip-05.md) | Context |
+| 6 | [ターミナルから出力を取り出す](./tip-06.md) | Output |
+| 7 | [ターミナルエイリアスでクイックアクセス](./tip-07.md) | Setup |
+| 8 | [コンテキストを積極的に圧縮する](./tip-08.md) | Context |
+| 9 | [自律タスクには書き込み-テストサイクルを完結させる](./tip-09.md) | Testing |
+| 10 | [Cmd+AとCtrl+Aはあなたの味方](./tip-10.md) | Input |
+| 11 | [ブロックされたサイトにはGemini CLIをフォールバックとして使用](./tip-11.md) | Web |
+| 12 | [自分のワークフローに投資する](./tip-12.md) | Workflow |
+| 13 | [会話履歴を検索する](./tip-13.md) | History |
+| 14 | [ターミナルタブでマルチタスク](./tip-14.md) | Workflow |
+| 15 | [システムプロンプトをスリム化する](./tip-15.md) | Optimization |
+| 16 | [Git worktreeで並列ブランチ作業](./tip-16.md) | Git |
+| 17 | [長時間ジョブには手動エクスポネンシャルバックオフ](./tip-17.md) | Automation |
+| 18 | [Claude Codeをライティングアシスタントとして使う](./tip-18.md) | Writing |
+| 19 | [Markdownは最強](./tip-19.md) | Writing |
+| 20 | [Notionを使ってリンクを保持して貼り付け](./tip-20.md) | Input |
+| 21 | [長時間でリスクのあるタスクにはコンテナを使用](./tip-21.md) | Container |
+| 22 | [Claude Codeを使いこなすには使い続けること](./tip-22.md) | Learning |
+| 23 | [会話を複製・半複製する](./tip-23.md) | Context |
+| 24 | [realpathで絶対パスを取得](./tip-24.md) | Basics |
+| 25 | [CLAUDE.md、スキル、スラッシュコマンド、プラグインの違い](./tip-25.md) | Concepts |
+| 26 | [インタラクティブなPRレビュー](./tip-26.md) | Git |
+| 27 | [Claude Codeをリサーチツールとして使う](./tip-27.md) | Research |
+| 28 | [出力を検証する様々な方法をマスターする](./tip-28.md) | Verification |
+| 29 | [Claude CodeをDevOpsエンジニアとして使う](./tip-29.md) | DevOps |
+| 30 | [CLAUDE.mdはシンプルで簡潔に保つ](./tip-30.md) | Setup |
+| 31 | [Claude Codeは万能インターフェース](./tip-31.md) | Concepts |
+| 32 | [適切な抽象レベルを選ぶことがすべて](./tip-32.md) | Workflow |
+| 33 | [許可したコマンドを監査する](./tip-33.md) | Security |
+| 34 | [たくさんテストを書く（TDDを使う）](./tip-34.md) | Testing |
+| 35 | [未知に勇敢に、反復的に問題解決](./tip-35.md) | Workflow |
+| 36 | [Bashコマンドとエージェントをバックグラウンドで実行](./tip-36.md) | Automation |
+| 37 | [パーソナライズソフトウェアの時代が来た](./tip-37.md) | Concepts |
+| 38 | [入力ボックスのナビゲーションと編集](./tip-38.md) | Input |
+| 39 | [計画に時間をかけつつ、素早くプロトタイプも作る](./tip-39.md) | Workflow |
+| 40 | [複雑すぎるコードをシンプルにする](./tip-40.md) | Code Quality |
+| 41 | [自動化の自動化](./tip-41.md) | Automation |
+| 42 | [知識を共有し、できるところで貢献する](./tip-42.md) | Community |
+| 43 | [学び続ける！](./tip-43.md) | Learning |
 
-### Setup & Basics
-- Tip 0: Status line customization
-- Tip 1: Essential slash commands
-- Tip 7: Terminal aliases
-- Tip 24: realpath for absolute paths
-- Tip 30: CLAUDE.md best practices
+## カテゴリ別
 
-### Input & Output
-- Tip 2: Voice input
-- Tip 6: Getting output from terminal
+### セットアップ & 基本
+- Tip 0: ステータスラインのカスタマイズ
+- Tip 1: 基本的なスラッシュコマンド
+- Tip 7: ターミナルエイリアス
+- Tip 24: realpathで絶対パス取得
+- Tip 30: CLAUDE.mdのベストプラクティス
+
+### 入力 & 出力
+- Tip 2: 音声入力
+- Tip 6: ターミナルからの出力取得
 - Tip 10: Cmd+A / Ctrl+A
-- Tip 20: Notion for link preservation
-- Tip 38: Input box navigation
+- Tip 20: Notionでリンク保持
+- Tip 38: 入力ボックスのナビゲーション
 
-### Context Management
-- Tip 5: Fresh context principle
-- Tip 8: Proactive compaction
-- Tip 23: Clone / half-clone conversations
+### コンテキスト管理
+- Tip 5: 新鮮なコンテキストの原則
+- Tip 8: 積極的なコンパクション
+- Tip 23: 会話の複製 / 半複製
 
-### Workflow & Productivity
-- Tip 3: Problem decomposition
-- Tip 12: Workflow investment
-- Tip 14: Multitasking with tabs
-- Tip 32: Abstraction levels
-- Tip 35: Iterative problem solving
-- Tip 39: Planning and prototyping
+### ワークフロー & 生産性
+- Tip 3: 問題の分解
+- Tip 12: ワークフローへの投資
+- Tip 14: タブでマルチタスク
+- Tip 32: 抽象レベルの選択
+- Tip 35: 反復的な問題解決
+- Tip 39: 計画とプロトタイピング
 
 ### Git & GitHub
-- Tip 4: Git and GitHub CLI
-- Tip 16: Git worktrees
-- Tip 26: Interactive PR reviews
+- Tip 4: GitとGitHub CLI
+- Tip 16: Git worktree
+- Tip 26: インタラクティブPRレビュー
 
-### Testing & Verification
-- Tip 9: Write-test cycle
-- Tip 28: Output verification
-- Tip 34: TDD approach
+### テスト & 検証
+- Tip 9: 書き込み-テストサイクル
+- Tip 28: 出力の検証
+- Tip 34: TDDアプローチ
 
-### Automation
-- Tip 17: Exponential backoff
-- Tip 36: Background execution
-- Tip 41: Automation of automation
+### 自動化
+- Tip 17: エクスポネンシャルバックオフ
+- Tip 36: バックグラウンド実行
+- Tip 41: 自動化の自動化
 
-### Advanced
-- Tip 11: Gemini CLI fallback
-- Tip 15: System prompt optimization
-- Tip 21: Container usage
-- Tip 29: DevOps workflows
-- Tip 33: Security audit
+### 上級
+- Tip 11: Gemini CLIフォールバック
+- Tip 15: システムプロンプト最適化
+- Tip 21: コンテナ使用
+- Tip 29: DevOpsワークフロー
+- Tip 33: セキュリティ監査
 
-### Writing & Research
-- Tip 18: Writing assistant
+### ライティング & リサーチ
+- Tip 18: ライティングアシスタント
 - Tip 19: Markdown
-- Tip 27: Research tool
+- Tip 27: リサーチツール
 
-### Concepts & Philosophy
-- Tip 22: Learning by doing
-- Tip 25: CLAUDE.md vs Skills vs Commands vs Plugins
-- Tip 31: Universal interface
-- Tip 37: Personalized software
-- Tip 42: Knowledge sharing
-- Tip 43: Continuous learning
+### コンセプト & 哲学
+- Tip 22: 使って学ぶ
+- Tip 25: CLAUDE.md vs スキル vs コマンド vs プラグイン
+- Tip 31: 万能インターフェース
+- Tip 37: パーソナライズソフトウェア
+- Tip 42: 知識の共有
+- Tip 43: 継続的な学習
 
-## For Agents
+## エージェント向けガイド
 
 各Tipの詳細を調べる場合：
 1. このインデックスで概要を把握
 2. 該当の `tip-XX.md` ファイルを読む
 3. 関連する実装は `scripts/`, `commands/`, `skills/` を参照
 
-元のREADME.mdにも全Tipの詳細説明があります。
+メインのREADME.mdにも全Tipの詳細説明があります。

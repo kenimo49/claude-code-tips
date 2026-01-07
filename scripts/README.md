@@ -1,25 +1,27 @@
-# Claude Code Scripts
+# Claude Code スクリプト
+
+> **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。
 
 ## context-bar.sh
 
-A two-line status line script for Claude Code that shows model, directory, git branch, uncommitted file count, sync status with origin, context usage, and your last message.
+Claude Code用の2行ステータスラインスクリプト。モデル名、ディレクトリ、Gitブランチ、未コミットファイル数、originとの同期状態、コンテキスト使用量、最後のメッセージを表示します。
 
-**Example output:**
+**出力例:**
 ```
 Opus 4.5 | 📁claude-code-tips | 🔀main (scripts/context-bar.sh uncommitted, synced 12m ago) | ██░░░░░░░░ 18% of 200k tokens
 💬 This is good. I don't think we need to change the documentation as long as we don't say that the default color is orange el...
 ```
 
-### Installation
+### インストール
 
-1. Copy the script to your Claude scripts directory:
+1. スクリプトをClaude scriptsディレクトリにコピー:
    ```bash
    mkdir -p ~/.claude/scripts
    cp context-bar.sh ~/.claude/scripts/
    chmod +x ~/.claude/scripts/context-bar.sh
    ```
 
-2. Update your `~/.claude/settings.json`:
+2. `~/.claude/settings.json` を更新:
    ```json
    {
      "statusLine": {
@@ -29,36 +31,36 @@ Opus 4.5 | 📁claude-code-tips | 🔀main (scripts/context-bar.sh uncommitted, 
    }
    ```
 
-That's it!
+これで完了です！
 
-### Color Themes
+### カラーテーマ
 
-The script supports optional color themes for the model name and progress bar. Edit the `COLOR` variable at the top of the script:
+スクリプトはモデル名とプログレスバーのオプションカラーテーマをサポートしています。スクリプト先頭の `COLOR` 変数を編集してください:
 
 ```bash
-# Color theme: gray, orange, blue, teal, green, lavender, rose, gold, slate, cyan
+# カラーテーマ: gray, orange, blue, teal, green, lavender, rose, gold, slate, cyan
 COLOR="orange"
 ```
 
-Preview all options by running `bash scripts/color-preview.sh`:
+`bash scripts/color-preview.sh` でプレビューを表示:
 
-![Color preview options](color-preview.png)
+![カラープレビュー](color-preview.png)
 
-### Requirements
+### 必要条件
 
-- `jq` (for JSON parsing)
+- `jq` (JSON解析用)
 - `bash`
-- `git` (optional, for branch display)
-- Claude Code 2.0.65+ (verified to work; older versions may not have the required JSON fields - check earlier commits for older versions)
+- `git` (オプション、ブランチ表示用)
+- Claude Code 2.0.65以上 (動作確認済み。古いバージョンでは必要なJSONフィールドがない可能性あり - 古いバージョン用は過去のコミットを参照)
 
-### How it works
+### 仕組み
 
-Claude Code passes session metadata to status line commands via stdin as JSON, including:
-- `model.display_name` - The model name
-- `cwd` - Current working directory
-- `context_window.total_input_tokens` - Total input tokens used
-- `context_window.total_output_tokens` - Total output tokens used
-- `context_window.context_window_size` - Maximum context window size
-- `transcript_path` - Path to the session transcript JSONL file
+Claude Codeはステータスラインコマンドにセッションメタデータをstdin経由でJSONとして渡します:
+- `model.display_name` - モデル名
+- `cwd` - 現在の作業ディレクトリ
+- `context_window.total_input_tokens` - 使用した入力トークン数
+- `context_window.total_output_tokens` - 使用した出力トークン数
+- `context_window.context_window_size` - 最大コンテキストウィンドウサイズ
+- `transcript_path` - セッショントランスクリプトJSONLファイルへのパス
 
-The script uses these JSON fields to calculate context usage (input + output tokens), showing percentage of the context window. Use `/context` for precise token breakdown.
+スクリプトはこれらのJSONフィールドを使用してコンテキスト使用量（入力+出力トークン）を計算し、コンテキストウィンドウに対するパーセンテージを表示します。正確なトークン内訳は `/context` コマンドで確認できます。

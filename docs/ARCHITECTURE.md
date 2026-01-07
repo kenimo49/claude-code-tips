@@ -1,12 +1,15 @@
-# Architecture Overview
+# アーキテクチャ概要
 
 Claude Code Tipsは、Claude Code（Anthropicの公式CLI）を最大限に活用するためのナレッジベース・ツール集・プラグイン配布リポジトリです。
 
-## Directory Structure
+> **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。オリジナルのライセンスと権利については元リポジトリを参照してください。
+
+## ディレクトリ構造
 
 ```
 claude-code-tips/
-├── README.md              # メインドキュメント（43 Tips + プラグイン説明）
+├── README.md              # メインドキュメント（日本語、44 Tips + プラグイン説明）
+├── README.en.md           # 英語版README
 ├── CLAUDE.md              # プロジェクト固有の指示
 ├── docs/                  # ドキュメント
 │   ├── ARCHITECTURE.md    # このファイル
@@ -36,12 +39,14 @@ claude-code-tips/
 └── assets/                # 画像・ビジュアル資料
 ```
 
-## Core Components
+## コアコンポーネント
 
 ### Tips (README.md)
-43個の実践的なTipsを提供。基礎（スラッシュコマンド、音声入力）から高度な技法（コンテナ運用、システムプロンプト最適化）まで。
 
-### dx Plugin (.claude-plugin/)
+44個の実践的なTipsを提供。基礎（スラッシュコマンド、音声入力）から高度な技法（コンテナ運用、システムプロンプト最適化）まで。
+
+### dxプラグイン (.claude-plugin/)
+
 このリポジトリ自体がClaude Codeプラグインとして機能。以下を提供：
 - `/dx:gha` - GitHub Actions障害調査
 - `/dx:handoff` - コンテキスト引き継ぎドキュメント生成
@@ -49,34 +54,40 @@ claude-code-tips/
 - `/dx:half-clone` - 会話半複製（コンテキスト削減）
 - `reddit-fetch` スキル - Gemini CLI経由でRedditコンテンツ取得
 
-### Scripts (scripts/)
+### スクリプト (scripts/)
+
 - `context-bar.sh`: カスタマイズ可能なステータスライン（10色テーマ）
 - `clone-conversation.sh`: 会話をUUID付きで複製
 - `half-clone-conversation.sh`: 会話の後半のみ保持して複製
 - `generate-toc.js`: README.mdの目次を自動生成
 
-### System Prompt Optimization (system-prompt/)
-Claude Codeのシステムプロンプトを約55%削減するパッチ。~20kトークン → ~9kトークン。
+### システムプロンプト最適化 (system-prompt/)
 
-### Container (container/)
+Claude Codeのシステムプロンプトを約55%削減するパッチ。約20kトークン → 約9kトークン。
+
+### コンテナ (container/)
+
 長時間実行・リスクのあるタスク用のDocker環境。`--dangerously-skip-permissions`を安全に使用可能。
 
-## Key Files for Context
+## 重要ファイル
 
 | ファイル | 目的 |
 |----------|------|
-| README.md | 全Tipsの詳細説明 |
+| README.md | 全Tipsの詳細説明（日本語） |
+| README.en.md | 全Tipsの詳細説明（英語） |
 | CLAUDE.md | プロジェクト固有の指示 |
 | system-prompt/UPGRADING.md | パッチ適用・アップグレード手順 |
 | container/README.md | Docker環境のセットアップ |
 | scripts/README.md | スクリプトの使用方法 |
 
-## For Agents
+## エージェント向けガイド
 
-### Exploring This Repository
+### リポジトリ探索
+
 1. **全体理解**: このファイル → README.md
 2. **特定機能**: 該当ディレクトリのREADME.md
 3. **実装詳細**: 各スクリプト・コマンドファイル
 
-### Tips Index
+### Tipsインデックス
+
 各Tipの詳細説明は `docs/tips/` を参照。
