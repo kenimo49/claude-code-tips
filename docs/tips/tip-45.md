@@ -50,6 +50,37 @@ claude --debug hooks
 
 hooksの動作状況、設定ファイルの構文エラー、正しく読み込まれているかをチェックできる。
 
+## MP3 File Playback
+
+PowerShellスクリプトでmp3を再生できる。
+
+`play_finish.ps1`:
+```powershell
+Add-Type -AssemblyName presentationCore
+$player = New-Object System.Windows.Media.MediaPlayer
+$player.Open('D:\WSL\claude_tools\sound\finish.mp3')
+$player.Play()
+Start-Sleep -Seconds 2
+```
+
+`~/.claude/settings.json`:
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File 'D:\\WSL\\claude_tools\\sound\\play_finish.ps1'"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## Other Use Cases
 
 ```bash
