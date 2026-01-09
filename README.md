@@ -863,7 +863,7 @@ Claude Codeは起動時にCLAUDE.mdファイルを**再帰的に上方向へ**�
 
 WSL2上でClaude Codeを動かしている場合、`powershell.exe`を直接呼び出してWindows側の機能を利用できます。これはHooksと組み合わせると特に便利です。
 
-**例：作業完了時やask時に音を鳴らす**
+**例：作業完了時に音を鳴らす**
 
 `~/.claude/settings.json`に以下を設定：
 
@@ -875,18 +875,7 @@ WSL2上でClaude Codeを動かしている場合、`powershell.exe`を直接呼�
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -Command \"[console]::beep(1000, 300)\""
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "idle_prompt",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "powershell.exe -Command \"[console]::beep(600, 300)\""
+            "command": "powershell.exe -NoProfile -Command \"[console]::beep(600, 300)\""
           }
         ]
       }
@@ -895,10 +884,11 @@ WSL2上でClaude Codeを動かしている場合、`powershell.exe`を直接呼�
 }
 ```
 
-- **Stop（作業完了時）**: 高い音（1000Hz）
-- **Notification（ask時）**: 低い音（600Hz）
+- **Stop**: Claudeが応答を完了した時に発火
+- **-NoProfile**: PowerShellの起動を高速化
+- **beep(周波数Hz, 長さms)**: 音をカスタマイズ可能
 
-周波数と長さ（ミリ秒）を調整して好みの音にカスタマイズできます。
+**注意**: `/hooks`コマンドにはStopは表示されませんが、動作します。設定変更後はClaude Codeの再起動が必要です。
 
 **その他の活用例：**
 

@@ -11,7 +11,7 @@ WSL2上でClaude Codeを動かしている場合、`powershell.exe`を直接呼�
 
 ## Sound Notification Example
 
-作業完了時やask時に音を鳴らす設定。
+作業完了時に音を鳴らす設定。
 
 `~/.claude/settings.json`:
 
@@ -23,18 +23,7 @@ WSL2上でClaude Codeを動かしている場合、`powershell.exe`を直接呼�
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -Command \"[console]::beep(1000, 300)\""
-          }
-        ]
-      }
-    ],
-    "Notification": [
-      {
-        "matcher": "idle_prompt",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "powershell.exe -Command \"[console]::beep(600, 300)\""
+            "command": "powershell.exe -NoProfile -Command \"[console]::beep(600, 300)\""
           }
         ]
       }
@@ -43,12 +32,13 @@ WSL2上でClaude Codeを動かしている場合、`powershell.exe`を直接呼�
 }
 ```
 
-| イベント | 音 |
-|---------|-----|
-| Stop（作業完了時） | 高い音（1000Hz） |
-| Notification（ask時） | 低い音（600Hz） |
+| 設定 | 説明 |
+|-----|------|
+| Stop | Claudeが応答を完了した時に発火 |
+| -NoProfile | PowerShellの起動を高速化 |
+| beep(周波数Hz, 長さms) | 音をカスタマイズ可能 |
 
-周波数と長さ（ミリ秒）を調整して好みの音にカスタマイズ可能。
+**注意**: `/hooks`コマンドにはStopは表示されないが、動作する。設定変更後はClaude Codeの再起動が必要。
 
 ## Other Use Cases
 
