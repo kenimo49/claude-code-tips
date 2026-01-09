@@ -3,6 +3,8 @@
 [English version](README.en.md)
 
 > **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。オリジナルのライセンスと権利については元リポジトリを参照してください。
+>
+> **追記**: Tip 0〜43はfork元（ykdojo）が作成したものです。Tip 44以降はkenimo49が追加したものです。
 
 Claude Codeを最大限に活用するためのTips集です。カスタムステータスライン、システムプロンプトの半減、Gemini CLIをClaude Codeの部下として使う方法、コンテナ内でのClaude Code実行なども含まれています。[dxプラグイン](#dxプラグインのインストール)も提供しています。
 
@@ -11,53 +13,55 @@ Claude Codeを最大限に活用するためのTips集です。カスタムス�
 [![デモ動画サムネイル](assets/demo-thumbnail.png)](https://www.youtube.com/watch?v=hiISl558JGE)
 
 <!-- TOC -->
-## 目次
+## Table of Contents
 
-- [Tip 0: ステータスラインをカスタマイズする](#tip-0-ステータスラインをカスタマイズする)
-- [Tip 1: 基本的なスラッシュコマンドを覚える](#tip-1-基本的なスラッシュコマンドを覚える)
-- [Tip 2: 音声でClaude Codeと会話する](#tip-2-音声でclaude-codeと会話する)
-- [Tip 3: 大きな問題を小さく分解する](#tip-3-大きな問題を小さく分解する)
-- [Tip 4: GitとGitHub CLIをプロのように使う](#tip-4-gitとgithub-cliをプロのように使う)
-- [Tip 5: AIのコンテキストは牛乳のようなもの。新鮮で凝縮されているのが一番！](#tip-5-aiのコンテキストは牛乳のようなもの新鮮で凝縮されているのが一番)
-- [Tip 6: ターミナルから出力を取り出す](#tip-6-ターミナルから出力を取り出す)
-- [Tip 7: ターミナルエイリアスでクイックアクセス](#tip-7-ターミナルエイリアスでクイックアクセス)
-- [Tip 8: コンテキストを積極的に圧縮する](#tip-8-コンテキストを積極的に圧縮する)
-- [Tip 9: 自律タスクには書き込み-テストサイクルを完結させる](#tip-9-自律タスクには書き込み-テストサイクルを完結させる)
-- [Tip 10: Cmd+AとCtrl+Aはあなたの味方](#tip-10-cmdaとctrlaはあなたの味方)
-- [Tip 11: ブロックされたサイトにはGemini CLIをフォールバックとして使用](#tip-11-ブロックされたサイトにはgemini-cliをフォールバックとして使用)
-- [Tip 12: 自分のワークフローに投資する](#tip-12-自分のワークフローに投資する)
-- [Tip 13: 会話履歴を検索する](#tip-13-会話履歴を検索する)
-- [Tip 14: ターミナルタブでマルチタスク](#tip-14-ターミナルタブでマルチタスク)
-- [Tip 15: システムプロンプトをスリム化する](#tip-15-システムプロンプトをスリム化する)
-- [Tip 16: Git worktreeで並列ブランチ作業](#tip-16-git-worktreeで並列ブランチ作業)
-- [Tip 17: 長時間ジョブには手動エクスポネンシャルバックオフ](#tip-17-長時間ジョブには手動エクスポネンシャルバックオフ)
-- [Tip 18: Claude Codeをライティングアシスタントとして使う](#tip-18-claude-codeをライティングアシスタントとして使う)
-- [Tip 19: Markdownは最強](#tip-19-markdownは最強)
-- [Tip 20: Notionを使ってリンクを保持して貼り付け](#tip-20-notionを使ってリンクを保持して貼り付け)
-- [Tip 21: 長時間でリスクのあるタスクにはコンテナを使用](#tip-21-長時間でリスクのあるタスクにはコンテナを使用)
-- [Tip 22: Claude Codeを使いこなすには使い続けること](#tip-22-claude-codeを使いこなすには使い続けること)
-- [Tip 23: 会話を複製・半複製する](#tip-23-会話を複製半複製する)
-- [Tip 24: realpathで絶対パスを取得](#tip-24-realpathで絶対パスを取得)
-- [Tip 25: CLAUDE.md、スキル、スラッシュコマンド、プラグインの違いを理解する](#tip-25-claudemdスキルスラッシュコマンドプラグインの違いを理解する)
-- [Tip 26: インタラクティブなPRレビュー](#tip-26-インタラクティブなprレビュー)
-- [Tip 27: Claude Codeをリサーチツールとして使う](#tip-27-claude-codeをリサーチツールとして使う)
-- [Tip 28: 出力を検証する様々な方法をマスターする](#tip-28-出力を検証する様々な方法をマスターする)
-- [Tip 29: Claude CodeをDevOpsエンジニアとして使う](#tip-29-claude-codeをdevopsエンジニアとして使う)
-- [Tip 30: CLAUDE.mdはシンプルで簡潔に保つ](#tip-30-claudemdはシンプルで簡潔に保つ)
-- [Tip 31: Claude Codeは万能インターフェース](#tip-31-claude-codeは万能インターフェース)
-- [Tip 32: 適切な抽象レベルを選ぶことがすべて](#tip-32-適切な抽象レベルを選ぶことがすべて)
-- [Tip 33: 許可したコマンドを監査する](#tip-33-許可したコマンドを監査する)
-- [Tip 34: たくさんテストを書く（TDDを使う）](#tip-34-たくさんテストを書くtddを使う)
-- [Tip 35: 未知に勇敢に、反復的に問題解決](#tip-35-未知に勇敢に反復的に問題解決)
-- [Tip 36: Bashコマンドとエージェントをバックグラウンドで実行](#tip-36-bashコマンドとエージェントをバックグラウンドで実行)
-- [Tip 37: パーソナライズソフトウェアの時代が来た](#tip-37-パーソナライズソフトウェアの時代が来た)
-- [Tip 38: 入力ボックスのナビゲーションと編集](#tip-38-入力ボックスのナビゲーションと編集)
-- [Tip 39: 計画に時間をかけつつ、素早くプロトタイプも作る](#tip-39-計画に時間をかけつつ素早くプロトタイプも作る)
-- [Tip 40: 複雑すぎるコードをシンプルにする](#tip-40-複雑すぎるコードをシンプルにする)
-- [Tip 41: 自動化の自動化](#tip-41-自動化の自動化)
-- [Tip 42: 知識を共有し、できるところで貢献する](#tip-42-知識を共有しできるところで貢献する)
-- [Tip 43: 学び続ける！](#tip-43-学び続ける)
-- [dxプラグインのインストール](#dxプラグインのインストール)
+- [Tip 0: ステータスラインをカスタマイズする](#tip-0-)
+- [Tip 1: 基本的なスラッシュコマンドを覚える](#tip-1-)
+- [Tip 2: 音声でClaude Codeと会話する](#tip-2-claude-code)
+- [Tip 3: 大きな問題を小さく分解する](#tip-3-)
+- [Tip 4: GitとGitHub CLIをプロのように使う](#tip-4-gitgithub-cli)
+- [Tip 5: AIのコンテキストは牛乳のようなもの。新鮮で凝縮されているのが一番！](#tip-5-ai)
+- [Tip 6: ターミナルから出力を取り出す](#tip-6-)
+- [Tip 7: ターミナルエイリアスでクイックアクセス](#tip-7-)
+- [Tip 8: コンテキストを積極的に圧縮する](#tip-8-)
+- [Tip 9: 自律タスクには書き込み-テストサイクルを完結させる](#tip-9--)
+- [Tip 10: Cmd+AとCtrl+Aはあなたの味方](#tip-10-cmdactrla)
+- [Tip 11: ブロックされたサイトにはGemini CLIをフォールバックとして使用](#tip-11-gemini-cli)
+- [Tip 12: 自分のワークフローに投資する](#tip-12-)
+- [Tip 13: 会話履歴を検索する](#tip-13-)
+- [Tip 14: ターミナルタブでマルチタスク](#tip-14-)
+- [Tip 15: システムプロンプトをスリム化する](#tip-15-)
+- [Tip 16: Git worktreeで並列ブランチ作業](#tip-16-git-worktree)
+- [Tip 17: 長時間ジョブには手動エクスポネンシャルバックオフ](#tip-17-)
+- [Tip 18: Claude Codeをライティングアシスタントとして使う](#tip-18-claude-code)
+- [Tip 19: Markdownは最強](#tip-19-markdown)
+- [Tip 20: Notionを使ってリンクを保持して貼り付け](#tip-20-notion)
+- [Tip 21: 長時間でリスクのあるタスクにはコンテナを使用](#tip-21-)
+- [Tip 22: Claude Codeを使いこなすには使い続けること](#tip-22-claude-code)
+- [Tip 23: 会話を複製・半複製する](#tip-23-)
+- [Tip 24: realpathで絶対パスを取得](#tip-24-realpath)
+- [Tip 25: CLAUDE.md、スキル、スラッシュコマンド、プラグインの違いを理解する](#tip-25-claudemd)
+- [Tip 26: インタラクティブなPRレビュー](#tip-26-pr)
+- [Tip 27: Claude Codeをリサーチツールとして使う](#tip-27-claude-code)
+- [Tip 28: 出力を検証する様々な方法をマスターする](#tip-28-)
+- [Tip 29: Claude CodeをDevOpsエンジニアとして使う](#tip-29-claude-codedevops)
+- [Tip 30: CLAUDE.mdはシンプルで簡潔に保つ](#tip-30-claudemd)
+- [Tip 31: Claude Codeは万能インターフェース](#tip-31-claude-code)
+- [Tip 32: 適切な抽象レベルを選ぶことがすべて](#tip-32-)
+- [Tip 33: 許可したコマンドを監査する](#tip-33-)
+- [Tip 34: たくさんテストを書く（TDDを使う）](#tip-34-tdd)
+- [Tip 35: 未知に勇敢に、反復的に問題解決](#tip-35-)
+- [Tip 36: Bashコマンドとエージェントをバックグラウンドで実行](#tip-36-bash)
+- [Tip 37: パーソナライズソフトウェアの時代が来た](#tip-37-)
+- [Tip 38: 入力ボックスのナビゲーションと編集](#tip-38-)
+- [Tip 39: 計画に時間をかけつつ、素早くプロトタイプも作る](#tip-39-)
+- [Tip 40: 複雑すぎるコードをシンプルにする](#tip-40-)
+- [Tip 41: 自動化の自動化](#tip-41-)
+- [Tip 42: 知識を共有し、できるところで貢献する](#tip-42-)
+- [Tip 43: 学び続ける！](#tip-43-)
+- [Tip 44: CLAUDE.mdの階層的な読み込みを活用する](#tip-44-claudemd)
+- [目次](#)
+- [dxプラグインのインストール](#dx)
 
 <!-- /TOC -->
 
@@ -828,6 +832,32 @@ Claude Codeについて学び続けるための効果的な方法がいくつか
 
 - [Twitter/X: Advent of Claude投稿](https://x.com/search?q=from%3Aadocomplete%20advent%20of%20claude&src=typed_query&f=live)
 - [LinkedIn: Advent of Claude投稿](https://www.linkedin.com/search/results/content/?fromMember=%5B%22ACoAAAFdD3IBYHwKSh6FsyGqOh1SpbrZ9ZHTjnI%22%5D&keywords=advent%20of%20claude&origin=FACETED_SEARCH&sid=zDV&sortBy=%22date_posted%22)
+
+## Tip 44: CLAUDE.mdの階層的な読み込みを活用する
+
+Claude Codeは起動時にCLAUDE.mdファイルを**再帰的に上方向へ**検索します。これを理解すると、グローバル設定とプロジェクト固有の設定を効果的に分離できます。
+
+例えば `/home/ken/workspace/project/` で起動した場合、以下の順序で読み込まれます：
+
+1. `project/CLAUDE.md` を読み込み（プロジェクト固有のルール）
+2. `workspace/CLAUDE.md` を読み込み（あれば）
+3. `~/.claude/CLAUDE.md` を読み込み（ユーザーメモリ）
+
+これは**上書きではなく累積的**に適用されます。つまり、より深い階層のCLAUDE.mdが優先されますが、上位階層のルールも有効です。
+
+**活用例：**
+
+- `~/.claude/CLAUDE.md` - 全プロジェクト共通の設定（日本語で回答、コーディングスタイルなど）
+- `workspace/CLAUDE.md` - ワークスペース全体のルール
+- `project/CLAUDE.md` - プロジェクト固有のルール（フレームワーク、テスト方法など）
+
+**現在読み込まれているCLAUDE.mdを確認：**
+
+```
+/memory
+```
+
+これにより、グローバルな設定は一度書けば全プロジェクトに適用され、プロジェクト固有の設定だけを各プロジェクトで管理できます。
 
 ## dxプラグインのインストール
 

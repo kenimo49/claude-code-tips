@@ -1,8 +1,10 @@
 # Tips インデックス
 
-Claude Code Tipsの全44項目（Tip 0〜43）の一覧です。各Tipの詳細説明は個別ファイルを参照してください。
+Claude Code Tipsの全45項目（Tip 0〜44）の一覧です。各Tipの詳細説明は個別ファイルを参照してください。
 
 > **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。
+>
+> **追記**: Tip 0〜43はfork元（ykdojo）が作成したものです。Tip 44以降はkenimo49が追加したものです。
 
 ## クイックリファレンス
 
@@ -52,6 +54,7 @@ Claude Code Tipsの全44項目（Tip 0〜43）の一覧です。各Tipの詳細�
 | 41 | [自動化の自動化](./tip-41.md) | Automation |
 | 42 | [知識を共有し、できるところで貢献する](./tip-42.md) | Community |
 | 43 | [学び続ける！](./tip-43.md) | Learning |
+| 44 | [CLAUDE.mdの階層的な読み込みを活用する](./tip-44.md) | Setup |
 
 ## カテゴリ別
 
@@ -61,6 +64,7 @@ Claude Code Tipsの全44項目（Tip 0〜43）の一覧です。各Tipの詳細�
 - Tip 7: ターミナルエイリアス
 - Tip 24: realpathで絶対パス取得
 - Tip 30: CLAUDE.mdのベストプラクティス
+- Tip 44: CLAUDE.mdの階層的な読み込み
 
 ### 入力 & 出力
 - Tip 2: 音声入力
