@@ -40,6 +40,16 @@ WSL2上でClaude Codeを動かしている場合、`powershell.exe`を直接呼�
 
 **注意**: `/hooks`コマンドにはStopは表示されないが、動作する。設定変更後はClaude Codeの再起動が必要。
 
+## Troubleshooting
+
+音が鳴らない場合は、デバッグモードで確認：
+
+```bash
+claude --debug hooks
+```
+
+hooksの動作状況、設定ファイルの構文エラー、正しく読み込まれているかをチェックできる。
+
 ## Other Use Cases
 
 ```bash
