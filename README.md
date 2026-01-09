@@ -60,7 +60,7 @@ Claude Codeを最大限に活用するためのTips集です。カスタムス�
 - [Tip 42: 知識を共有し、できるところで貢献する](#tip-42-)
 - [Tip 43: 学び続ける！](#tip-43-)
 - [Tip 44: CLAUDE.mdの階層的な読み込みを活用する](#tip-44-claudemd)
-- [目次](#)
+- [Tip 45: WSL2からPowerShellコマンドを実行する](#tip-45-wsl2powershell)
 - [dxプラグインのインストール](#dx)
 
 <!-- /TOC -->
@@ -858,6 +858,59 @@ Claude Codeは起動時にCLAUDE.mdファイルを**再帰的に上方向へ**�
 ```
 
 これにより、グローバルな設定は一度書けば全プロジェクトに適用され、プロジェクト固有の設定だけを各プロジェクトで管理できます。
+
+## Tip 45: WSL2からPowerShellコマンドを実行する
+
+WSL2上でClaude Codeを動かしている場合、`powershell.exe`を直接呼び出してWindows側の機能を利用できます。これはHooksと組み合わせると特に便利です。
+
+**例：作業完了時やask時に音を鳴らす**
+
+`~/.claude/settings.json`に以下を設定：
+
+```json
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -Command \"[console]::beep(1000, 300)\""
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "matcher": "idle_prompt",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -Command \"[console]::beep(600, 300)\""
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+- **Stop（作業完了時）**: 高い音（1000Hz）
+- **Notification（ask時）**: 低い音（600Hz）
+
+周波数と長さ（ミリ秒）を調整して好みの音にカスタマイズできます。
+
+**その他の活用例：**
+
+```bash
+# Windows通知を表示
+powershell.exe -Command "New-BurntToastNotification -Text 'Claude完了'"
+
+# クリップボードにコピー
+powershell.exe -Command "Set-Clipboard 'テキスト'"
+```
+
+WSL2とWindowsの連携により、Claude Codeの自動化の幅が広がります。
 
 ## dxプラグインのインストール
 
