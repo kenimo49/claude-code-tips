@@ -924,7 +924,8 @@ $player.Play()
 Start-Sleep -Seconds 2
 ```
 
-`~/.claude/settings.json`:
+**実際の設定例（`~/.claude/settings.json`）：**
+
 ```json
 {
   "hooks": {
@@ -937,10 +938,22 @@ Start-Sleep -Seconds 2
           }
         ]
       }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -Command \"[console]::beep(800, 200)\""
+          }
+        ]
+      }
     ]
   }
 }
 ```
+
+この設定では、作業完了時にMP3を再生し、ask時にはbeep音を鳴らして区別しています。
 
 **その他の活用例：**
 
