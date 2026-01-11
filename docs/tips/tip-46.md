@@ -61,6 +61,12 @@ Claude Codeから接続する前に、Chromeを起動しておく必要がある
 google-chrome &
 ```
 
+自動化専用のプロファイルを作成している場合は、`--profile-directory`で指定：
+
+```bash
+google-chrome --profile-directory="Profile 1" &
+```
+
 ### 6. Claude Codeから接続
 
 Chromeが起動している状態で：
@@ -84,6 +90,8 @@ Claude in Chrome拡張機能は専用のタブグループで動作する。こ�
 - **セキュリティ**: 自動化タスクがメインのブラウザ環境に影響を与えない
 
 自動化専用の隔離された環境で安全にタスクを実行できる。
+
+WSLg上のChromeプロファイルの保存場所や新規作成方法については [WSLg Chrome Profile](../knowledge/wslg-chrome-profile.md) を参照。
 
 ## Troubleshooting
 
@@ -113,4 +121,5 @@ echo $DISPLAY
 
 ## See Also
 
+- [Claude in Chrome 公式ページ](https://claude.com/ja-jp/chrome) - Anthropic公式のClaude in Chrome紹介ページ
 - [Tip 45: Execute PowerShell commands from WSL2](./tip-45.md) - WSL2とWindowsの連携
