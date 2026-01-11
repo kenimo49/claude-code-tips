@@ -53,7 +53,17 @@ Chromeウィンドウが表示されればWSLgが正常に動作している。
    - https://chromewebstore.google.com/detail/claude/fcoeoabgfenejglbffodgkkbkcdhcgfn
 3. 拡張機能のサイドバーからClaudeアカウントにログイン
 
-### 5. Claude Codeから接続
+### 5. Chromeを起動しておく
+
+Claude Codeから接続する前に、Chromeを起動しておく必要がある：
+
+```bash
+google-chrome &
+```
+
+### 6. Claude Codeから接続
+
+Chromeが起動している状態で：
 
 ```bash
 claude --chrome
