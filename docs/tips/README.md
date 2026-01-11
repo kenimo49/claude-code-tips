@@ -1,6 +1,6 @@
 # Tips インデックス
 
-Claude Code Tipsの全46項目（Tip 0〜45）の一覧です。各Tipの詳細説明は個別ファイルを参照してください。
+Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細説明は個別ファイルを参照してください。
 
 > **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。
 >
@@ -56,6 +56,7 @@ Claude Code Tipsの全46項目（Tip 0〜45）の一覧です。各Tipの詳細�
 | 43 | [学び続ける！](./tip-43.md) | Learning |
 | 44 | [CLAUDE.mdの階層的な読み込みを活用する](./tip-44.md) | Setup |
 | 45 | [WSL2からPowerShellコマンドを実行する](./tip-45.md) | Automation |
+| 46 | [WSL2上からClaude in Chromeを使う](./tip-46.md) | Browser Automation |
 
 ## カテゴリ別
 
@@ -102,6 +103,7 @@ Claude Code Tipsの全46項目（Tip 0〜45）の一覧です。各Tipの詳細�
 - Tip 36: バックグラウンド実行
 - Tip 41: 自動化の自動化
 - Tip 45: WSL2からPowerShell実行
+- Tip 46: WSL2からClaude in Chrome
 
 ### 上級
 - Tip 11: Gemini CLIフォールバック
