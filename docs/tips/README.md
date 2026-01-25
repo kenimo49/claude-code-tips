@@ -1,10 +1,12 @@
 # Tips インデックス
 
-Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細説明は個別ファイルを参照してください。
+Claude Code Tipsの全64項目（Tip 0〜63）の一覧です。各Tipの詳細説明は個別ファイルを参照してください。
 
 > **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。
 >
 > **追記**: Tip 0〜43はfork元（ykdojo）が作成したものです。Tip 44以降はkenimo49が追加したものです。
+>
+> **追記**: Tip 48以降は [everything-claude-code](https://github.com/affaan-m/everything-claude-code) を参考に作成しています。
 
 ## クイックリファレンス
 
@@ -57,6 +59,23 @@ Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細�
 | 44 | [CLAUDE.mdの階層的な読み込みを活用する](./tip-44.md) | Setup |
 | 45 | [WSL2からPowerShellコマンドを実行する](./tip-45.md) | Automation |
 | 46 | [WSL2上からClaude in Chromeを使う](./tip-46.md) | Browser Automation |
+| 47 | [セッションをフォークして並行調査する](./tip-47.md) | Workflow |
+| 48 | [モデル選択戦略 - Haiku/Sonnet/Opus を使い分ける](./tip-48.md) | Performance |
+| 49 | [フックでセッション間の状態を維持する](./tip-49.md) | Hooks |
+| 50 | [専門エージェントを設計して委譲する](./tip-50.md) | Agent |
+| 51 | [/learn で継続的に学習する](./tip-51.md) | Learning |
+| 52 | [MCP サーバーで外部ツールを統合する](./tip-52.md) | MCP |
+| 53 | [コードマップでアーキテクチャを可視化する](./tip-53.md) | Documentation |
+| 54 | [検証ループを設計する](./tip-54.md) | Quality |
+| 55 | [並列インスタンスでスループットを上げる](./tip-55.md) | Workflow |
+| 56 | [コンテキストウィンドウの最後の20%を避ける](./tip-56.md) | Performance |
+| 57 | [セキュリティレビューを自動化する](./tip-57.md) | Security |
+| 58 | [イミュータビリティを徹底する](./tip-58.md) | Best Practices |
+| 59 | [ファイルサイズを小さく保つ](./tip-59.md) | Best Practices |
+| 60 | [N+1 クエリを回避する](./tip-60.md) | Performance |
+| 61 | [エラーバウンダリでクラッシュを防ぐ](./tip-61.md) | React |
+| 62 | [Zod スキーマで入力を検証する](./tip-62.md) | Validation |
+| 63 | [秘密情報は絶対にコードに含めない](./tip-63.md) | Security |
 
 ## カテゴリ別
 
@@ -67,6 +86,7 @@ Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細�
 - Tip 24: realpathで絶対パス取得
 - Tip 30: CLAUDE.mdのベストプラクティス
 - Tip 44: CLAUDE.mdの階層的な読み込み
+- Tip 49: フックでセッション間の状態を維持
 
 ### 入力 & 出力
 - Tip 2: 音声入力
@@ -79,6 +99,7 @@ Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細�
 - Tip 5: 新鮮なコンテキストの原則
 - Tip 8: 積極的なコンパクション
 - Tip 23: 会話の複製 / 半複製
+- Tip 56: コンテキストウィンドウの最後の20%を避ける
 
 ### ワークフロー & 生産性
 - Tip 3: 問題の分解
@@ -87,6 +108,8 @@ Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細�
 - Tip 32: 抽象レベルの選択
 - Tip 35: 反復的な問題解決
 - Tip 39: 計画とプロトタイピング
+- Tip 47: セッションをフォークして並行調査
+- Tip 55: 並列インスタンスでスループット向上
 
 ### Git & GitHub
 - Tip 4: GitとGitHub CLI
@@ -97,6 +120,7 @@ Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細�
 - Tip 9: 書き込み-テストサイクル
 - Tip 28: 出力の検証
 - Tip 34: TDDアプローチ
+- Tip 54: 検証ループを設計する
 
 ### 自動化
 - Tip 17: エクスポネンシャルバックオフ
@@ -111,6 +135,11 @@ Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細�
 - Tip 21: コンテナ使用
 - Tip 29: DevOpsワークフロー
 - Tip 33: セキュリティ監査
+- Tip 48: モデル選択戦略（Haiku/Sonnet/Opus）
+- Tip 50: 専門エージェントを設計して委譲
+- Tip 52: MCPサーバーで外部ツール統合
+- Tip 53: コードマップでアーキテクチャ可視化
+- Tip 57: セキュリティレビューを自動化
 
 ### ライティング & リサーチ
 - Tip 18: ライティングアシスタント
@@ -124,6 +153,15 @@ Claude Code Tipsの全47項目（Tip 0〜46）の一覧です。各Tipの詳細�
 - Tip 37: パーソナライズソフトウェア
 - Tip 42: 知識の共有
 - Tip 43: 継続的な学習
+- Tip 51: /learn で継続的に学習
+
+### ベストプラクティス（開発パターン）
+- Tip 58: イミュータビリティを徹底する
+- Tip 59: ファイルサイズを小さく保つ
+- Tip 60: N+1 クエリを回避する
+- Tip 61: エラーバウンダリでクラッシュを防ぐ（React）
+- Tip 62: Zod スキーマで入力を検証する
+- Tip 63: 秘密情報は絶対にコードに含めない
 
 ## エージェント向けガイド
 
