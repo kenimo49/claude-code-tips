@@ -61,6 +61,8 @@ Claude Codeを最大限に活用するためのTips集です。カスタムス�
 - [Tip 43: 学び続ける！](#tip-43-)
 - [Tip 44: CLAUDE.mdの階層的な読み込みを活用する](#tip-44-claudemd)
 - [Tip 45: WSL2からPowerShellコマンドを実行する](#tip-45-wsl2powershell)
+- [Tip 46: WSL2からClaude in Chromeを使う](#tip-46-wsl2claude-in-chrome)
+- [Tip 47: セッションをフォークして並行調査する](#tip-47-)
 - [dxプラグインのインストール](#dx)
 
 <!-- /TOC -->
@@ -966,6 +968,88 @@ powershell.exe -Command "Set-Clipboard 'テキスト'"
 ```
 
 WSL2とWindowsの連携により、Claude Codeの自動化の幅が広がります。
+
+## Tip 46: WSL2からClaude in Chromeを使う
+
+WSL2上のClaude CodeからChrome拡張機能「Claude in Chrome」を操作できます。WSLgを利用してLinux版Chromeを実行することで、ブラウザ自動化が可能になります。
+
+**前提条件：**
+
+- WSL2環境（WSLgが有効であること）
+- Claude有料プラン（Claude in Chrome拡張機能の利用に必要）
+
+**セットアップ手順：**
+
+```bash
+# 1. Google Chromeのインストール
+cd /tmp && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt-get install -f -y  # 依存関係エラーが出た場合
+
+# 2. 日本語フォントのインストール（文字化け対策）
+sudo apt install fonts-noto-cjk
+
+# 3. Chromeの起動確認
+google-chrome &
+```
+
+Chromeが起動したら、Chrome Web Storeから「Claude」拡張機能をインストールし、Claudeアカウントにログインします。
+
+**Claude Codeからの接続：**
+
+```bash
+# Chromeを起動しておく
+google-chrome &
+
+# Claude Codeから接続
+claude --chrome
+```
+
+**注意点：**
+
+- Chrome拡張機能はheadlessモードでは動作しない（GUI必須）
+- 自動化専用のプロファイルを作成すると環境を分離できる（`--profile-directory="Profile 1"`）
+
+詳細なセットアップ手順やトラブルシューティングは [docs/tips/tip-46.md](docs/tips/tip-46.md) を参照してください。
+
+## Tip 47: セッションをフォークして並行調査する
+
+`--resume`でセッションを再開する際、`--fork-session`フラグを付けると**セッションを分岐**できます。これにより、同じコンテキストを持った状態で複数の異なる調査を並行して進められます。
+
+**基本的な使い方：**
+
+```bash
+# セッションAの情報を元に、ウィンドウBで分岐（A-1を作成）
+claude --resume A --fork-session
+
+# 同じセッションAから、ウィンドウCでも分岐（A-2を作成）
+claude --resume A --fork-session
+```
+
+**フォークとresumeの違い：**
+
+| コマンド | 動作 |
+|---------|------|
+| `claude --resume A` | セッションAをそのまま継続（同一セッション） |
+| `claude --resume A --fork-session` | セッションAから分岐した新しいセッションを作成 |
+
+**活用例：**
+
+例えば、あるプロジェクトの設計について話し合っていたセッションがあるとします。そこからフォークして：
+
+- **分岐1**: フロントエンドの実装方法を調査
+- **分岐2**: バックエンドのAPI設計を検討
+- **分岐3**: テスト戦略を考える
+
+それぞれが元のセッションのコンテキスト（プロジェクトの概要、制約条件など）を持った状態で、独立して進められます。
+
+**注意点：**
+
+- `--fork-session`を付けずに同じセッションを複数ウィンドウで`--resume`すると、メッセージが混在してしまいます
+- フォークしたセッションはセッションピッカーで元のセッションの下にグループ化されて表示されます
+- `--continue`と組み合わせることも可能です（`claude --continue --fork-session`）
+
+完全なファイルレベルの分離が必要な場合は、Tip 16のGit worktreeの利用も検討してください。
 
 ## dxプラグインのインストール
 
