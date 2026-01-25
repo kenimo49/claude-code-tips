@@ -63,7 +63,7 @@ Claude Code Tipsの全64項目（Tip 0〜63）の一覧です。各Tipの詳細�
 | 48 | [モデル選択戦略 - Haiku/Sonnet/Opus を使い分ける](./tip-48.md) | Performance |
 | 49 | [フックでセッション間の状態を維持する](./tip-49.md) | Hooks |
 | 50 | [専門エージェントを設計して委譲する](./tip-50.md) | Agent |
-| 51 | [/learn で継続的に学習する](./tip-51.md) | Learning |
+| 51 | [/learn コマンドを作成して継続的に学習する](./tip-51.md) | Custom Commands |
 | 52 | [MCP サーバーで外部ツールを統合する](./tip-52.md) | MCP |
 | 53 | [コードマップでアーキテクチャを可視化する](./tip-53.md) | Documentation |
 | 54 | [検証ループを設計する](./tip-54.md) | Quality |

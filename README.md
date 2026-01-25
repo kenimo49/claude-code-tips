@@ -1061,7 +1061,7 @@ Tip 48以降は [everything-claude-code](https://github.com/affaan-m/everything-
 | [Tip 48](docs/tips/tip-48.md) | モデル選択戦略 - Haiku/Sonnet/Opus を使い分ける | Performance |
 | [Tip 49](docs/tips/tip-49.md) | フックでセッション間の状態を維持する | Hooks |
 | [Tip 50](docs/tips/tip-50.md) | 専門エージェントを設計して委譲する | Agent |
-| [Tip 51](docs/tips/tip-51.md) | /learn で継続的に学習する | Learning |
+| [Tip 51](docs/tips/tip-51.md) | /learn コマンドを作成して継続的に学習する | Custom Commands |
 | [Tip 52](docs/tips/tip-52.md) | MCP サーバーで外部ツールを統合する | MCP |
 | [Tip 53](docs/tips/tip-53.md) | コードマップでアーキテクチャを可視化する | Documentation |
 | [Tip 54](docs/tips/tip-54.md) | 検証ループを設計する | Quality |

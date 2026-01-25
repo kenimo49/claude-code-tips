@@ -1,34 +1,57 @@
-# Tip 51: Use /learn for continuous learning
+# Tip 51: Create a /learn command for continuous learning
 
-> /learn で継続的に学習する
+> /learn コマンドを作成して継続的に学習する
 
-**Category**: Learning
+**Category**: Custom Commands
 **Related**: [Tip 25: CLAUDE.md vs Skills vs Commands vs Plugins](./tip-25.md)
 
 ## Overview
 
-`/learn` コマンドを使うと、現在のセッションから有用なパターンを抽出し、将来のプロジェクトで再利用可能なスキルとして保存できる。
+セッションから有用なパターンを抽出し、CLAUDE.md に保存するカスタムコマンドを作成できる。これにより、プロジェクト固有の知識を蓄積できる。
 
-## How It Works
+> **注意**: `/learn` は公式の Claude Code 機能ではなく、カスタムコマンドとして自分で実装するものです。
 
-1. セッション中に有効だったアプローチを特定
-2. `/learn` でそのパターンをスキルとして保存
-3. 将来のセッションで自動的に活用
+## Implementation
+
+`.claude/commands/learn.md` を作成：
+
+```markdown
+# Learn Command
+
+現在のセッションを分析し、有用なパターンを抽出して CLAUDE.md に追記する。
+
+## 手順
+
+1. このセッションで行った作業を振り返る
+2. 再利用可能なパターンを特定する：
+   - プロジェクト固有のコーディングパターン
+   - エラー解決のアプローチ
+   - テスト戦略
+   - ビルド・デプロイ手順
+3. 抽出したパターンを `.claude/CLAUDE.md` に追記する形式で提案する
+
+## 出力形式
+
+```
+以下のパターンを学習しました：
+
+### [パターン名]
+- 説明: ...
+- 適用場面: ...
+
+CLAUDE.md への追記案：
+\`\`\`markdown
+## [セクション名]
+- ...
+\`\`\`
+```
+```
 
 ## Usage
 
 ```
 /learn
 ```
-
-Claudeがセッションを分析し、学習すべきパターンを提案する。
-
-## What Gets Learned
-
-- プロジェクト固有のコーディングパターン
-- エラー解決のアプローチ
-- テスト戦略
-- ビルド・デプロイ手順
 
 ## Example Session
 
@@ -42,17 +65,34 @@ Claude: 了解しました。zustandでの状態管理を行います。
 You: /learn
 
 Claude: 以下のパターンを学習しました：
-- このプロジェクトはzustandで状態管理
+
+### 状態管理パターン
+- 説明: zustand を使用した状態管理
+- 適用場面: グローバルステート
+
+CLAUDE.md への追記案：
+## State Management
+- zustand を使用
 - ストアは /src/stores/ に配置
 - createSelectors パターンを使用
 ```
 
 ## Where Learnings Are Stored
 
-学習した内容は以下に保存される：
+抽出したパターンは手動で以下に追記する：
 
-- `~/.claude/CLAUDE.md` - グローバルな学習
+- `~/.claude/CLAUDE.md` - グローバルな学習（全プロジェクト共通）
 - `.claude/CLAUDE.md` - プロジェクト固有の学習
+
+## Alternative: Use /memory
+
+公式機能の `/memory` コマンドでも CLAUDE.md を編集できる：
+
+```
+/memory
+```
+
+これにより CLAUDE.md をエディタで開いて直接編集できる。
 
 ## Why This Matters
 
