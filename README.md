@@ -63,6 +63,7 @@ Claude Codeを最大限に活用するためのTips集です。カスタムス�
 - [Tip 45: WSL2からPowerShellコマンドを実行する](#tip-45-wsl2powershell)
 - [Tip 46: WSL2からClaude in Chromeを使う](#tip-46-wsl2claude-in-chrome)
 - [Tip 47: セッションをフォークして並行調査する](#tip-47-)
+- [Tip 48以降について](#tip-48以降について)
 - [dxプラグインのインストール](#dx)
 
 <!-- /TOC -->
@@ -1050,6 +1051,29 @@ claude --resume A --fork-session
 - `--continue`と組み合わせることも可能です（`claude --continue --fork-session`）
 
 完全なファイルレベルの分離が必要な場合は、Tip 16のGit worktreeの利用も検討してください。
+
+## Tip 48以降について
+
+Tip 48以降は [everything-claude-code](https://github.com/affaan-m/everything-claude-code) を参考に作成しています。Claude Code 特有のテクニックと開発のベストプラクティスをまとめています。
+
+| Tip | タイトル | カテゴリ |
+|-----|---------|---------|
+| [Tip 48](docs/tips/tip-48.md) | モデル選択戦略 - Haiku/Sonnet/Opus を使い分ける | Performance |
+| [Tip 49](docs/tips/tip-49.md) | フックでセッション間の状態を維持する | Hooks |
+| [Tip 50](docs/tips/tip-50.md) | 専門エージェントを設計して委譲する | Agent |
+| [Tip 51](docs/tips/tip-51.md) | /learn で継続的に学習する | Learning |
+| [Tip 52](docs/tips/tip-52.md) | MCP サーバーで外部ツールを統合する | MCP |
+| [Tip 53](docs/tips/tip-53.md) | コードマップでアーキテクチャを可視化する | Documentation |
+| [Tip 54](docs/tips/tip-54.md) | 検証ループを設計する | Quality |
+| [Tip 55](docs/tips/tip-55.md) | 並列インスタンスでスループットを上げる | Workflow |
+| [Tip 56](docs/tips/tip-56.md) | コンテキストウィンドウの最後の20%を避ける | Performance |
+| [Tip 57](docs/tips/tip-57.md) | セキュリティレビューを自動化する | Security |
+| [Tip 58](docs/tips/tip-58.md) | イミュータビリティを徹底する | Best Practices |
+| [Tip 59](docs/tips/tip-59.md) | ファイルサイズを小さく保つ | Best Practices |
+| [Tip 60](docs/tips/tip-60.md) | N+1 クエリを回避する | Performance |
+| [Tip 61](docs/tips/tip-61.md) | エラーバウンダリでクラッシュを防ぐ | React |
+| [Tip 62](docs/tips/tip-62.md) | Zod スキーマで入力を検証する | Validation |
+| [Tip 63](docs/tips/tip-63.md) | 秘密情報は絶対にコードに含めない | Security |
 
 ## dxプラグインのインストール
 
