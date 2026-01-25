@@ -5,6 +5,8 @@
 **Category**: Agent
 **Related**: [Tip 39: Use plan mode](./tip-39.md)
 
+> **カスタム設定**: このTipで紹介するエージェントは、`CLAUDE.md` や `agents/` ディレクトリで定義するカスタム設定です。Claude Code の公式機能ではありません。
+
 ## Overview
 
 Claude Codeでは専門的なエージェントを設計し、特定のタスクを委譲できる。各エージェントに限定されたスコープを与えることで、品質と効率が向上する。

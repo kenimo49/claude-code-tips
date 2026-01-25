@@ -5,6 +5,8 @@
 **Category**: Documentation
 **Related**: [Tip 30: Keep CLAUDE.md simple](./tip-30.md)
 
+> **カスタム設定**: このTipで紹介する `/update-codemaps` コマンドは、`commands/update-codemaps.md` で定義するカスタムコマンドです。Claude Code の公式機能ではありません。
+
 ## Overview
 
 コードマップを作成することで、大規模なコードベースの構造をClaude Codeに効率的に伝えられる。TypeScript ASTを分析して自動生成することも可能。

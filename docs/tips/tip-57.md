@@ -5,6 +5,8 @@
 **Category**: Security
 **Related**: [Tip 50: Design specialized agents and delegate](./tip-50.md), [Tip 63: Never include secrets in code](./tip-63.md)
 
+> **カスタム設定**: このTipで紹介する `security-reviewer` エージェントと `/security-review` コマンドは、`agents/security-reviewer.md` や `commands/` で定義するカスタム設定です。Claude Code の公式機能ではありません。
+
 ## Overview
 
 security-reviewer エージェントを設計し、OWASP Top 10に基づくセキュリティチェックを自動化する。コードレビューの一環としてセキュリティ監査を組み込む。
