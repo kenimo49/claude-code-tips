@@ -1,9 +1,9 @@
-# Tip 59: Keep file sizes small
+# Tip coding-02: Keep file sizes small
 
 > ファイルサイズを小さく保つ
 
 **Category**: Best Practices
-**Related**: [Tip 58: Embrace immutability](./tip-58.md)
+**Related**: [Tip coding-01: Embrace immutability](./tip-coding-01.md)
 
 ## Overview
 
@@ -116,4 +116,4 @@ Claude Code でのコンテキスト管理・探索効率への貢献：
 
 ## See Also
 
-- [Tip 58: Embrace immutability](./tip-58.md) - イミュータビリティ
+- [Tip coding-01: Embrace immutability](./tip-coding-01.md) - イミュータビリティ

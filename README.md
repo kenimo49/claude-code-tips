@@ -63,7 +63,6 @@ Claude Codeを最大限に活用するためのTips集です。カスタムス�
 - [Tip 45: WSL2からPowerShellコマンドを実行する](#tip-45-wsl2powershell)
 - [Tip 46: WSL2からClaude in Chromeを使う](#tip-46-wsl2claude-in-chrome)
 - [Tip 47: セッションをフォークして並行調査する](#tip-47-)
-- [Tip 48以降について](#tip-48以降について)
 - [dxプラグインのインストール](#dx)
 
 <!-- /TOC -->
@@ -1068,12 +1067,17 @@ Tip 48以降は [everything-claude-code](https://github.com/affaan-m/everything-
 | [Tip 55](docs/tips/tip-55.md) | 並列インスタンスでスループットを上げる | Workflow |
 | [Tip 56](docs/tips/tip-56.md) | コンテキストウィンドウの最後の20%を避ける | Performance |
 | [Tip 57](docs/tips/tip-57.md) | セキュリティレビューを自動化する | Security |
-| [Tip 58](docs/tips/tip-58.md) | イミュータビリティを徹底する | Best Practices |
-| [Tip 59](docs/tips/tip-59.md) | ファイルサイズを小さく保つ | Best Practices |
-| [Tip 60](docs/tips/tip-60.md) | N+1 クエリを回避する | Performance |
-| [Tip 61](docs/tips/tip-61.md) | エラーバウンダリでクラッシュを防ぐ | React |
-| [Tip 62](docs/tips/tip-62.md) | Zod スキーマで入力を検証する | Validation |
-| [Tip 63](docs/tips/tip-63.md) | 秘密情報は絶対にコードに含めない | Security |
+
+### Coding Tips（一般的な開発ベストプラクティス）
+
+| Tip | タイトル | カテゴリ |
+|-----|---------|---------|
+| [Tip coding-01](docs/tips/coding/tip-coding-01.md) | イミュータビリティを徹底する | Patterns |
+| [Tip coding-02](docs/tips/coding/tip-coding-02.md) | ファイルサイズを小さく保つ | Organization |
+| [Tip coding-03](docs/tips/coding/tip-coding-03.md) | N+1 クエリを回避する | Performance |
+| [Tip coding-04](docs/tips/coding/tip-coding-04.md) | エラーバウンダリでクラッシュを防ぐ | React |
+| [Tip coding-05](docs/tips/coding/tip-coding-05.md) | Zod スキーマで入力を検証する | Validation |
+| [Tip coding-06](docs/tips/coding/tip-coding-06.md) | 秘密情報は絶対にコードに含めない | Security |
 
 ## dxプラグインのインストール
 

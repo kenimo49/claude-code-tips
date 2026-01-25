@@ -1,9 +1,9 @@
-# Tip 61: Use error boundaries to prevent crashes
+# Tip coding-04: Use error boundaries to prevent crashes
 
 > エラーバウンダリでクラッシュを防ぐ
 
 **Category**: React
-**Related**: [Tip 62: Validate inputs with Zod schemas](./tip-62.md)
+**Related**: [Tip coding-05: Validate inputs with Zod schemas](./tip-coding-05.md)
 
 ## Overview
 
@@ -148,4 +148,4 @@ Claude Code でのコンテキスト管理・探索効率への貢献：
 
 ## See Also
 
-- [Tip 62: Validate inputs with Zod schemas](./tip-62.md) - 入力検証
+- [Tip coding-05: Validate inputs with Zod schemas](./tip-coding-05.md) - 入力検証

@@ -1,9 +1,9 @@
-# Tip 62: Validate inputs with Zod schemas
+# Tip coding-05: Validate inputs with Zod schemas
 
 > Zod スキーマで入力を検証する
 
 **Category**: Validation
-**Related**: [Tip 61: Use error boundaries to prevent crashes](./tip-61.md), [Tip 63: Never include secrets in code](./tip-63.md)
+**Related**: [Tip coding-04: Use error boundaries to prevent crashes](./tip-coding-04.md), [Tip coding-06: Never include secrets in code](./tip-coding-06.md)
 
 ## Overview
 
@@ -154,5 +154,5 @@ Claude Code でのコンテキスト管理・探索効率への貢献：
 
 ## See Also
 
-- [Tip 61: Use error boundaries to prevent crashes](./tip-61.md) - エラーハンドリング
-- [Tip 63: Never include secrets in code](./tip-63.md) - 秘密情報の管理
+- [Tip coding-04: Use error boundaries to prevent crashes](./tip-coding-04.md) - エラーハンドリング
+- [Tip coding-06: Never include secrets in code](./tip-coding-06.md) - 秘密情報の管理

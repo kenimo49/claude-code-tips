@@ -1,6 +1,9 @@
 # Tips インデックス
 
-Claude Code Tipsの全64項目（Tip 0〜63）の一覧です。各Tipの詳細説明は個別ファイルを参照してください。
+Claude Code Tipsの一覧です。各Tipの詳細説明は個別ファイルを参照してください。
+
+- **Tip 0〜57**: Claude Code 固有の Tips
+- **Tip coding-01〜06**: 一般的なコーディングベストプラクティス（`coding/` ディレクトリ）
 
 > **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。
 >
@@ -70,12 +73,17 @@ Claude Code Tipsの全64項目（Tip 0〜63）の一覧です。各Tipの詳細�
 | 55 | [並列インスタンスでスループットを上げる](./tip-55.md) | Workflow |
 | 56 | [コンテキストウィンドウの最後の20%を避ける](./tip-56.md) | Performance |
 | 57 | [セキュリティレビューを自動化する](./tip-57.md) | Security |
-| 58 | [イミュータビリティを徹底する](./tip-58.md) | Best Practices |
-| 59 | [ファイルサイズを小さく保つ](./tip-59.md) | Best Practices |
-| 60 | [N+1 クエリを回避する](./tip-60.md) | Performance |
-| 61 | [エラーバウンダリでクラッシュを防ぐ](./tip-61.md) | React |
-| 62 | [Zod スキーマで入力を検証する](./tip-62.md) | Validation |
-| 63 | [秘密情報は絶対にコードに含めない](./tip-63.md) | Security |
+
+### Coding Tips（一般的な開発ベストプラクティス）
+
+| # | タイトル | カテゴリ |
+|---|---------|----------|
+| coding-01 | [イミュータビリティを徹底する](./coding/tip-coding-01.md) | Patterns |
+| coding-02 | [ファイルサイズを小さく保つ](./coding/tip-coding-02.md) | Organization |
+| coding-03 | [N+1 クエリを回避する](./coding/tip-coding-03.md) | Performance |
+| coding-04 | [エラーバウンダリでクラッシュを防ぐ](./coding/tip-coding-04.md) | React |
+| coding-05 | [Zod スキーマで入力を検証する](./coding/tip-coding-05.md) | Validation |
+| coding-06 | [秘密情報は絶対にコードに含めない](./coding/tip-coding-06.md) | Security |
 
 ## カテゴリ別
 
@@ -155,13 +163,13 @@ Claude Code Tipsの全64項目（Tip 0〜63）の一覧です。各Tipの詳細�
 - Tip 43: 継続的な学習
 - Tip 51: /learn で継続的に学習
 
-### ベストプラクティス（開発パターン）
-- Tip 58: イミュータビリティを徹底する
-- Tip 59: ファイルサイズを小さく保つ
-- Tip 60: N+1 クエリを回避する
-- Tip 61: エラーバウンダリでクラッシュを防ぐ（React）
-- Tip 62: Zod スキーマで入力を検証する
-- Tip 63: 秘密情報は絶対にコードに含めない
+### Coding Tips（一般的な開発ベストプラクティス）
+- Tip coding-01: イミュータビリティを徹底する
+- Tip coding-02: ファイルサイズを小さく保つ
+- Tip coding-03: N+1 クエリを回避する
+- Tip coding-04: エラーバウンダリでクラッシュを防ぐ（React）
+- Tip coding-05: Zod スキーマで入力を検証する
+- Tip coding-06: 秘密情報は絶対にコードに含めない
 
 ## エージェント向けガイド
 

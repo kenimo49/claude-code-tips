@@ -3,7 +3,7 @@
 > セキュリティレビューを自動化する
 
 **Category**: Security
-**Related**: [Tip 50: Design specialized agents and delegate](./tip-50.md), [Tip 63: Never include secrets in code](./tip-63.md)
+**Related**: [Tip 50: Design specialized agents and delegate](./tip-50.md), [Tip coding-06: Never include secrets in code](./coding/tip-coding-06.md)
 
 > **カスタム設定**: このTipで紹介する `security-reviewer` エージェントと `/security-review` コマンドは、`agents/security-reviewer.md` や `commands/` で定義するカスタム設定です。Claude Code の公式機能ではありません。
 
@@ -112,4 +112,4 @@ npx snyk test
 ## See Also
 
 - [Tip 50: Design specialized agents and delegate](./tip-50.md) - エージェント設計
-- [Tip 63: Never include secrets in code](./tip-63.md) - 秘密情報の管理
+- [Tip coding-06: Never include secrets in code](./coding/tip-coding-06.md) - 秘密情報の管理

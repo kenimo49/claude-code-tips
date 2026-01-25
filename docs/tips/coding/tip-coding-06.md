@@ -1,9 +1,9 @@
-# Tip 63: Never include secrets in code
+# Tip coding-06: Never include secrets in code
 
 > 秘密情報は絶対にコードに含めない
 
 **Category**: Security
-**Related**: [Tip 57: Automate security review](./tip-57.md), [Tip 62: Validate inputs with Zod schemas](./tip-62.md)
+**Related**: [Tip 57: Automate security review](../tip-57.md), [Tip coding-05: Validate inputs with Zod schemas](./tip-coding-05.md)
 
 ## Overview
 
@@ -140,5 +140,5 @@ Claude Code でのコンテキスト管理・探索効率への貢献：
 
 ## See Also
 
-- [Tip 57: Automate security review](./tip-57.md) - セキュリティレビュー
-- [Tip 62: Validate inputs with Zod schemas](./tip-62.md) - 入力検証
+- [Tip 57: Automate security review](../tip-57.md) - セキュリティレビュー
+- [Tip coding-05: Validate inputs with Zod schemas](./tip-coding-05.md) - 入力検証

@@ -1,4 +1,4 @@
-# Tip 60: Avoid N+1 queries
+# Tip coding-03: Avoid N+1 queries
 
 > N+1 クエリを回避する
 
