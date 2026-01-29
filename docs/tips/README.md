@@ -2,7 +2,7 @@
 
 Claude Code Tipsの一覧です。各Tipの詳細説明は個別ファイルを参照してください。
 
-- **Tip 0〜57**: Claude Code 固有の Tips
+- **Tip 0〜59**: Claude Code 固有の Tips
 - **Tip coding-01〜06**: 一般的なコーディングベストプラクティス（`coding/` ディレクトリ）
 
 > **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。
@@ -73,6 +73,8 @@ Claude Code Tipsの一覧です。各Tipの詳細説明は個別ファイルを�
 | 55 | [並列インスタンスでスループットを上げる](./tip-55.md) | Workflow |
 | 56 | [コンテキストウィンドウの最後の20%を避ける](./tip-56.md) | Performance |
 | 57 | [セキュリティレビューを自動化する](./tip-57.md) | Security |
+| 58 | [Chrome フェイクカメラでブラウザ自動化テスト](./tip-58.md) | Browser Automation |
+| 59 | [WindowsスクショをWSL2のClaude Codeで確認する](./tip-59.md) | Workflow |
 
 ### Coding Tips（一般的な開発ベストプラクティス）
 
@@ -118,6 +120,7 @@ Claude Code Tipsの一覧です。各Tipの詳細説明は個別ファイルを�
 - Tip 39: 計画とプロトタイピング
 - Tip 47: セッションをフォークして並行調査
 - Tip 55: 並列インスタンスでスループット向上
+- Tip 59: WindowsスクショをWSL2のClaude Codeで確認
 
 ### Git & GitHub
 - Tip 4: GitとGitHub CLI
@@ -136,6 +139,7 @@ Claude Code Tipsの一覧です。各Tipの詳細説明は個別ファイルを�
 - Tip 41: 自動化の自動化
 - Tip 45: WSL2からPowerShell実行
 - Tip 46: WSL2からClaude in Chrome
+- Tip 58: Chrome フェイクカメラでブラウザ自動化
 
 ### 上級
 - Tip 11: Gemini CLIフォールバック

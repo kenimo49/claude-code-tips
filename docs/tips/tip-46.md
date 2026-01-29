@@ -123,3 +123,4 @@ echo $DISPLAY
 
 - [Claude in Chrome 公式ページ](https://claude.com/ja-jp/chrome) - Anthropic公式のClaude in Chrome紹介ページ
 - [Tip 45: Execute PowerShell commands from WSL2](./tip-45.md) - WSL2とWindowsの連携
+- [Tip 58: Use Chrome Fake Camera](./tip-58.md) - フェイクカメラでブラウザ自動化テスト

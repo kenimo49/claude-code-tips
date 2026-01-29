@@ -1067,6 +1067,8 @@ Tip 48以降は [everything-claude-code](https://github.com/affaan-m/everything-
 | [Tip 55](docs/tips/tip-55.md) | 並列インスタンスでスループットを上げる | Workflow |
 | [Tip 56](docs/tips/tip-56.md) | コンテキストウィンドウの最後の20%を避ける | Performance |
 | [Tip 57](docs/tips/tip-57.md) | セキュリティレビューを自動化する | Security |
+| [Tip 58](docs/tips/tip-58.md) | Chrome フェイクカメラでブラウザ自動化テスト | Browser Automation |
+| [Tip 59](docs/tips/tip-59.md) | WindowsスクショをWSL2のClaude Codeで確認する | Workflow |
 
 ### Coding Tips（一般的な開発ベストプラクティス）
 
