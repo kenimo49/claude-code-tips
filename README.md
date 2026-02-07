@@ -1069,6 +1069,7 @@ Tip 48以降は [everything-claude-code](https://github.com/affaan-m/everything-
 | [Tip 57](docs/tips/tip-57.md) | セキュリティレビューを自動化する | Security |
 | [Tip 58](docs/tips/tip-58.md) | Chrome フェイクカメラでブラウザ自動化テスト | Browser Automation |
 | [Tip 59](docs/tips/tip-59.md) | WindowsスクショをWSL2のClaude Codeで確認する | Workflow |
+| [Tip 60](docs/tips/tip-60.md) | スマホからWSL2にSSH接続してClaude Codeを操作する | Workflow |
 
 ### Coding Tips（一般的な開発ベストプラクティス）
 
