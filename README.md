@@ -1,12 +1,20 @@
-# 40+ Claude Code Tips: 基礎から上級まで
+# 60+ Claude Code Tips: 基礎から上級まで
 
 [English version](README.en.md)
 
-> **注意**: このリポジトリは [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) の日本語版です。オリジナルのライセンスと権利については元リポジトリを参照してください。
->
-> **追記**: Tip 0〜43はfork元（ykdojo）が作成したものです。Tip 44以降はkenimo49が追加したものです。
+Claude Codeを最大限に活用するための実践的Tips集です。CLAUDE.mdの階層設計、スキル構築、WSL2連携、エージェント設計パターン、セキュリティレビュー自動化など、現場で使えるノウハウを幅広くカバーしています。
 
-Claude Codeを最大限に活用するためのTips集です。カスタムステータスライン、システムプロンプトの半減、Gemini CLIをClaude Codeの部下として使う方法、コンテナ内でのClaude Code実行なども含まれています。[dxプラグイン](#dxプラグインのインストール)も提供しています。
+> **出典について**: Tip 0〜43は [ykdojo/claude-code-tips](https://github.com/ykdojo/claude-code-tips) をベースにした日本語翻訳です。Tip 44以降、スキル、コーディングTipsはkenimo49によるオリジナルコンテンツです。
+
+### 主なトピック
+
+- 🔧 **セットアップ & 設定** — CLAUDE.md階層設計、ステータスライン、モデル選択
+- 🚀 **ワークフロー** — セッション管理、並列作業、スマホからのSSH操作
+- 🤖 **エージェント & スキル** — 専門エージェント設計、カスタムスキル構築、MCP統合
+- 🛡️ **品質 & セキュリティ** — 検証ループ、セキュリティレビュー自動化、TDD
+- 🖥️ **WSL2 & ブラウザ** — PowerShell連携、Chrome自動化、スクリーンショット活用
+
+[dxプラグイン](#dxプラグインのインストール)も提供しています。
 
 📺 [クイックデモ](https://www.youtube.com/watch?v=hiISl558JGE) - マルチClaude ワークフローと音声入力の実演：
 
