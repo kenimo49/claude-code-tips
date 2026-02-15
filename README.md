@@ -63,6 +63,7 @@ Claude Codeを最大限に活用するためのTips集です。カスタムス�
 - [Tip 45: WSL2からPowerShellコマンドを実行する](#tip-45-wsl2powershell)
 - [Tip 46: WSL2からClaude in Chromeを使う](#tip-46-wsl2claude-in-chrome)
 - [Tip 47: セッションをフォークして並行調査する](#tip-47-)
+- [Tip 61: Claudeにスキルを作って再利用可能なワークフローを構築する](#tip-61-claude)
 - [dxプラグインのインストール](#dx)
 
 <!-- /TOC -->
@@ -1070,6 +1071,7 @@ Tip 48以降は [everything-claude-code](https://github.com/affaan-m/everything-
 | [Tip 58](docs/tips/tip-58.md) | Chrome フェイクカメラでブラウザ自動化テスト | Browser Automation |
 | [Tip 59](docs/tips/tip-59.md) | WindowsスクショをWSL2のClaude Codeで確認する | Workflow |
 | [Tip 60](docs/tips/tip-60.md) | スマホからWSL2にSSH接続してClaude Codeを操作する | Workflow |
+| [Tip 61](docs/tips/tip-61.md) | Claudeにスキルを作って再利用可能なワークフローを構築する | Skills |
 
 ### Coding Tips（一般的な開発ベストプラクティス）
 
