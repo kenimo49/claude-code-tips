@@ -16,10 +16,6 @@ Claude Codeを最大限に活用するための実践的Tips集です。CLAUDE.m
 
 [dxプラグイン](#dxプラグインのインストール)も提供しています。
 
-📺 [クイックデモ](https://www.youtube.com/watch?v=hiISl558JGE) - マルチClaude ワークフローと音声入力の実演：
-
-[![デモ動画サムネイル](assets/demo-thumbnail.png)](https://www.youtube.com/watch?v=hiISl558JGE)
-
 <!-- TOC -->
 ## Table of Contents
 
